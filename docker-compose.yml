@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  website:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: flarepoint-fixthestrait
+    restart: unless-stopped
+    ports:
+      - "8080:80"
