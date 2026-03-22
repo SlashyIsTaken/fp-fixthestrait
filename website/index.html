@@ -4,31 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FIX THE STRAIT — Strategic Solutions for the Hormuz Problem</title>
-<meta name="description" content="A satirical exploration of the world's most anxious chokepoint. 9 totally serious solutions for the Strait of Hormuz, from giant trebuchets to dolphin logistics. None of them work.">
+<meta name="description" content="A satirical exploration of the world's most anxious chokepoint. 10 totally serious solutions for the Strait of Hormuz, from giant trebuchets to dolphin logistics. None of them work.">
 <meta name="keywords" content="Strait of Hormuz, satire, oil, geopolitics, comedy, energy security, chokepoint, interactive">
 <meta name="author" content="Fix The Strait">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://fixthestrait.com/">
-<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon.ico?v=2" sizes="any">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="FIX THE STRAIT — 9 Totally Serious Solutions for the Hormuz Problem">
-<meta property="og:description" content="21 million barrels of oil squeeze through a 33km gap every day. We have 9 solutions. None of them work. All of them are interactive.">
+<meta property="og:title" content="FIX THE STRAIT — 10 Totally Serious Solutions for the Hormuz Problem">
+<meta property="og:description" content="21 million barrels of oil squeeze through a 33km gap every day. We have 10 solutions. None of them work. All of them are interactive.">
 <meta property="og:url" content="https://fixthestrait.com/">
 <meta property="og:site_name" content="Fix The Strait">
 <meta property="og:image" content="https://fixthestrait.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="FIX THE STRAIT — 9 satirical solutions for the Strait of Hormuz chokepoint">
+<meta property="og:image:alt" content="FIX THE STRAIT — 10 satirical solutions for the Strait of Hormuz chokepoint">
 <meta property="og:locale" content="en_US">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="FIX THE STRAIT — 9 Totally Serious Solutions for the Hormuz Problem">
-<meta name="twitter:description" content="21 million barrels of oil squeeze through a 33km gap every day. We have 9 solutions. None of them work. All of them are interactive.">
+<meta name="twitter:title" content="FIX THE STRAIT — 10 Totally Serious Solutions for the Hormuz Problem">
+<meta name="twitter:description" content="21 million barrels of oil squeeze through a 33km gap every day. We have 10 solutions. None of them work. All of them are interactive.">
 <meta name="twitter:image" content="https://fixthestrait.com/og-image.png">
-<meta name="twitter:image:alt" content="FIX THE STRAIT — 9 satirical solutions for the Strait of Hormuz chokepoint">
+<meta name="twitter:image:alt" content="FIX THE STRAIT — 10 satirical solutions for the Strait of Hormuz chokepoint">
 
 <!-- Theme -->
 <meta name="theme-color" content="#ff6b2b">
@@ -694,6 +694,15 @@ footer .disclaimer { margin-top: 24px; padding-top: 24px; border-top: 1px solid 
       <div class="meta-item">Feasibility: <span class="bad">Already rugpulled</span></div>
     </div>
   </div>
+  <div class="solution-card" onclick="openModal('flood')">
+    <div class="card-number">10</div>
+    <h3>Accelerate Climate Change</h3>
+    <p class="card-desc">Melt the ice caps faster. Raise sea levels until the Gulf floods wide enough to make the Strait irrelevant.</p>
+    <div class="card-meta">
+      <div class="meta-item">Cost: <span class="bad">Civilization</span></div>
+      <div class="meta-item">Feasibility: <span class="bad">Already Underway</span></div>
+    </div>
+  </div>
 </div>
 
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
@@ -790,6 +799,13 @@ const modalData = {
     interactive: 'dolphins',
     facts: '<p>The US Navy Marine Mammal Program is real, headquartered in San Diego, with about 70 bottlenose dolphins and 30 California sea lions trained for mine detection and harbor patrol, not oil logistics.</p><p>A bottlenose dolphin swims at about 20 km/h and would take roughly 1.5 hours to cross the strait. Even if they could carry a full barrel (they absolutely cannot — it weighs more than they do), you\'d need every dolphin on Earth, times 35. The dolphins\' union has formally declined.</p>'
   },
+  flood: {
+    overline: 'Solution 10 — Accelerated Climate Engineering',
+    title: 'Melt It All',
+    body: '<p>The Strait of Hormuz is narrow because geography said so. But what if we <strong>raised sea levels</strong> enough to flood the entire Arabian Peninsula coastline, turning the Persian Gulf into a vast, open sea? No more chokepoint — just vibes and water.</p><p>Earth\'s ice caps contain enough frozen water to raise sea levels by approximately <strong>70 meters</strong>. At that point, half of the world\'s coastal cities are underwater, but the Strait of Hormuz is now 200km wide. Problem. Solved.</p><p>Use the slider below to choose your preferred level of planetary destruction:</p>',
+    interactive: 'flood',
+    facts: '<p>Current climate models predict 0.3–1.0 meters of sea level rise by 2100 under various emissions scenarios. A 1-meter rise would displace roughly 150 million people worldwide and flood significant portions of Bangladesh, the Netherlands, and Florida.</p><p>To raise sea levels by the 5+ meters needed to meaningfully widen the strait, you\'d need to melt most of Greenland\'s ice sheet (7.4m worth) or a significant portion of Antarctica (58m worth). At current warming rates, the Greenland scenario takes centuries. The "good" news: we\'re already working on it. The bad news: everything else about this.</p>'
+  },
   crude: {
     overline: 'Solution 09 — Blockchain Disruption',
     title: 'CrudeCoin\u2122',
@@ -848,6 +864,8 @@ function openModal(id) {
     ih = '<div class="straw-game"><div style="background:var(--bg-card);border:1px solid var(--border);padding:12px 16px;margin-bottom:16px;border-radius:4px;"><span style="font-family:var(--font-mono);font-size:10px;color:var(--danger);letter-spacing:2px;">&#9650; TOP SECRET — OPERATION KRAZY STRAW — EYES ONLY &#9650;</span></div><div class="straw-slider"><label>Straw Diameter:</label><input type="range" min="1" max="1000" value="100" oninput="updateStraw(this.value)"><div class="straw-val" id="strawVal">100 cm</div></div><div style="font-family:var(--font-mono);font-size:10px;color:var(--text-dimmer);letter-spacing:1px;margin-bottom:8px;">STEALTH RATING:</div><div class="stealth-meter"><div class="stealth-fill" id="stealthFill" style="width:50%;background:var(--warn);"></div></div><div style="font-family:var(--font-mono);font-size:11px;color:var(--warn);margin-bottom:16px;" id="stealthLabel">SUSPICIOUS</div><div class="canal-results" style="grid-template-columns:repeat(3,1fr);"><div class="canal-result"><div class="cr-val" id="strawFlow">2,400 bpd</div><div class="cr-label">Flow Rate / Straw</div></div><div class="canal-result"><div class="cr-val" id="strawCount">8,750</div><div class="cr-label">Straws Needed</div></div><div class="canal-result"><div class="cr-val" id="strawCost">$35B</div><div class="cr-label">Est. Cost</div></div></div><div class="canal-commentary" id="strawCommentary">At 100cm diameter, each straw moves about 2,400 barrels per day. You\'d need 8,750 straws running in parallel on the ocean floor. That\'s a lot of straws to hide. Iran\'s sonar operators are going to have questions.</div></div>';
   } else if (data.interactive === 'dolphins') {
     ih = '<div class="dolphin-game"><div class="dolphin-ocean" id="dolphinOcean"></div><div class="dolphin-stats"><div class="drain-stat"><div class="ds-val" id="dolphinRecruited">0</div><div class="ds-label">Dolphins Recruited</div></div><div class="drain-stat"><div class="ds-val" id="dolphinCapacity">0 bpd</div><div class="ds-label">Barrel Capacity / Day</div></div><div class="drain-stat"><div class="ds-val" id="dolphinMorale">Curious</div><div class="ds-label">Fleet Morale</div></div><div class="drain-stat"><div class="ds-val" id="dolphinUnion">Not Yet</div><div class="ds-label">Unionized?</div></div></div><div class="dolphin-controls"><button class="action-btn" onclick="recruitDolphin()">RECRUIT DOLPHIN ($100K)</button><button class="action-btn secondary" onclick="recruitDolphin10()">RECRUIT 10</button><span style="font-family:var(--font-mono);font-size:10px;color:var(--text-dimmer);">NEED: 21,000,000</span></div><div class="dolphin-message" id="dolphinMsg">&nbsp;</div></div>';
+  } else if (data.interactive === 'flood') {
+    ih = '<div class="flood-game"><div class="flood-slider" style="margin-bottom:16px;"><label style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim);letter-spacing:1px;">SEA LEVEL RISE:</label><input type="range" min="0" max="70" value="0" step="0.5" oninput="updateFlood(this.value)" style="width:100%;margin:8px 0;"><div style="font-family:var(--font-brand);font-size:28px;font-weight:800;color:var(--blue);" id="floodVal">0 m</div></div><div class="stealth-meter"><div class="stealth-fill" id="floodFill" style="width:0%;background:var(--blue);"></div></div><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-dimmer);margin-bottom:16px;letter-spacing:1px;" id="floodLabel">CURRENT LEVELS \u2014 THE STRAIT IS STILL NARROW</div><div class="canal-results" style="grid-template-columns:repeat(3,1fr);"><div class="canal-result"><div class="cr-val" id="floodWidth">33 km</div><div class="cr-label">Strait Width</div></div><div class="canal-result"><div class="cr-val" id="floodDisplaced">0</div><div class="cr-label">People Displaced</div></div><div class="canal-result"><div class="cr-val" id="floodCities">0</div><div class="cr-label">Cities Underwater</div></div></div><div class="canal-results" style="grid-template-columns:repeat(3,1fr);margin-top:8px;"><div class="canal-result"><div class="cr-val" id="floodTemp">+0\u00B0C</div><div class="cr-label">Warming Required</div></div><div class="canal-result"><div class="cr-val" id="floodTimeline">Now</div><div class="cr-label">ETA (Business as Usual)</div></div><div class="canal-result"><div class="cr-val" id="floodCO2">0 Gt</div><div class="cr-label">Extra CO\u2082 Needed</div></div></div><div class="canal-commentary" id="floodCommentary">Drag the slider to raise sea levels. The strait will widen. Everything else will get worse. This is the only solution on the list that humanity is actually pursuing.</div></div>';
   } else if (data.interactive === 'crude') {
     ih = '<div class="crude-game"><div style="text-align:center;margin-bottom:16px;"><div style="font-family:var(--font-brand);font-size:32px;font-weight:800;color:var(--accent);">CRUDE<span style="color:var(--warn);">COIN</span>\u2122</div><div style="font-family:var(--font-mono);font-size:10px;color:var(--text-dimmer);letter-spacing:2px;">THE FUTURE OF PETROLEUM IS DIGITAL</div></div><div class="crude-chart"><canvas id="crudeCanvas" width="600" height="80"></canvas><div class="crude-chart-label" id="crudeChartLabel" style="color:var(--success);">$69.42</div></div><div style="text-align:center;margin:16px 0;"><button class="action-btn" onclick="mineCrude()" style="font-size:13px;padding:14px 36px;">MINE CRUDECOIN</button></div><div class="canal-results" style="grid-template-columns:repeat(3,1fr);"><div class="canal-result"><div class="cr-val" id="crudeTokens">0</div><div class="cr-label">Tokens Mined</div></div><div class="canal-result"><div class="cr-val" id="crudeMarketCap">$0</div><div class="cr-label">Market Cap</div></div><div class="canal-result"><div class="cr-val" id="crudeEnergy" style="color:var(--danger);">0 MWh</div><div class="cr-label">Energy Wasted</div></div></div><div class="canal-commentary" id="crudeCommentary">Click MINE CRUDECOIN to begin tokenizing petroleum. Each token represents one barrel of crude oil that will never actually move. The future is now. The future is stupid.</div></div>';
   }
@@ -1119,6 +1137,78 @@ function drawCrudeChart() {
   });
   ctx.stroke(); ctx.lineTo(w,h); ctx.lineTo(0,h); ctx.closePath();
   ctx.fillStyle = col+'11'; ctx.fill();
+}
+
+// ===== FLOOD =====
+function updateFlood(val) {
+  var m = parseFloat(val);
+  document.getElementById('floodVal').textContent = m.toFixed(1) + ' m';
+
+  // Strait widens roughly: starts at 33km, grows with flooding of coastal lowlands
+  var width = 33 + m * 3.5;
+  document.getElementById('floodWidth').textContent = Math.round(width) + ' km';
+
+  // People displaced (rough exponential model)
+  var displaced = 0;
+  if (m <= 1) displaced = Math.round(m * 150e6);
+  else if (m <= 5) displaced = Math.round(150e6 + (m - 1) * 200e6);
+  else if (m <= 10) displaced = Math.round(950e6 + (m - 5) * 300e6);
+  else if (m <= 30) displaced = Math.round(2.45e9 + (m - 10) * 100e6);
+  else displaced = Math.round(4.45e9 + (m - 30) * 50e6);
+  var dispStr = displaced >= 1e9 ? (displaced / 1e9).toFixed(1) + ' billion' : displaced >= 1e6 ? Math.round(displaced / 1e6).toLocaleString() + ' million' : displaced.toLocaleString();
+  document.getElementById('floodDisplaced').textContent = dispStr;
+
+  // Cities underwater
+  var cities = m < 1 ? Math.round(m * 20) : m < 5 ? Math.round(20 + (m - 1) * 40) : m < 10 ? Math.round(180 + (m - 5) * 30) : m < 30 ? Math.round(330 + (m - 10) * 15) : Math.round(630 + (m - 30) * 5);
+  document.getElementById('floodCities').textContent = cities;
+
+  // Warming required (very rough: ~1m per ~1.5°C above pre-industrial, already at ~1.2°C)
+  var temp = m < 1 ? 1.2 + m * 0.8 : m < 10 ? 2 + m * 0.5 : 7 + (m - 10) * 0.2;
+  document.getElementById('floodTemp').textContent = '+' + temp.toFixed(1) + '\u00B0C';
+
+  // Timeline
+  var timeline;
+  if (m < 0.5) timeline = '2050';
+  else if (m < 1) timeline = '2100';
+  else if (m < 3) timeline = '2200';
+  else if (m < 7) timeline = '2500';
+  else if (m < 15) timeline = '3000+';
+  else if (m < 40) timeline = '5000+';
+  else timeline = 'Geological';
+  document.getElementById('floodTimeline').textContent = timeline;
+
+  // Extra CO2
+  var co2 = Math.round(m * 200);
+  document.getElementById('floodCO2').textContent = co2 >= 1000 ? (co2 / 1000).toFixed(1) + ' Tt' : co2 + ' Gt';
+
+  // Progress bar
+  var pct = (m / 70) * 100;
+  var fill = document.getElementById('floodFill');
+  fill.style.width = pct + '%';
+  if (m < 1) { fill.style.background = 'var(--blue)'; }
+  else if (m < 5) { fill.style.background = 'var(--warn)'; }
+  else if (m < 15) { fill.style.background = 'var(--accent)'; }
+  else { fill.style.background = 'var(--danger)'; }
+
+  // Label
+  var label = document.getElementById('floodLabel');
+  if (m < 0.5) { label.textContent = 'CURRENT TRAJECTORY \u2014 BARELY NOTICEABLE'; label.style.color = 'var(--blue)'; }
+  else if (m < 1) { label.textContent = 'PARIS AGREEMENT FAILED \u2014 MIAMI IS NERVOUS'; label.style.color = 'var(--blue)'; }
+  else if (m < 3) { label.textContent = 'MALDIVES GONE \u2014 NETHERLANDS ON NOTICE'; label.style.color = 'var(--warn)'; }
+  else if (m < 7) { label.textContent = 'COASTAL APOCALYPSE \u2014 STRAIT GETTING WIDER THO'; label.style.color = 'var(--warn)'; }
+  else if (m < 15) { label.textContent = 'GREENLAND MELTED \u2014 NEW YORK IS ATLANTIS'; label.style.color = 'var(--accent)'; }
+  else if (m < 40) { label.textContent = 'ANTARCTICA JOINING IN \u2014 MAP NEEDS REDRAWING'; label.style.color = 'var(--danger)'; }
+  else { label.textContent = 'FULL MELT \u2014 STRAIT NO LONGER EXISTS (NOR DOES MUCH ELSE)'; label.style.color = 'var(--danger)'; }
+
+  // Commentary
+  var c = document.getElementById('floodCommentary');
+  if (m < 0.5) c.textContent = 'At ' + m.toFixed(1) + 'm, this is roughly where we\'re headed by 2050. The strait is still 33km wide. Bangladesh is already stressed. You\'ve solved nothing but you\'re on track.';
+  else if (m < 1) c.textContent = 'At ' + m.toFixed(1) + 'm, low-lying island nations are evacuating. ' + dispStr + ' displaced. The strait has widened by a generous ' + Math.round(m * 3.5) + 'km. Tanker captains do not notice. Florida notices.';
+  else if (m < 3) c.textContent = m.toFixed(1) + 'm of rise. The Maldives are a memory. ' + dispStr + ' displaced. The strait is ' + Math.round(width) + 'km wide now \u2014 marginally better. You\'ve destroyed several countries to save 15 minutes of tanker routing.';
+  else if (m < 7) c.textContent = m.toFixed(1) + 'm! ' + dispStr + ' displaced. ' + cities + ' cities underwater. The strait is ' + Math.round(width) + 'km wide. Iran\'s coastline has moved inland. Oil terminals are also underwater, which rather defeats the purpose.';
+  else if (m < 15) c.textContent = 'Greenland is ice-free. ' + m.toFixed(1) + 'm of rise. ' + dispStr + ' people displaced. The strait is ' + Math.round(width) + 'km wide. The Persian Gulf has expanded into parts of Iraq and Kuwait. Most oil infrastructure is submerged. You did it! At an unimaginable cost!';
+  else if (m < 40) c.textContent = m.toFixed(1) + 'm. Antarctica is melting. ' + dispStr + ' displaced. The entire geography of the Middle East has changed. The "strait" is now an open sea. There is no chokepoint. There are also no port cities, no refineries, and no civilization to ship oil to. Victory?';
+  else c.textContent = m.toFixed(1) + 'm. Maximum melt. The strait is ' + Math.round(width) + 'km wide \u2014 basically open ocean. ' + dispStr + ' displaced. ' + cities + ' cities gone. The world map is unrecognizable. London, Shanghai, New York, Mumbai \u2014 all underwater. But hey, tankers have more room. Mission accomplished. Was it worth it? Absolutely not.';
 }
 
 // ===== CLOSE MODAL =====
