@@ -520,7 +520,8 @@ footer .disclaimer { margin-top: 24px; padding-top: 24px; border-top: 1px solid 
 
 .form-group textarea { resize: vertical; min-height: 100px; }
 
-.form-group select { cursor: pointer; appearance: none; }
+.form-group select { cursor: pointer; appearance: none; font-family: var(--font-body); }
+.form-group select option { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 14px; }
 
 .form-group .form-hint {
   font-family: var(--font-mono);
@@ -666,6 +667,194 @@ footer .disclaimer { margin-top: 24px; padding-top: 24px; border-top: 1px solid 
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+/* ===== CLASSIFIED MODE TOGGLE ===== */
+.classified-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  transition: color 0.3s;
+  user-select: none;
+}
+
+.classified-toggle:hover { color: var(--accent); }
+
+.classified-toggle .toggle-track {
+  width: 32px;
+  height: 16px;
+  background: var(--border);
+  border-radius: 8px;
+  position: relative;
+  transition: background 0.3s;
+}
+
+.classified-toggle .toggle-thumb {
+  width: 12px;
+  height: 12px;
+  background: var(--text-dim);
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.classified-toggle.active .toggle-track { background: var(--danger); }
+.classified-toggle.active .toggle-thumb { transform: translateX(16px); background: white; }
+.classified-toggle.active { color: var(--danger); }
+
+/* Classified mode styles — applied when body has .classified class */
+body.classified .classified-banner {
+  background: var(--danger);
+  animation: classified-flash 1.5s ease-in-out infinite;
+}
+
+@keyframes classified-flash {
+  0%, 100% { background: var(--danger); }
+  50% { background: #b91c1c; }
+}
+
+body.classified .classified-banner::after {
+  content: ' — CLEARANCE LEVEL: COSMIC TOP SECRET';
+}
+
+/* Analyst notes in modals */
+.analyst-note {
+  display: none;
+  background: #0f1a0f;
+  border: 1px solid #22c55e33;
+  border-left: 3px solid var(--success);
+  padding: 16px 20px;
+  margin: 16px 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: #4ade80;
+  line-height: 1.7;
+  letter-spacing: 0.3px;
+  position: relative;
+}
+
+.analyst-note::before {
+  content: 'ANALYST NOTE — EYES ONLY';
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #22c55e88;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+body.classified .analyst-note { display: block; animation: fadeUp 0.4s ease-out; }
+
+/* Classified ticker override */
+body.classified .ticker-wrap { border-bottom-color: var(--danger-dim); }
+
+/* Clearance gate on submit form */
+.clearance-gate {
+  display: none;
+  background: var(--bg);
+  border: 2px solid var(--danger);
+  padding: 32px;
+  text-align: center;
+  margin-bottom: 24px;
+  overflow: hidden;
+  transition: opacity 0.5s, max-height 0.6s ease-in-out, padding 0.6s ease-in-out, margin 0.6s ease-in-out, border-width 0.6s ease-in-out;
+}
+
+.clearance-gate.granted {
+  opacity: 0;
+  max-height: 0 !important;
+  padding: 0 32px;
+  margin-bottom: 0;
+  border-width: 0;
+}
+
+.clearance-gate .gate-title {
+  font-family: var(--font-brand);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--danger);
+  margin-bottom: 12px;
+}
+
+.clearance-gate .gate-text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1.7;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+}
+
+.clearance-gate .gate-input {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.clearance-gate input {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  padding: 10px 16px;
+  outline: none;
+  width: 250px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.clearance-gate input:focus { border-color: var(--danger); }
+
+.clearance-gate .gate-error {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--danger);
+  margin-top: 12px;
+  min-height: 16px;
+}
+
+body.classified .clearance-gate { display: block; max-height: 300px; }
+body.classified .submit-form.gate-locked { opacity: 0; max-height: 0; overflow: hidden; padding: 0; margin: 0; border: none; transition: opacity 0.4s, max-height 0.5s ease-in-out; }
+body.classified .submit-form.gate-unlocked { opacity: 1; max-height: 2000px; transition: opacity 0.5s 0.3s, max-height 0.6s ease-in-out 0.2s; }
+
+/* Classified card badge */
+body.classified .solution-card::after {
+  content: 'CLASSIFIED';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--danger);
+  opacity: 0.5;
+}
+
+/* Scanline overlay in classified mode */
+body.classified::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 0, 0.015) 2px,
+    rgba(0, 255, 0, 0.015) 4px
+  );
+  pointer-events: none;
+  z-index: 9998;
 }
 
 @media (max-width: 1000px) { .solutions-grid { grid-template-columns: repeat(2, 1fr); } }

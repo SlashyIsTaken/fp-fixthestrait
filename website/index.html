@@ -49,6 +49,7 @@
     <li><a href="#submit-solution">Submit</a></li>
     <li><a href="#about">Intel</a></li>
     <li><a href="https://en.wikipedia.org/wiki/Strait_of_Hormuz" target="_blank">Wikipedia</a></li>
+    <li><div class="classified-toggle" id="classifiedToggle" onclick="toggleClassified()"><div class="toggle-track"><div class="toggle-thumb"></div></div>Classified Mode</div></li>
   </ul>
 </nav>
 
@@ -118,17 +119,8 @@
 </div>
 
 <div class="solutions-grid">
-  <div class="solution-card" onclick="openModal('canal')">
-    <div class="card-number">01</div>
-    <h3>Dig a Canal</h3>
-    <p class="card-desc">Draw your own canal through the Arabian Peninsula. Click on the map and watch the budget evaporate.</p>
-    <div class="card-meta">
-      <div class="meta-item">Cost: <span class="bad">You decide</span></div>
-      <div class="meta-item">Feasibility: <span class="bad">Geological Nightmare</span></div>
-    </div>
-  </div>
   <div class="solution-card" onclick="openModal('ask')">
-    <div class="card-number">02</div>
+    <div class="card-number">01</div>
     <h3>Just Ask Nicely</h3>
     <p class="card-desc">Send a polite diplomatic email to all parties. This is our third follow-up. Please RSVP.</p>
     <div class="card-meta">
@@ -136,8 +128,26 @@
       <div class="meta-item">Feasibility: <span class="ok">Aggressively Optimistic</span></div>
     </div>
   </div>
-  <div class="solution-card" onclick="openModal('carriers')">
+  <div class="solution-card" onclick="openModal('dolphins')">
+    <div class="card-number">02</div>
+    <h3>Train the Dolphins</h3>
+    <p class="card-desc">Expand the US Navy Marine Mammal Program. Strap a barrel to each dolphin. 21 million of them.</p>
+    <div class="card-meta">
+      <div class="meta-item">Cost: <span class="bad">$2.1T/yr</span></div>
+      <div class="meta-item">Feasibility: <span class="bad">Dolphins Said No</span></div>
+    </div>
+  </div>
+  <div class="solution-card" onclick="openModal('trebuchet')">
     <div class="card-number">03</div>
+    <h3>Giant Trebuchet</h3>
+    <p class="card-desc">Build a medieval siege weapon large enough to yeet oil barrels across 33km at Mach 1.7.</p>
+    <div class="card-meta">
+      <div class="meta-item">Cost: <span class="bad">$LOL</span></div>
+      <div class="meta-item">Feasibility: <span class="bad">Geneva Convention</span></div>
+    </div>
+  </div>
+  <div class="solution-card" onclick="openModal('carriers')">
+    <div class="card-number">04</div>
     <h3>Aircraft Carrier Bridge</h3>
     <p class="card-desc">Park ~100 aircraft carriers side by side. Lay plywood. Drive trucks across. Click to deploy.</p>
     <div class="card-meta">
@@ -145,22 +155,13 @@
       <div class="meta-item">Feasibility: <span class="bad">The Navy Said No</span></div>
     </div>
   </div>
-  <div class="solution-card" onclick="openModal('drain')">
-    <div class="card-number">04</div>
-    <h3>Drain the Strait</h3>
-    <p class="card-desc">Just pump all the water out. Walk the oil across the seabed. Only 31.4 trillion gallons to go.</p>
-    <div class="card-meta">
-      <div class="meta-item">Cost: <span class="bad">$&#8734;+</span></div>
-      <div class="meta-item">Feasibility: <span class="bad">Hydrologically Insane</span></div>
-    </div>
-  </div>
-  <div class="solution-card" onclick="openModal('trebuchet')">
+  <div class="solution-card" onclick="openModal('straw')">
     <div class="card-number">05</div>
-    <h3>Giant Trebuchet</h3>
-    <p class="card-desc">Build a medieval siege weapon large enough to yeet oil barrels across 33km at Mach 1.7.</p>
+    <h3>Operation Krazy Straw</h3>
+    <p class="card-desc">A covert underwater pipeline disguised as a very large drinking straw. Iran must never know.</p>
     <div class="card-meta">
-      <div class="meta-item">Cost: <span class="bad">$LOL</span></div>
-      <div class="meta-item">Feasibility: <span class="bad">Geneva Convention</span></div>
+      <div class="meta-item">Cost: <span class="bad">$80B+</span></div>
+      <div class="meta-item">Feasibility: <span class="bad">Classified</span></div>
     </div>
   </div>
   <div class="solution-card" onclick="openModal('moveit')">
@@ -172,22 +173,22 @@
       <div class="meta-item">Feasibility: <span class="bad">Geological Fantasy</span></div>
     </div>
   </div>
-  <div class="solution-card" onclick="openModal('straw')">
+  <div class="solution-card" onclick="openModal('drain')">
     <div class="card-number">07</div>
-    <h3>Operation Krazy Straw</h3>
-    <p class="card-desc">A covert underwater pipeline disguised as a very large drinking straw. Iran must never know.</p>
+    <h3>Drain the Strait</h3>
+    <p class="card-desc">Just pump all the water out. Walk the oil across the seabed. Only 31.4 trillion gallons to go.</p>
     <div class="card-meta">
-      <div class="meta-item">Cost: <span class="bad">$80B+</span></div>
-      <div class="meta-item">Feasibility: <span class="bad">Classified</span></div>
+      <div class="meta-item">Cost: <span class="bad">$&#8734;+</span></div>
+      <div class="meta-item">Feasibility: <span class="bad">Hydrologically Insane</span></div>
     </div>
   </div>
-  <div class="solution-card" onclick="openModal('dolphins')">
+  <div class="solution-card" onclick="openModal('canal')">
     <div class="card-number">08</div>
-    <h3>Train the Dolphins</h3>
-    <p class="card-desc">Expand the US Navy Marine Mammal Program. Strap a barrel to each dolphin. 21 million of them.</p>
+    <h3>Dig a Canal</h3>
+    <p class="card-desc">Draw your own canal through the Arabian Peninsula. Click on the map and watch the budget evaporate.</p>
     <div class="card-meta">
-      <div class="meta-item">Cost: <span class="bad">$2.1T/yr</span></div>
-      <div class="meta-item">Feasibility: <span class="bad">Dolphins Said No</span></div>
+      <div class="meta-item">Cost: <span class="bad">You decide</span></div>
+      <div class="meta-item">Feasibility: <span class="bad">Geological Nightmare</span></div>
     </div>
   </div>
   <div class="solution-card" onclick="openModal('crude')">
@@ -256,6 +257,15 @@
 </div>
 
 <div class="submit-section">
+  <div class="clearance-gate">
+    <div class="gate-title">CLEARANCE CHECK REQUIRED</div>
+    <div class="gate-text">This form is restricted under Classified Mode. Enter your clearance code to proceed.<br>Hint: it's the name of something on this page that should never have been declassified.</div>
+    <div class="gate-input">
+      <input type="text" id="clearance-code" placeholder="ENTER CODE" onkeydown="if(event.key==='Enter')checkClearance()">
+      <button class="action-btn" onclick="checkClearance()" style="padding:10px 20px;">VERIFY</button>
+    </div>
+    <div class="gate-error" id="gate-error"></div>
+  </div>
   <form class="submit-form" onsubmit="submitSolution(event)">
     <div class="form-group">
       <label for="sol-name">Solution Name</label>
@@ -319,5 +329,6 @@
 <script src="app.js"></script>
 <script src="form.js"></script>
 <script src="game.js"></script>
+<script src="classified.js"></script>
 </body>
 </html>

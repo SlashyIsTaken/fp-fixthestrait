@@ -21,35 +21,35 @@ function makeMap(id, center, zoom) {
 
 const modalData = {
   canal: {
-    overline: 'Solution 01 — Extreme Landscaping',
+    overline: 'Solution 08 — Extreme Landscaping',
     title: 'Dig a Massive Canal',
     body: '<p>The Suez Canal is 193km long and took about 10 years to build. A canal bypassing the Strait of Hormuz would need to cut through the UAE or Oman — through mountains, desert, and sovereign territory that might have opinions about a giant trench.</p><p><strong>Click on the map below to draw your canal route.</strong> Each click adds a waypoint. We\'ll calculate the cost in real-time. Real-world canal construction runs roughly $1-2 billion per kilometer.</p>',
     interactive: 'canal',
     facts: '<p>There actually is a real pipeline bypass — the Habshan-Fujairah pipeline, which can move about 1.5 million barrels per day from Abu Dhabi to Fujairah on the Gulf of Oman. Saudi Arabia also has the East-West pipeline (Petroline) carrying about 5 million bpd to the Red Sea.</p><p>Together these cover only a fraction of the 21 million bpd through Hormuz. A canal would be orders of magnitude more expensive than expanding pipeline capacity. Estimated cost: $200-800 billion before the inevitable overruns.</p>'
   },
   ask: {
-    overline: 'Solution 02 — Radical Diplomacy',
+    overline: 'Solution 01 — Radical Diplomacy',
     title: 'Just Ask Nicely',
     body: '<p>What if — and hear us out — we just sent a really nice email? Like, <em>really</em> nice. With a subject line that shows we care. Below is a draft prepared by our top diplomatic AI (third follow-up, the first two were ignored):</p>',
     interactive: 'email',
     facts: '<p>Diplomatic negotiations over the strait have been ongoing for decades. The 1982 UN Convention on the Law of the Sea (UNCLOS) establishes the right of "transit passage" through international straits, which Iran has intermittently acknowledged and challenged.</p><p>Iran has threatened to close the strait multiple times, most notably during tensions in 2012 and 2019. The international consensus is that closing the strait would be an act of war — but "consensus" and "reality" are different departments.</p>'
   },
   carriers: {
-    overline: 'Solution 03 — Naval Architecture',
+    overline: 'Solution 04 — Naval Architecture',
     title: 'Aircraft Carrier Bridge',
     body: '<p>A Nimitz-class aircraft carrier is 333 meters long and 77 meters wide. The Strait at its narrowest is about 33,000 meters. So you\'d only need roughly <strong>100 aircraft carriers</strong> parked side by side to form a bridge.</p><p>The US Navy currently has 11. So we\'d need to build 89 more. At roughly $13 billion each, that\'s only about <strong>$1.16 trillion</strong>. Click below to start deploying.</p>',
     interactive: 'carriers',
     facts: '<p>The US Fifth Fleet, headquartered in Bahrain, is responsible for naval operations in the Persian Gulf. Multiple nations maintain naval presences in the area.</p><p>Aircraft carriers are not, to our knowledge, used as bridges in any current naval doctrine. We reached out to the Pentagon for comment and they hung up.</p>'
   },
   drain: {
-    overline: 'Solution 04 — Hydrological Warfare',
+    overline: 'Solution 07 — Hydrological Warfare',
     title: 'Drain the Strait',
     body: '<p>The Strait of Hormuz contains roughly <strong>119 billion cubic meters</strong> of water — about 31.4 trillion gallons. Simply pump it out, walk the oil across the seabed, and call it a day.</p><p>The world\'s most powerful pump moves about 50,000 gallons per minute. At that rate, draining the strait takes approximately <strong>1,194 years</strong> — assuming the Indian Ocean doesn\'t notice, which it absolutely would. Click the pump and watch your progress.</p>',
     interactive: 'drain',
     facts: '<p>The Strait has an average depth of about 60 meters with the deepest point around 90 meters. The water volume is enormous and is connected to the entire Indian Ocean.</p><p>Even if you could drain it, the exposed seabed would be a muddy, salt-encrusted wasteland. Also, you\'d destroy one of the most important marine ecosystems in the Persian Gulf. But sure, let\'s pump.</p>'
   },
   trebuchet: {
-    overline: 'Solution 05 — Medieval Engineering',
+    overline: 'Solution 03 — Medieval Engineering',
     title: 'Giant Trebuchet',
     body: '<p>A standard oil barrel weighs about 136kg (300 lbs). To launch one 33 kilometers, you\'d need a launch velocity of approximately <strong>569 m/s — that\'s Mach 1.7</strong>, or about twice the speed of sound.</p><p>The barrel would need to survive supersonic flight, extreme heat from air friction, and then somehow land intact. Each barrel contains 159 liters of crude oil that would very much like to not be going Mach 1.7.</p><p>Adjust the launch angle and fire away. We\'ve run the physics. It doesn\'t work at any angle.</p>',
     interactive: 'trebuchet',
@@ -63,14 +63,14 @@ const modalData = {
     facts: '<p>Tectonic plates move at roughly the speed your fingernails grow — about 2-10cm per year. Iran is already slowly moving northward into the Eurasian plate, which is why the Zagros Mountains exist.</p><p>In about 50 million years, the Persian Gulf will likely close entirely. So plate tectonics will solve the Strait of Hormuz problem. You just have to wait.</p>'
   },
   straw: {
-    overline: 'Solution 07 — Covert Infrastructure',
+    overline: 'Solution 05 — Covert Infrastructure',
     title: 'Operation Krazy Straw',
     body: '<p>Classified briefing: the plan is simple. Lay a <strong>giant drinking straw</strong> along the ocean floor, from the Persian Gulf side to the Gulf of Oman side, completely bypassing Iranian waters. Disguise it as a natural seafloor formation. Pipe 21 million barrels per day through it.</p><p>Iran must never know. This is a <strong>covert slurping operation</strong>. Adjust the straw diameter below and assess operational viability:</p>',
     interactive: 'straw',
     facts: '<p>Subsea pipelines are very much real — the Nord Stream pipelines ran 1,224km along the Baltic seabed. The Langeled pipeline carries gas 1,166km from Norway to the UK. So underwater pipes aren\'t insane.</p><p>What IS insane is calling it a straw, making it "covert" (subsea construction involves dozens of ships visible from space), and the idea that Iran wouldn\'t notice a massive pipeline running past their coastline. But the engineering community appreciates the enthusiasm.</p>'
   },
   dolphins: {
-    overline: 'Solution 08 — Marine Logistics',
+    overline: 'Solution 02 — Marine Logistics',
     title: 'Train the Dolphins',
     body: '<p>The US Navy Marine Mammal Program has been training dolphins since 1960. They can detect mines, retrieve objects, and guard harbors. So why not strap a barrel of oil to each one and have them swim it across?</p><p>A barrel of crude oil weighs 136kg. A bottlenose dolphin can carry about... significantly less than that. But what they lack in carrying capacity, they make up for in enthusiasm and sonar.</p><p>To move 21 million barrels per day, you\'d need <strong>21 million dolphins</strong>. The entire global bottlenose dolphin population is about 600,000. Click below to start recruiting:</p>',
     interactive: 'dolphins',
