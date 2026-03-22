@@ -32,7 +32,10 @@
     { label: 'DIPLOMATIC INCIDENT', color: '#ef4444', emoji: '\uD83D\uDCE8', w: 26, h: 22 },
     { label: 'CARRIER CHUNK', color: '#7a756e', emoji: '\u2693', w: 30, h: 20 },
     { label: 'KRAZY STRAW', color: '#3b82f6', emoji: '\uD83E\uDD64', w: 20, h: 30 },
-    { label: 'CRUDE COIN MINER', color: '#f59e0b', emoji: '\u26CF\uFE0F', w: 24, h: 24 }
+    { label: 'CRUDE COIN MINER', color: '#f59e0b', emoji: '\u26CF\uFE0F', w: 24, h: 24 },
+    { label: 'SEA MINE', color: '#6b7280', emoji: '', w: 24, h: 24, behavior: 'mine', customDraw: 'mine' },
+    { label: 'SEA MINE', color: '#6b7280', emoji: '', w: 24, h: 24, behavior: 'mine', customDraw: 'mine' },
+    { label: 'FIGHTER JET', color: '#a855f7', emoji: '', w: 36, h: 18, behavior: 'jet', customDraw: 'jet' }
   ];
 
   // Generate initial terrain
@@ -62,7 +65,7 @@
     var safeTop = landTop[landTop.length - 1] + 20;
     var safeBot = landBot[landBot.length - 1] - 20;
     var y = safeTop + Math.random() * (safeBot - safeTop - type.h);
-    obstacles.push({
+    var ob = {
       x: W + 10,
       y: y,
       w: type.w,
@@ -70,8 +73,24 @@
       color: type.color,
       emoji: type.emoji,
       label: type.label,
-      bobOffset: Math.random() * Math.PI * 2
-    });
+      bobOffset: Math.random() * Math.PI * 2,
+      behavior: type.behavior || 'normal',
+      customDraw: type.customDraw || null,
+      vy: 0
+    };
+
+    if (ob.behavior === 'mine') {
+      // Mines drift slowly with current, feel stationary in water
+      ob.driftSpeed = 0.3 + Math.random() * 0.3;
+    } else if (ob.behavior === 'jet') {
+      // Jets strafe vertically across the strait from top or bottom
+      var fromTop = Math.random() > 0.5;
+      ob.y = fromTop ? safeTop : safeBot - type.h;
+      ob.vy = fromTop ? (2.5 + Math.random() * 2) : -(2.5 + Math.random() * 2);
+      ob.x = W + 30 + Math.random() * 100;
+    }
+
+    obstacles.push(ob);
   }
 
   function spawnPickup() {
@@ -120,11 +139,23 @@
 
     // Move obstacles
     for (var i = obstacles.length - 1; i >= 0; i--) {
-      obstacles[i].x -= speed;
-      if (obstacles[i].x < -40) { obstacles.splice(i, 1); continue; }
-      if (collides(tanker, obstacles[i])) {
-        addParticles(obstacles[i].x, obstacles[i].y, obstacles[i].color, 8);
-        endGame('HIT BY ' + obstacles[i].label);
+      var ob = obstacles[i];
+      if (ob.behavior === 'mine') {
+        // Mines are anchored — scroll with the world
+        ob.x -= speed;
+      } else if (ob.behavior === 'jet') {
+        // Jets move fast horizontally and strafe vertically
+        ob.x -= speed * 1.8;
+        ob.y += ob.vy;
+        // Remove if jet leaves vertically
+        if (ob.y < -40 || ob.y > H + 40) { obstacles.splice(i, 1); continue; }
+      } else {
+        ob.x -= speed;
+      }
+      if (ob.x < -40) { obstacles.splice(i, 1); continue; }
+      if (collides(tanker, ob)) {
+        addParticles(ob.x, ob.y, ob.color, 8);
+        endGame('HIT BY ' + ob.label);
         return;
       }
     }
@@ -245,11 +276,138 @@
 
     // Obstacles
     obstacles.forEach(function(o) {
-      var bob = Math.sin(frameCount * 0.05 + o.bobOffset) * 3;
-      ctx.font = Math.max(o.w, o.h) + 'px serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(o.emoji, o.x + o.w / 2, o.y + o.h / 2 + bob);
+      ctx.save();
+      var bob = o.behavior === 'jet' ? 0 : Math.sin(frameCount * 0.05 + o.bobOffset) * 3;
+
+      if (o.customDraw === 'mine') {
+        var cx = o.x + o.w / 2;
+        var cy = o.y + o.h / 2 + bob;
+        var r = o.w / 2;
+        // Chain/tether
+        ctx.strokeStyle = '#4a464066';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy + r);
+        var chainEnd = cy + r + 22;
+        for (var cl = 0; cl < 4; cl++) {
+          ctx.lineTo(cx + (cl % 2 === 0 ? 2 : -2), cy + r + cl * 6);
+        }
+        ctx.lineTo(cx, chainEnd);
+        ctx.stroke();
+        // Anchor weight
+        ctx.fillStyle = '#4a464044';
+        ctx.fillRect(cx - 3, chainEnd, 6, 4);
+        // Mine body — dark sphere with glow
+        ctx.shadowColor = '#ef4444';
+        ctx.shadowBlur = 6 + Math.sin(frameCount * 0.1 + o.bobOffset) * 4;
+        ctx.fillStyle = '#374151';
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowColor = 'transparent';
+        ctx.shadowBlur = 0;
+        // Darker hemisphere
+        ctx.fillStyle = '#1f2937';
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0.3, Math.PI + 0.3);
+        ctx.fill();
+        // Contact horns (the spiky detonators)
+        var horns = [
+          [-r - 3, -2], [r + 3, -2],   // left, right
+          [-2, -r - 3], [-2, r + 3],   // top, bottom
+          [-r * 0.7 - 2, -r * 0.7 - 2], [r * 0.7 + 2, -r * 0.7 - 2], // diagonals
+          [-r * 0.7 - 2, r * 0.7 + 2], [r * 0.7 + 2, r * 0.7 + 2]
+        ];
+        ctx.fillStyle = '#6b7280';
+        horns.forEach(function(h) {
+          ctx.beginPath();
+          ctx.arc(cx + h[0], cy + h[1], 2.5, 0, Math.PI * 2);
+          ctx.fill();
+        });
+        // Highlight
+        ctx.fillStyle = '#ffffff15';
+        ctx.beginPath();
+        ctx.arc(cx - r * 0.3, cy - r * 0.3, r * 0.3, 0, Math.PI * 2);
+        ctx.fill();
+        // Blinking indicator
+        if (Math.sin(frameCount * 0.15 + o.bobOffset) > 0.5) {
+          ctx.fillStyle = '#ef4444';
+          ctx.beginPath();
+          ctx.arc(cx, cy - r * 0.1, 1.5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      } else if (o.customDraw === 'jet') {
+        var jx = o.x;
+        var jy = o.y + o.h / 2;
+        var dir = o.vy > 0 ? 1 : -1;
+        // Exhaust trail
+        ctx.globalAlpha = 0.15;
+        ctx.fillStyle = '#a855f7';
+        for (var t = 1; t <= 4; t++) {
+          ctx.beginPath();
+          ctx.ellipse(jx + o.w + t * 10, jy - dir * t * 2, 6 - t, 2, 0, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.globalAlpha = 0.08;
+        ctx.fillStyle = '#f59e0b';
+        ctx.beginPath();
+        ctx.ellipse(jx + o.w + 4, jy, 5, 3, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1;
+        // Fuselage
+        ctx.fillStyle = '#6b7280';
+        ctx.beginPath();
+        ctx.moveTo(jx, jy);
+        ctx.lineTo(jx + o.w * 0.8, jy - 2);
+        ctx.lineTo(jx + o.w, jy);
+        ctx.lineTo(jx + o.w * 0.8, jy + 2);
+        ctx.closePath();
+        ctx.fill();
+        // Cockpit
+        ctx.fillStyle = '#93c5fd';
+        ctx.beginPath();
+        ctx.ellipse(jx + o.w * 0.85, jy, 3, 1.5, 0, 0, Math.PI * 2);
+        ctx.fill();
+        // Main wings (swept back)
+        ctx.fillStyle = '#4b5563';
+        ctx.beginPath();
+        ctx.moveTo(jx + o.w * 0.4, jy - 1);
+        ctx.lineTo(jx + o.w * 0.15, jy - 12);
+        ctx.lineTo(jx + o.w * 0.3, jy - 1);
+        ctx.closePath();
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(jx + o.w * 0.4, jy + 1);
+        ctx.lineTo(jx + o.w * 0.15, jy + 12);
+        ctx.lineTo(jx + o.w * 0.3, jy + 1);
+        ctx.closePath();
+        ctx.fill();
+        // Tail fins
+        ctx.fillStyle = '#4b5563';
+        ctx.beginPath();
+        ctx.moveTo(jx + 4, jy - 1);
+        ctx.lineTo(jx - 2, jy - 6);
+        ctx.lineTo(jx + 8, jy - 1);
+        ctx.closePath();
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(jx + 4, jy + 1);
+        ctx.lineTo(jx - 2, jy + 6);
+        ctx.lineTo(jx + 8, jy + 1);
+        ctx.closePath();
+        ctx.fill();
+        // Nose highlight
+        ctx.fillStyle = '#9ca3af';
+        ctx.beginPath();
+        ctx.ellipse(jx + o.w * 0.92, jy - 0.5, 2, 1, 0, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        ctx.font = Math.max(o.w, o.h) + 'px serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(o.emoji, o.x + o.w / 2, o.y + o.h / 2 + bob);
+      }
+      ctx.restore();
     });
 
     // Tanker
