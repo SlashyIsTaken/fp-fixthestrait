@@ -1,6 +1,6 @@
 # Fix the Strait
 
-A satirical interactive website exploring 10 absurdly impractical solutions to the Strait of Hormuz chokepoint crisis.
+A satirical interactive website exploring 12 absurdly impractical solutions to the Strait of Hormuz chokepoint crisis.
 
 **Live site:** [fixthestrait.com](https://fixthestrait.com)
 
@@ -8,7 +8,7 @@ A satirical interactive website exploring 10 absurdly impractical solutions to t
 
 The Strait of Hormuz is the world's most critical oil transit chokepoint — 33km of water between Iran and Oman, with ~21 million barrels of oil flowing through it daily. This website presents increasingly unhinged "solutions" to this geopolitical vulnerability, each one treated with the gravity of an actual classified briefing.
 
-## The 10 Solutions
+## The 12 Solutions
 
 | # | Solution | Cost | Feasibility |
 |---|----------|------|-------------|
@@ -22,6 +22,8 @@ The Strait of Hormuz is the world's most critical oil transit chokepoint — 33k
 | 8 | **Dig a Canal** — Draw your own canal through the Arabian Peninsula | Varies | Interactive |
 | 9 | **CrudeCoin™** — Tokenize barrels as NFTs; oil never moves | $0 (technically) | Creative securities fraud |
 | 10 | **Accelerate Climate Change** — Melt ice caps, raise sea levels 70m | Existential | Already in progress |
+| 11 | **Just Rename It** — Rebrand the strait via executive order; Gulf of America precedent | $4B (marketing) | Executive Order |
+| 12 | **Time Travel** — Prevent tectonic plates from converging 200M years ago | 1.21 Gigawatts | Temporal Paradox |
 
 ## Features
 

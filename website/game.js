@@ -35,7 +35,9 @@
     { label: 'CRUDE COIN MINER', color: '#f59e0b', emoji: '\u26CF\uFE0F', w: 24, h: 24 },
     { label: 'SEA MINE', color: '#6b7280', emoji: '', w: 24, h: 24, behavior: 'mine', customDraw: 'mine' },
     { label: 'SEA MINE', color: '#6b7280', emoji: '', w: 24, h: 24, behavior: 'mine', customDraw: 'mine' },
-    { label: 'FIGHTER JET', color: '#a855f7', emoji: '', w: 36, h: 18, behavior: 'jet', customDraw: 'jet' }
+    { label: 'FIGHTER JET', color: '#a855f7', emoji: '', w: 36, h: 18, behavior: 'jet', customDraw: 'jet' },
+    { label: 'RENAMING DECREE', color: '#f97316', emoji: '\uD83D\uDCDC', w: 24, h: 24 },
+    { label: 'TIME PARADOX', color: '#06b6d4', emoji: '\u231A', w: 26, h: 26 }
   ];
 
   // Generate initial terrain

@@ -89,6 +89,20 @@ const modalData = {
     body: '<p>Why physically move oil when you could simply <strong>tokenize it</strong>? Each barrel becomes an NFT on the CrudeCoin\u2122 blockchain. Refineries purchase the token, which represents ownership of one barrel of crude currently sitting in the ground. The oil never actually moves. The strait becomes irrelevant.</p><p>The fact that refineries need <em>actual physical oil</em> to refine into fuel is, frankly, a legacy-thinking problem. We\'re disrupting petroleum the way Uber disrupted taxis — by ignoring the fundamental physics.</p><p>Click below to mine CrudeCoin\u2122 and watch the market do its thing:</p>',
     interactive: 'crude',
     facts: '<p>Commodity tokenization is actually a real and growing area of fintech. Several platforms offer tokenized ownership of physical commodities including oil. However, someone still needs to physically move the oil to a refinery.</p><p>The irony: Bitcoin mining alone consumes about 150 TWh per year — roughly the energy content of 260 million barrels of oil. You\'d be burning digital oil to digitize physical oil. The thermodynamics department would like a word.</p>'
+  },
+  rename: {
+    overline: 'Solution 11 — Strategic Rebranding',
+    title: 'Just Rename It',
+    body: '<p>In January 2025, the Gulf of Mexico was officially renamed to the "Gulf of America" by executive order. The body of water did not change. The maps did. The vibes shifted. If it worked for the Gulf of Mexico, why not for the <strong>Strait of Hormuz</strong>?</p><p>The theory is simple: the word "Hormuz" sounds threatening. It sounds like something that\'s about to close. Rename it to something friendlier and the geopolitical tension evaporates. Nobody\'s going to threaten to "close the Friendship Funnel." You can\'t blockade "Steve."</p><p>Select your preferred rebrand below and watch the diplomatic fallout unfold in real time:</p>',
+    interactive: 'rename',
+    facts: '<p>The Gulf of Mexico was officially renamed to the "Gulf of America" in U.S. federal documents in January 2025 by executive order. Other countries did not recognize the name change. Google Maps briefly showed both names depending on where you were searching from. Mexico responded by renaming North America to "America Mexicana" on their official maps.</p><p>The Strait of Hormuz gets its name from the island of Hormuz (Hormoz), derived from the Persian god Ahura Mazda. The strait has been called various names throughout history by different civilizations. Renaming it would require international consensus through the International Hydrographic Organization — or, alternatively, just a really confident executive order and the willingness to be ignored by 194 countries.</p>'
+  },
+  timetravel: {
+    overline: 'Solution 12 — Temporal Engineering',
+    title: 'Time Travel',
+    body: '<p>200 million years ago, the Arabian and Eurasian tectonic plates hadn\'t yet collided. There was no Persian Gulf. There was no Strait of Hormuz. There was no problem. The solution is obvious: <strong>go back in time and prevent the plates from converging.</strong></p><p>We don\'t need to understand how time travel works. As a great physicist once said: "Don\'t try to understand it. Feel it." (That physicist worked for a secret organization running temporal operations, so he\'s basically one of us.)</p><p>The only question is <em>when</em> to go. Choose your temporal destination below and assess the consequences:</p>',
+    interactive: 'timetravel',
+    facts: '<p>The Strait of Hormuz formed as a result of the Arabian Plate colliding with the Eurasian Plate, a process that began roughly 20-30 million years ago and created the Zagros Mountains. The Persian Gulf itself is geologically young — a shallow basin that flooded as sea levels rose after the last ice age about 14,000 years ago.</p><p>As for time travel: general relativity technically permits closed timelike curves (time loops) in certain exotic spacetime geometries, but they require negative energy densities that may not exist in nature. The grandfather paradox remains unresolved. Christopher Nolan\'s <em>Tenet</em> proposed temporal inversion via "inverted entropy," which physicists have described as "not how entropy works" but "an excellent movie." Doc Brown\'s flux capacitor requires 1.21 gigawatts, which is about the output of a single nuclear reactor. The DeLorean, however, is out of production.</p>'
   }
 };
 
@@ -145,6 +159,10 @@ function openModal(id) {
     ih = '<div class="flood-game"><div class="flood-slider" style="margin-bottom:16px;"><label style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim);letter-spacing:1px;">SEA LEVEL RISE:</label><input type="range" min="0" max="70" value="0" step="0.5" oninput="updateFlood(this.value)" style="width:100%;margin:8px 0;"><div style="font-family:var(--font-brand);font-size:28px;font-weight:800;color:var(--blue);" id="floodVal">0 m</div></div><div class="stealth-meter"><div class="stealth-fill" id="floodFill" style="width:0%;background:var(--blue);"></div></div><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-dimmer);margin-bottom:16px;letter-spacing:1px;" id="floodLabel">CURRENT LEVELS \u2014 THE STRAIT IS STILL NARROW</div><div class="canal-results" style="grid-template-columns:repeat(3,1fr);"><div class="canal-result"><div class="cr-val" id="floodWidth">33 km</div><div class="cr-label">Strait Width</div></div><div class="canal-result"><div class="cr-val" id="floodDisplaced">0</div><div class="cr-label">People Displaced</div></div><div class="canal-result"><div class="cr-val" id="floodCities">0</div><div class="cr-label">Cities Underwater</div></div></div><div class="canal-results" style="grid-template-columns:repeat(3,1fr);margin-top:8px;"><div class="canal-result"><div class="cr-val" id="floodTemp">+0\u00B0C</div><div class="cr-label">Warming Required</div></div><div class="canal-result"><div class="cr-val" id="floodTimeline">Now</div><div class="cr-label">ETA (Business as Usual)</div></div><div class="canal-result"><div class="cr-val" id="floodCO2">0 Gt</div><div class="cr-label">Extra CO\u2082 Needed</div></div></div><div class="canal-commentary" id="floodCommentary">Drag the slider to raise sea levels. The strait will widen. Everything else will get worse. This is the only solution on the list that humanity is actually pursuing.</div></div>';
   } else if (data.interactive === 'crude') {
     ih = '<div class="crude-game"><div style="text-align:center;margin-bottom:16px;"><div style="font-family:var(--font-brand);font-size:32px;font-weight:800;color:var(--accent);">CRUDE<span style="color:var(--warn);">COIN</span>\u2122</div><div style="font-family:var(--font-mono);font-size:10px;color:var(--text-dimmer);letter-spacing:2px;">THE FUTURE OF PETROLEUM IS DIGITAL</div></div><div class="crude-chart"><canvas id="crudeCanvas" width="600" height="80"></canvas><div class="crude-chart-label" id="crudeChartLabel" style="color:var(--success);">$69.42</div></div><div style="text-align:center;margin:16px 0;"><button class="action-btn" onclick="mineCrude()" style="font-size:13px;padding:14px 36px;">MINE CRUDECOIN</button></div><div class="canal-results" style="grid-template-columns:repeat(3,1fr);"><div class="canal-result"><div class="cr-val" id="crudeTokens">0</div><div class="cr-label">Tokens Mined</div></div><div class="canal-result"><div class="cr-val" id="crudeMarketCap">$0</div><div class="cr-label">Market Cap</div></div><div class="canal-result"><div class="cr-val" id="crudeEnergy" style="color:var(--danger);">0 MWh</div><div class="cr-label">Energy Wasted</div></div></div><div class="canal-commentary" id="crudeCommentary">Click MINE CRUDECOIN to begin tokenizing petroleum. Each token represents one barrel of crude oil that will never actually move. The future is now. The future is stupid.</div></div>';
+  } else if (data.interactive === 'rename') {
+    ih = '<div class="rename-game"><div style="background:var(--bg-card);border:1px solid var(--border);padding:16px;margin-bottom:16px;border-radius:4px;"><div style="font-family:var(--font-mono);font-size:10px;color:var(--accent);letter-spacing:2px;margin-bottom:8px;">EXECUTIVE ORDER — STRATEGIC REBRANDING INITIATIVE</div><div style="font-family:var(--font-mono);font-size:10px;color:var(--text-dimmer);">Precedent: Gulf of Mexico \u2192 Gulf of America (Jan 2025)</div></div><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim);letter-spacing:1px;margin-bottom:8px;">SELECT NEW NAME:</div><div class="rename-options" id="renameOptions"><button class="action-btn secondary" onclick="renameTo(this,0)" style="font-size:11px;padding:10px 16px;">The Friendship Funnel\u2122</button><button class="action-btn secondary" onclick="renameTo(this,1)" style="font-size:11px;padding:10px 16px;">Freedom Strait\u2122</button><button class="action-btn secondary" onclick="renameTo(this,2)" style="font-size:11px;padding:10px 16px;">Steve</button><button class="action-btn secondary" onclick="renameTo(this,3)" style="font-size:11px;padding:10px 16px;">The Vibe Corridor\u2122</button><button class="action-btn secondary" onclick="renameTo(this,4)" style="font-size:11px;padding:10px 16px;">Gulf of America 2</button><button class="action-btn secondary" onclick="renameTo(this,5)" style="font-size:11px;padding:10px 16px;">Oily McWaterway</button></div><div class="canal-results" style="grid-template-columns:repeat(3,1fr);margin-top:16px;"><div class="canal-result"><div class="cr-val" id="renameApproval">0</div><div class="cr-label">Countries Recognizing</div></div><div class="canal-result"><div class="cr-val" id="renameProtests">0</div><div class="cr-label">Formal Protests Filed</div></div><div class="canal-result"><div class="cr-val" id="renameCost">$0</div><div class="cr-label">Rebranding Cost</div></div></div><div class="stealth-meter" style="margin-top:12px;"><div class="stealth-fill" id="renameFill" style="width:0%;background:var(--accent);"></div></div><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-dimmer);margin-top:4px;margin-bottom:12px;letter-spacing:1px;" id="renameStatus">AWAITING EXECUTIVE ORDER</div><div class="response-panel" id="renameResponse"><div class="advisor">State Department Advisor</div><em>Select a new name for the Strait of Hormuz...</em></div></div>';
+  } else if (data.interactive === 'timetravel') {
+    ih = '<div class="timetravel-game"><div style="background:var(--bg-card);border:1px solid var(--border);padding:16px;margin-bottom:16px;border-radius:4px;"><div style="font-family:var(--font-mono);font-size:10px;color:var(--accent);letter-spacing:2px;margin-bottom:4px;">TEMPORAL OPERATIONS DIVISION</div><div style="font-family:var(--font-mono);font-size:10px;color:var(--text-dimmer);">"Don\'t try to understand it. Feel it." \u2014 Neil, <em>Tenet</em></div></div><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim);letter-spacing:1px;margin-bottom:8px;">SELECT TEMPORAL DESTINATION:</div><div class="rename-options" id="timeOptions"><button class="action-btn secondary" onclick="timeTravel(this,0)" style="font-size:11px;padding:10px 16px;">200 Million Years Ago</button><button class="action-btn secondary" onclick="timeTravel(this,1)" style="font-size:11px;padding:10px 16px;">14,000 Years Ago</button><button class="action-btn secondary" onclick="timeTravel(this,2)" style="font-size:11px;padding:10px 16px;">1507 AD</button><button class="action-btn secondary" onclick="timeTravel(this,3)" style="font-size:11px;padding:10px 16px;">1953 AD</button><button class="action-btn secondary" onclick="timeTravel(this,4)" style="font-size:11px;padding:10px 16px;">October 21, 2015</button><button class="action-btn secondary" onclick="timeTravel(this,5)" style="font-size:11px;padding:10px 16px;">Tomorrow</button></div><div class="canal-results" style="grid-template-columns:repeat(3,1fr);margin-top:16px;"><div class="canal-result"><div class="cr-val" id="ttParadoxes">0</div><div class="cr-label">Paradoxes Created</div></div><div class="canal-result"><div class="cr-val" id="ttEnergy">0 GW</div><div class="cr-label">Energy Required</div></div><div class="canal-result"><div class="cr-val" id="ttStraightFixed" style="color:var(--text-dim);">No</div><div class="cr-label">Strait Fixed?</div></div></div><div class="stealth-meter" style="margin-top:12px;"><div class="stealth-fill" id="ttFill" style="width:0%;background:var(--blue);"></div></div><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-dimmer);margin-top:4px;margin-bottom:12px;letter-spacing:1px;" id="ttStatus">TEMPORAL COORDINATES NOT SET</div><div class="response-panel" id="ttResponse"><div class="advisor">Temporal Advisor</div><em>Select a destination in time... What\'s happened, happened. Or has it?</em></div></div>';
   }
 
   inner.innerHTML = '<div class="m-overline">' + data.overline + '</div><h2>' + data.title + '</h2><div class="m-body">' + data.body + '</div>' + ih + '<div class="real-talk">' + data.facts + '</div>';
@@ -477,6 +495,118 @@ function updateFlood(val) {
   else if (m < 15) c.textContent = 'Greenland is ice-free. ' + m.toFixed(1) + 'm of rise. ' + dispStr + ' people displaced. The strait is ' + Math.round(width) + 'km wide. The Persian Gulf has expanded into parts of Iraq and Kuwait. Most oil infrastructure is submerged. You did it! At an unimaginable cost!';
   else if (m < 40) c.textContent = m.toFixed(1) + 'm. Antarctica is melting. ' + dispStr + ' displaced. The entire geography of the Middle East has changed. The "strait" is now an open sea. There is no chokepoint. There are also no port cities, no refineries, and no civilization to ship oil to. Victory?';
   else c.textContent = m.toFixed(1) + 'm. Maximum melt. The strait is ' + Math.round(width) + 'km wide \u2014 basically open ocean. ' + dispStr + ' displaced. ' + cities + ' cities gone. The world map is unrecognizable. London, Shanghai, New York, Mumbai \u2014 all underwater. But hey, tankers have more room. Mission accomplished. Was it worth it? Absolutely not.';
+}
+
+// ===== RENAME =====
+var renameData = [
+  {
+    name: 'The Friendship Funnel\u2122',
+    approval: 3, protests: 47, cost: 4.2,
+    fill: 15, fillColor: 'var(--warn)', status: 'INTERNATIONAL RIDICULE',
+    response: 'The executive order was signed at 3am. By 3:02am, Iran had issued a statement calling it "an act of cartographic aggression." By 3:15am, the name was trending on Twitter. By 3:30am, someone had already registered friendshipfunnel.com and was selling t-shirts. The UAE ambassador was overheard saying "we suggested this as a joke in 2024." Three countries recognize the new name: the US, Palau (by accident), and a micronation in Nevada that doesn\'t count. Google Maps is showing both names. Apple Maps is showing neither. The strait itself has no comment but is widely believed to be embarrassed.'
+  },
+  {
+    name: 'Freedom Strait\u2122',
+    approval: 1, protests: 89, cost: 6.8,
+    fill: 8, fillColor: 'var(--danger)', status: 'GEOPOLITICAL INCIDENT',
+    response: 'The name "Freedom Strait" was announced at a press conference where the word "freedom" was used 47 times in 12 minutes. Iran responded by renaming the Persian Gulf to the "Gulf of Iranian Sovereignty" and the entire Indian Ocean to "Not America\'s Ocean." Russia renamed the Bering Strait to "Definitely Russia\'s Strait." China renamed the South China Sea to "The South China Sea (This Time We Mean It)." Within 72 hours, every country on Earth had renamed at least one body of water out of spite. The International Hydrographic Organization dissolved itself. Google Maps crashed. The UN held an emergency session. The original strait remains functionally identical. Oil prices rose $4 per barrel due to "naming uncertainty."'
+  },
+  {
+    name: 'Steve',
+    approval: 12, protests: 23, cost: 0.8,
+    fill: 40, fillColor: 'var(--success)', status: 'SURPRISINGLY POPULAR',
+    response: 'Against all expectations, "Steve" is performing well. The name polled at 67% favorability in focus groups, outperforming every other option including the strait\'s actual name. Iran\'s foreign minister was asked about "Steve" in a press conference and visibly struggled not to laugh before saying "we reject this" with what reporters described as "a twinkle in his eye." Nobody can threaten to "close Steve." News anchors can\'t say "tensions rising in Steve" with a straight face. Oil traders are confused but amused. A petition to rename all geopolitical chokepoints to first names has gained 2 million signatures. The Suez Canal is now "Karen." The Bosphorus is "Dave." International tension has decreased 12% purely through vibes. Steve the dolphin (Solution 02) has filed a trademark dispute.'
+  },
+  {
+    name: 'The Vibe Corridor\u2122',
+    approval: 7, protests: 31, cost: 3.1,
+    fill: 25, fillColor: 'var(--accent)', status: 'BRANDING CONSULTANTS DEPLOYED',
+    response: 'McKinsey was hired for $340M to develop "The Vibe Corridor" brand identity. Their 400-page deck includes a new color palette (sunset orange and "petroleum teal"), a mascot (a tanker with sunglasses named "Captain Chill"), and a Spotify playlist for ships transiting the corridor. Iran called the rebrand "the most American thing they have ever seen," which is both an insult and a compliment depending on who you ask. The branding package includes suggested Instagram captions for oil tankers: "just vibing through the corridor \u2728 #blessed #oil #corridorlife." Tourism boards from Oman and UAE are cautiously interested. The strait\'s TripAdvisor rating improved from 2.3 to 3.1 stars overnight.'
+  },
+  {
+    name: 'Gulf of America 2',
+    approval: 1, protests: 142, cost: 0,
+    fill: 5, fillColor: 'var(--danger)', status: 'UNIVERSAL CONDEMNATION',
+    response: 'The announcement that the Strait of Hormuz would become "Gulf of America 2" was met with what diplomats described as "a silence so loud it registered on seismographs." Mexico immediately renamed the Gulf of America back to the Gulf of Mexico "plus the Strait of Hormuz is also Mexico\'s now." Iran, in an unprecedented move, agreed with Mexico. The Arab League issued a joint statement consisting entirely of the word "no" in 22 languages. The UK called it "a bit much, even for you lot." Australia called it "yeah nah." Canada said nothing but was visibly disappointed. The name "Gulf of America 2" implies there will be a Gulf of America 3, and 14 countries have preemptively filed objections.'
+  },
+  {
+    name: 'Oily McWaterway',
+    approval: 0, protests: 67, cost: 1.2,
+    fill: 10, fillColor: 'var(--warn)', status: 'REJECTED BY LITERALLY EVERYONE',
+    response: 'The "Boaty McBoatface" strategy was attempted and has failed even harder than the original. The name was proposed via public poll, won with 89% of the vote, and was immediately vetoed by every government on Earth simultaneously \u2014 the first time this has happened in the history of international relations. The UN Security Council achieved unanimous agreement for the first time since 1945, specifically to block the name "Oily McWaterway." Iran and the US issued a joint statement: "We agree on nothing except that this name is unacceptable." The British public, who started this naming convention, expressed pride. The name lives on in memes. The strait remains unnamed in protest by 14 countries who refuse to call it anything now.'
+  }
+];
+
+function renameTo(btn, idx) {
+  document.querySelectorAll('#renameOptions .action-btn').forEach(function(b) { b.style.background=''; b.style.color=''; });
+  btn.style.background='var(--accent)'; btn.style.color='var(--bg)';
+  var d = renameData[idx];
+  document.getElementById('renameApproval').textContent = d.approval + ' / 195';
+  document.getElementById('renameApproval').style.color = d.approval > 5 ? 'var(--warn)' : 'var(--danger)';
+  document.getElementById('renameProtests').textContent = d.protests;
+  document.getElementById('renameProtests').style.color = 'var(--danger)';
+  document.getElementById('renameCost').textContent = d.cost > 0 ? '$' + d.cost + 'B' : '$0 (priceless)';
+  var fill = document.getElementById('renameFill');
+  fill.style.width = d.fill + '%'; fill.style.background = d.fillColor;
+  document.getElementById('renameStatus').textContent = d.status;
+  document.getElementById('renameStatus').style.color = d.fillColor;
+  document.getElementById('renameResponse').innerHTML = '<div class="advisor">State Department Advisor \u2014 "' + d.name + '"</div>' + d.response;
+}
+
+// ===== TIME TRAVEL =====
+var ttData = [
+  {
+    era: '200 Million Years Ago',
+    paradoxes: '\u221E', energy: '10\u00B2\u2074 GW', fixed: 'Technically',
+    fill: 100, fillColor: 'var(--danger)', status: 'FULL TEMPORAL CATASTROPHE',
+    response: 'You arrive 200 million years ago. Pangaea is still intact. The Arabian and Eurasian plates are nowhere near each other. There is no Persian Gulf, no strait, no oil, no humans, no problem. You plant a series of "DO NOT CONVERGE" signs along the proto-plate boundaries. You feel accomplished.<br><br>Then you realize: preventing the plate collision means no Zagros Mountains, no Persian Gulf basin, no trapped organic matter, no oil. You haven\'t bypassed the strait. You\'ve deleted the oil. The entire global economy you were trying to protect doesn\'t exist. You\'ve also just erased 200 million years of evolution. Every human who ever lived: gone. Including you. But you\'re standing here. This is a paradox. The universe is confused. A small dinosaur looks at your "DO NOT CONVERGE" sign and eats it.<br><br><em>"What\'s happened, happened. Except you\'ve unhappened everything."</em>'
+  },
+  {
+    era: '14,000 Years Ago',
+    paradoxes: '847', energy: '10\u00B9\u2078 GW', fixed: 'Briefly',
+    fill: 70, fillColor: 'var(--accent)', status: 'TEMPORAL FLOODING PARADOX',
+    response: 'You arrive at the end of the last ice age. Sea levels are 120 meters lower. The Persian Gulf is a river valley. There is no strait because there is no sea. You plant a flag and declare the problem solved.<br><br>Then the ice starts melting. You watch the water rise. Over the next several thousand years, the valley floods and the Strait of Hormuz forms again. You\'ve simply arrived too early for the party. You try to prevent the ice from melting by \u2014 wait, that\'s Solution 10 in reverse. You\'re going in circles. Literally. You are trapped in a time loop of your own making.<br><br>A hunter-gatherer sees your flag, which reads "PROPERTY OF TEMPORAL OPERATIONS DIVISION," and uses it to catch fish. This is the most useful thing the Temporal Operations Division has ever produced.<br><br><em>"We tried to run before we could walk. We can barely crawl." \u2014 Tenet mission debrief, probably</em>'
+  },
+  {
+    era: '1507 AD',
+    paradoxes: '12', energy: '1.21 GW', fixed: 'No',
+    fill: 35, fillColor: 'var(--warn)', status: 'DIPLOMATIC TIME CRIME',
+    response: 'You arrive in 1507, the year the Portuguese under Afonso de Albuquerque seized the island of Hormuz and established control of the strait. Your plan: convince Albuquerque that the strait isn\'t worth it. "Trust me," you say, "in 500 years this is going to be everyone\'s problem."<br><br>Albuquerque does not speak English. He does not understand why you\'re wearing synthetic fabrics. He is, however, very interested in your iPhone, which he believes is witchcraft. You are arrested. Your iPhone dies because there are no chargers in 1507. You are tried for sorcery. Your defense \u2014 "I\'m from the future and the Strait of Hormuz will cause geopolitical anxiety" \u2014 is not well received.<br><br>The Portuguese seize the strait anyway. History is unchanged. You are now a footnote in a 16th-century Portuguese legal document about a "strange prophet who carried a black mirror."<br><br><em>"Where we\'re going, we don\'t need roads." You did, actually. Roads would have helped.</em>'
+  },
+  {
+    era: '1953 AD',
+    paradoxes: '2,847', energy: '4.4 GW', fixed: 'Made It Worse',
+    fill: 85, fillColor: 'var(--danger)', status: 'CATASTROPHIC BUTTERFLY EFFECT',
+    response: 'You arrive in 1953, the year of the CIA-backed coup that overthrew Iran\'s Prime Minister Mossadegh. Your reasoning: prevent the coup, change the trajectory of US-Iran relations, and maybe they\'ll be chill about the strait by 2026.<br><br>You approach the CIA operatives and say "don\'t do this, it causes 70 years of problems." They ask for your credentials. You show them your Temporal Operations Division badge. They\'ve never heard of it. Because it doesn\'t exist yet. Because you haven\'t founded it yet. Because you\'re in 1953. Temporal bureaucracy is a nightmare.<br><br>The coup happens anyway. You\'ve changed nothing except that the CIA now has a classified file titled "TEMPORAL WEIRDO \u2014 STRAIT OBSESSION \u2014 POSSIBLE ASSET, POSSIBLE LUNATIC." This file is rediscovered in 2025 and leaked. It becomes a meme. The strait situation is now worse because Iran thinks America has had time travelers AND still couldn\'t fix relations.<br><br><em>Great Scott. You\'ve made a terrible mistake. 1.21 gigawatts of terrible mistake.</em>'
+  },
+  {
+    era: 'October 21, 2015',
+    paradoxes: '3', energy: '1.21 GW', fixed: 'No (But Cool Hoverboard)',
+    fill: 20, fillColor: 'var(--blue)', status: 'WRONG FRANCHISE',
+    response: 'You arrive on October 21, 2015 \u2014 the exact date Marty McFly traveled to in <em>Back to the Future Part II</em>. You chose this date because you assumed the future would have the technology to fix the strait. It does not. There are no hoverboards (the real kind), no flying cars, and no Mr. Fusion. The Cubs did win the World Series though, which Doc Brown got right, but a year late.<br><br>You attempt to purchase a sports almanac to fund the strait-fixing operation. A wild-eyed old man in a Hawaiian shirt tells you this is "exactly the kind of thing that creates alternate timelines." He seems to know a lot about this. He also has a DeLorean. You do not ask follow-up questions.<br><br>You invest in Bitcoin instead. By 2025 you\'re wealthy enough to fund the strait operation but realize all the solutions are the ones already on this website. You\'ve created a time loop. You are now the reason this website exists. The flux capacitor is fluxing. The strait is still there. The timeline is intact. Heavy.<br><br><em>"Roads? Where we\'re going, we don\'t need roads. We need a functioning geopolitical framework for maritime transit, which roads can\'t help with either."</em>'
+  },
+  {
+    era: 'Tomorrow',
+    paradoxes: '1 (you)', energy: '0 GW', fixed: 'Absolutely Not',
+    fill: 5, fillColor: 'var(--text-dimmer)', status: 'TECHNICALLY TIME TRAVEL',
+    response: 'You travel forward in time by exactly one day. This is technically time travel. Everyone does it. It\'s called "waiting." You arrive tomorrow. The strait is still there. Nothing has changed.<br><br>You check the news. The strait is still 33km wide. Iran is still on one side. Oman is still on the other. Oil is still flowing. The same 21 million barrels are making the same anxious journey. Your time machine \u2014 which is just a chair you sat in overnight \u2014 has not solved anything.<br><br>You try to go back to today to warn yourself not to waste a time travel trip on "tomorrow." But you can\'t, because traveling backward in time violates causality and also you don\'t actually have a time machine, you just waited. An inverted bullet falls up from the ground and into a wall. Wait, no it doesn\'t. That was a different movie. You are not the Protagonist. You are just a person who is now one day older and the strait is still there.<br><br><em>"We live in a twilight world." No. You just took a nap and called it time travel.</em>'
+  }
+];
+
+function timeTravel(btn, idx) {
+  document.querySelectorAll('#timeOptions .action-btn').forEach(function(b) { b.style.background=''; b.style.color=''; });
+  btn.style.background='var(--accent)'; btn.style.color='var(--bg)';
+  var d = ttData[idx];
+  document.getElementById('ttParadoxes').textContent = d.paradoxes;
+  document.getElementById('ttParadoxes').style.color = 'var(--danger)';
+  document.getElementById('ttEnergy').textContent = d.energy;
+  document.getElementById('ttStraightFixed').textContent = d.fixed;
+  document.getElementById('ttStraightFixed').style.color = d.fixed === 'No' || d.fixed === 'Absolutely Not' || d.fixed === 'Made It Worse' ? 'var(--danger)' : d.fixed === 'Technically' ? 'var(--warn)' : 'var(--accent)';
+  var fill = document.getElementById('ttFill');
+  fill.style.width = d.fill + '%'; fill.style.background = d.fillColor;
+  document.getElementById('ttStatus').textContent = d.status;
+  document.getElementById('ttStatus').style.color = d.fillColor;
+  document.getElementById('ttResponse').innerHTML = '<div class="advisor">Temporal Advisor \u2014 ' + d.era + '</div>' + d.response;
 }
 
 // ===== CLOSE MODAL =====
