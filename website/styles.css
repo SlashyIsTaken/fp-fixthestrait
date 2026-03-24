@@ -195,6 +195,18 @@ nav {
   margin-top: 2px;
 }
 
+.source-link {
+  color: var(--text-dimmer);
+  text-decoration: underline;
+  text-decoration-color: rgba(255,255,255,0.15);
+  text-underline-offset: 2px;
+  transition: color 0.2s;
+}
+
+.source-link:hover {
+  color: var(--text-dim);
+}
+
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }

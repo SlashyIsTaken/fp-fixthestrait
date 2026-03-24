@@ -625,4 +625,36 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
-setInterval(function() { document.getElementById('ship-count').textContent = '~' + (17 + Math.floor(Math.random()*7) - 3); }, 4000);
+// ===== HERO STAT COUNT-UP =====
+(function() {
+  var counted = false;
+  function countUp() {
+    if (counted) return;
+    counted = true;
+    document.querySelectorAll('.hero-stat .number[data-target]').forEach(function(el) {
+      var target = parseInt(el.getAttribute('data-target'));
+      var suffix = el.getAttribute('data-suffix') || '';
+      var duration = 1200;
+      var start = performance.now();
+      function tick(now) {
+        var t = Math.min((now - start) / duration, 1);
+        var ease = 1 - Math.pow(1 - t, 3); // ease-out cubic
+        var val = Math.round(target * ease);
+        el.textContent = val + suffix;
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }
+  // Fire when hero section scrolls into view (or immediately if already visible)
+  var hero = document.querySelector('.hero-stats');
+  if (!hero) return;
+  if (typeof IntersectionObserver !== 'undefined') {
+    var obs = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) { countUp(); obs.disconnect(); }
+    }, { threshold: 0.5 });
+    obs.observe(hero);
+  } else {
+    countUp();
+  }
+})();
