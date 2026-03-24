@@ -36,6 +36,38 @@
   var originalTickerHTML = '';
   var isClassified = false;
 
+  // ===== CLASSIFIED WELCOME MODAL =====
+  function showClassifiedWelcome() {
+    var overlay = document.createElement('div');
+    overlay.className = 'classified-welcome-overlay';
+    overlay.innerHTML =
+      '<div class="classified-welcome">' +
+        '<div class="cw-scanline"></div>' +
+        '<div class="cw-header">AUTHENTICATION VERIFIED</div>' +
+        '<div class="cw-divider"></div>' +
+        '<div class="cw-codename">WELCOME, AGENT</div>' +
+        '<div class="cw-designation">CLEARANCE LEVEL: <span>COSMIC / STRAIT-EYES</span></div>' +
+        '<div class="cw-body">' +
+          'You now have access to <strong>classified analyst notes</strong> embedded within each solution brief. ' +
+          'These internal memos, field reports, and intercepted communications are marked <span class="cw-eyes-only">EYES ONLY</span> and contain ' +
+          'information that was never meant to leave the building.' +
+          '<br><br>' +
+          'Look for the green analyst notes when viewing solutions. ' +
+          'The ticker has also been switched to classified traffic. The submission form now requires a clearance code.' +
+        '</div>' +
+        '<div class="cw-footer">' +
+          '<div class="cw-warning">UNAUTHORIZED DISCLOSURE WILL RESULT IN REASSIGNMENT TO THE TREBUCHET TESTING RANGE</div>' +
+          '<button class="action-btn cw-dismiss" onclick="this.closest(\'.classified-welcome-overlay\').remove()">ACKNOWLEDGE &amp; PROCEED</button>' +
+        '</div>' +
+      '</div>';
+
+    document.body.appendChild(overlay);
+    // Trigger animation
+    requestAnimationFrame(function() {
+      overlay.classList.add('visible');
+    });
+  }
+
   // ===== TOGGLE =====
   window.toggleClassified = function() {
     isClassified = !isClassified;
@@ -43,6 +75,9 @@
 
     var toggle = document.getElementById('classifiedToggle');
     if (toggle) toggle.classList.toggle('active', isClassified);
+
+    // Show welcome modal when entering classified mode
+    if (isClassified) showClassifiedWelcome();
 
     // Swap ticker
     var ticker = document.getElementById('ticker');
