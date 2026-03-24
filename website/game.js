@@ -494,6 +494,7 @@
     scoreFinal.textContent = 'Score: ' + score.toLocaleString() + ' | ' + barrels + ' barrels | ' + distance.toFixed(1) + ' km';
     btn.textContent = 'TRY AGAIN';
     btn.onclick = startGame;
+    renderLeaderboard(score);
   }
 
   function startGame() {
@@ -558,10 +559,58 @@
     if (startBtn) startBtn.onclick = startGame;
   }
 
+  // ===== LEADERBOARD =====
+  var fakeLeaderboard = [
+    { name: 'Steve (Dolphin)', tag: 'UNION REP', tagColor: '#22c55e', detail: '47.2 km | 312 barrels', score: 84750, note: 'Refused to stop for bathroom breaks' },
+    { name: 'USS Enterprise', tag: 'DECOMMISSIONED', tagColor: '#ef4444', detail: '38.1 km | 287 barrels', score: 71200, note: 'Technically not sailing since 2017' },
+    { name: 'Ever Given', tag: 'STUCK AGAIN', tagColor: '#eab308', detail: '0.3 km | 2 barrels', score: 65100, note: 'Sideways the entire run. Still scored higher than you.' },
+    { name: 'Pentagon Intern', tag: 'PROMOTED', tagColor: '#3b82f6', detail: '33.0 km | 201 barrels', score: 52400, note: 'Suggested "just drive faster"' },
+    { name: 'CrudeCoin Bot', tag: 'MINING', tagColor: '#f59e0b', detail: '29.7 km | 0 barrels', score: 41800, note: 'Collected 0 barrels but minted 47 tokens' },
+    { name: 'Iranian Fishing Vessel', tag: 'SUSPICIOUS', tagColor: '#f97316', detail: '33.0 km | 178 barrels', score: 38900, note: '"Just fishing" (was not just fishing)' },
+    { name: 'Trebuchet Barrel #4,071', tag: 'IN FLIGHT', tagColor: '#ff6b2b', detail: '33.0 km | 1 barrel', score: 33200, note: 'Technically completed the strait at Mach 1.7' },
+    { name: 'Bahrain', tag: 'ON VACATION', tagColor: '#06b6d4', detail: '12.4 km | 89 barrels', score: 21500, note: 'Kept stopping to take photos' },
+    { name: 'A Very Lost Kayaker', tag: 'CIVILIAN', tagColor: '#94a3b8', detail: '8.2 km | 3 barrels', score: 12300, note: 'Thought this was the Thames' },
+    { name: 'McKinsey Consultant', tag: '$340M FEE', tagColor: '#a855f7', detail: '0.0 km | 0 barrels', score: 8400, note: 'Produced a 200-slide deck about the game instead of playing it' }
+  ];
+
+  function renderLeaderboard(playerScore) {
+    var lb = document.getElementById('leaderboard');
+    if (!lb) return;
+
+    var entries = fakeLeaderboard.map(function(e) { return { name: e.name, tag: e.tag, tagColor: e.tagColor, detail: e.detail, score: e.score, note: e.note, isPlayer: false }; });
+
+    if (typeof playerScore === 'number' && playerScore > 0) {
+      var playerEntry = {
+        name: 'You',
+        tag: 'JUST NOW',
+        tagColor: '#ff6b2b',
+        detail: distance.toFixed(1) + ' km | ' + barrels + ' barrels',
+        score: playerScore,
+        note: null,
+        isPlayer: true
+      };
+      entries.push(playerEntry);
+      entries.sort(function(a, b) { return b.score - a.score; });
+      entries = entries.slice(0, 12);
+    }
+
+    lb.innerHTML = entries.map(function(e, i) {
+      var rank = i + 1;
+      var tagHtml = e.tag ? '<span class="lb-tag" style="background:' + e.tagColor + '22;color:' + e.tagColor + ';">' + e.tag + '</span>' : '';
+      var noteHtml = e.note ? ' <span style="color:var(--text-dimmer);font-size:9px;font-style:italic;">\u2014 ' + e.note + '</span>' : '';
+      return '<div class="lb-entry' + (e.isPlayer ? ' you' : '') + '">' +
+        '<span class="lb-rank">' + rank + '</span>' +
+        '<span class="lb-name">' + e.name + tagHtml + noteHtml + '</span>' +
+        '<span class="lb-score">' + e.score.toLocaleString() + '</span>' +
+      '</div>';
+    }).join('');
+  }
+
   // Init when DOM is ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', function() { init(); renderLeaderboard(); });
   } else {
     init();
+    renderLeaderboard();
   }
 })();
