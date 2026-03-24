@@ -1,4 +1,4 @@
-# Fix the Strait
+# Fix the Strait of Hormuz
 
 A satirical interactive website exploring 10 absurdly impractical solutions to the Strait of Hormuz chokepoint crisis.
 
