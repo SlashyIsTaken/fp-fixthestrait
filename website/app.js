@@ -21,18 +21,18 @@ function makeMap(id, center, zoom) {
 
 // Share text for each solution
 const shareData = {
-  canal: { text: "My solution to the Strait of Hormuz is to dig a massive canal through the Arabian Peninsula. I drew a route and the budget evaporated instantly.", emoji: "\u26cf\ufe0f" },
-  ask: { text: "My solution to the Strait of Hormuz crisis is to just send a really nice email. This is our third follow-up. Please RSVP.", emoji: "\u2709\ufe0f" },
-  carriers: { text: "My solution to the Strait of Hormuz is to park 100 aircraft carriers side by side and lay plywood across them. Total cost: $1.16 trillion.", emoji: "\u26f5" },
-  drain: { text: "My solution to the Strait of Hormuz is to simply drain all 31.4 trillion gallons of water out of it. Only takes 1,194 years.", emoji: "\ud83d\udca7" },
-  trebuchet: { text: "My solution to the Strait of Hormuz is a giant trebuchet that yeets oil barrels 33km at Mach 1.7. The Geneva Convention has concerns.", emoji: "\ud83c\udff0" },
-  moveit: { text: "My solution to the Strait of Hormuz is to physically relocate Iran using tectonic engineering. ETA: 200 million years.", emoji: "\ud83c\udf0d" },
-  straw: { text: "My solution to the Strait of Hormuz is a covert underwater pipeline disguised as a giant drinking straw. Iran must never know.", emoji: "\ud83e\udd64" },
-  dolphins: { text: "My solution to the Strait of Hormuz is to strap oil barrels to 21 million trained dolphins. The dolphins said no. Their union rep is also a dolphin.", emoji: "\ud83d\udc2c" },
-  flood: { text: "My solution to the Strait of Hormuz is to melt the ice caps and raise sea levels 70m until the strait is irrelevant. We're already working on it apparently.", emoji: "\ud83c\udf0a" },
-  crude: { text: "My solution to the Strait of Hormuz is to tokenize every barrel of oil as an NFT. The oil never moves. You own the JPEG. Already rugpulled.", emoji: "\ud83d\udcb0" },
-  rename: { text: "My solution to the Strait of Hormuz is to just rename it. If the Gulf of Mexico can become the Gulf of America, the strait can become \"The Friendship Funnel.\u2122\"", emoji: "\ud83d\udcdd" },
-  timetravel: { text: "My solution to the Strait of Hormuz is to go back 200 million years and prevent the tectonic plates from forming it. Don't try to understand it. Feel it.", emoji: "\u23f0" }
+  canal: { text: "I just drew a canal through 3 sovereign nations to bypass the Strait of Hormuz. It cost $400 billion and started 2 wars before I finished clicking. I am an infrastructure genius.", emoji: "\u26cf\ufe0f" },
+  ask: { text: "Apparently the global oil crisis can be solved by a polite email with a motivational PowerPoint. Iran left the group chat. Bahrain sent vacation photos. Again.", emoji: "\u2709\ufe0f" },
+  carriers: { text: "My plan for the Strait of Hormuz is 100 aircraft carriers + plywood from Home Depot. The Navy said no. Home Depot said \"concerned but flattered.\"", emoji: "\u26f5" },
+  drain: { text: "I've been clicking a pump button for 10 minutes and I've drained 0.000000003% of the Strait of Hormuz. Only 1,194 years to go. I can do this.", emoji: "\ud83d\udca7" },
+  trebuchet: { text: "Medieval siege warfare is the answer to modern oil logistics. I'm launching crude oil barrels at Mach 1.7 across the Strait of Hormuz. Oxford called me \"a danger to siege weapon enthusiasts everywhere.\"", emoji: "\ud83c\udff0" },
+  moveit: { text: "I just relocated Iran to Antarctica on an interactive map. The penguins are confused. The oil is frozen. An MIT seismologist called this \"the stupidest thing anyone has ever asked me.\"", emoji: "\ud83c\udf0d" },
+  straw: { text: "The CIA's classified plan to bypass the Strait of Hormuz is a giant drinking straw on the ocean floor. Codename: BENDY BOY. Iran found it in 4 hours. It has been reclassified from \"covert\" to \"embarrassing.\"", emoji: "\ud83e\udd64" },
+  dolphins: { text: "21 million dolphins. Each carrying a barrel of oil. The dolphins unionized. Their rep is named Steve. Steve has a lawyer. The lawyer is also a dolphin. This is my solution to the Strait of Hormuz.", emoji: "\ud83d\udc2c" },
+  flood: { text: "If we melt ALL the ice caps, sea levels rise 70m and the Strait of Hormuz becomes 200km wide. Problem solved. The analyst who ran this simulation has requested therapy.", emoji: "\ud83c\udf0a" },
+  crude: { text: "I just tokenized the entire Strait of Hormuz oil supply as NFTs. The oil never moves. You own the JPEG. The SEC called it \"the most creative securities fraud this quarter.\" Three VCs invested anyway.", emoji: "\ud83d\udcb0" },
+  rename: { text: "If you can rename the Gulf of Mexico you can rename anything. My proposal for the Strait of Hormuz: \"Steve.\" You can't blockade Steve. Nobody's going to war over Steve.", emoji: "\ud83d\udcdd" },
+  timetravel: { text: "I'm going back 200 million years to prevent the tectonic plates from forming the Strait of Hormuz. The Pentagon's Temporal Operations Division has a budget of $0 and a broken DeLorean. Don't try to understand it. Feel it.", emoji: "\u23f0" }
 };
 
 function shareSolution(id) {
