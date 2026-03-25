@@ -384,6 +384,26 @@ nav {
 
 .modal .m-overline { font-family: var(--font-mono); font-size: 11px; color: var(--accent); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px; }
 .modal h2 { font-family: var(--font-brand); font-size: 36px; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 24px; }
+
+.share-bar { margin-bottom: 20px; }
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid var(--border-light);
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.share-btn:hover { border-color: var(--accent); color: var(--accent); }
+.share-btn.share-copied { border-color: var(--success); color: var(--success); }
+.share-icon { font-size: 13px; }
+
 .modal .m-body { font-family: var(--font-body); color: var(--text-dim); font-size: 16px; line-height: 1.7; margin-bottom: 32px; }
 .modal .m-body p { margin-bottom: 16px; }
 .modal .m-body strong { color: var(--text); }

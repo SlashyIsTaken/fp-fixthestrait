@@ -19,6 +19,46 @@ function makeMap(id, center, zoom) {
   return map;
 }
 
+// Share text for each solution
+const shareData = {
+  canal: { text: "My solution to the Strait of Hormuz is to dig a massive canal through the Arabian Peninsula. I drew a route and the budget evaporated instantly.", emoji: "\u26cf\ufe0f" },
+  ask: { text: "My solution to the Strait of Hormuz crisis is to just send a really nice email. This is our third follow-up. Please RSVP.", emoji: "\u2709\ufe0f" },
+  carriers: { text: "My solution to the Strait of Hormuz is to park 100 aircraft carriers side by side and lay plywood across them. Total cost: $1.16 trillion.", emoji: "\u26f5" },
+  drain: { text: "My solution to the Strait of Hormuz is to simply drain all 31.4 trillion gallons of water out of it. Only takes 1,194 years.", emoji: "\ud83d\udca7" },
+  trebuchet: { text: "My solution to the Strait of Hormuz is a giant trebuchet that yeets oil barrels 33km at Mach 1.7. The Geneva Convention has concerns.", emoji: "\ud83c\udff0" },
+  moveit: { text: "My solution to the Strait of Hormuz is to physically relocate Iran using tectonic engineering. ETA: 200 million years.", emoji: "\ud83c\udf0d" },
+  straw: { text: "My solution to the Strait of Hormuz is a covert underwater pipeline disguised as a giant drinking straw. Iran must never know.", emoji: "\ud83e\udd64" },
+  dolphins: { text: "My solution to the Strait of Hormuz is to strap oil barrels to 21 million trained dolphins. The dolphins said no. Their union rep is also a dolphin.", emoji: "\ud83d\udc2c" },
+  flood: { text: "My solution to the Strait of Hormuz is to melt the ice caps and raise sea levels 70m until the strait is irrelevant. We're already working on it apparently.", emoji: "\ud83c\udf0a" },
+  crude: { text: "My solution to the Strait of Hormuz is to tokenize every barrel of oil as an NFT. The oil never moves. You own the JPEG. Already rugpulled.", emoji: "\ud83d\udcb0" },
+  rename: { text: "My solution to the Strait of Hormuz is to just rename it. If the Gulf of Mexico can become the Gulf of America, the strait can become \"The Friendship Funnel.\u2122\"", emoji: "\ud83d\udcdd" },
+  timetravel: { text: "My solution to the Strait of Hormuz is to go back 200 million years and prevent the tectonic plates from forming it. Don't try to understand it. Feel it.", emoji: "\u23f0" }
+};
+
+function shareSolution(id) {
+  var d = shareData[id];
+  if (!d) return;
+  var url = 'https://fixthestrait.com/#' + id;
+  var text = d.emoji + ' ' + d.text + '\n\n';
+
+  // Try native share (mobile), fall back to copy
+  if (navigator.share) {
+    navigator.share({ text: text, url: url }).catch(function() {});
+  } else {
+    // Copy to clipboard
+    var full = text + url;
+    navigator.clipboard.writeText(full).then(function() {
+      var btn = document.querySelector('.share-btn');
+      if (btn) {
+        var orig = btn.innerHTML;
+        btn.innerHTML = '<span class="share-icon">\u2713</span> COPIED TO CLIPBOARD';
+        btn.classList.add('share-copied');
+        setTimeout(function() { btn.innerHTML = orig; btn.classList.remove('share-copied'); }, 2000);
+      }
+    });
+  }
+}
+
 const modalData = {
   canal: {
     overline: 'Solution 08 — Extreme Landscaping',
@@ -165,10 +205,15 @@ function openModal(id) {
     ih = '<div class="timetravel-game"><div style="background:var(--bg-card);border:1px solid var(--border);padding:16px;margin-bottom:16px;border-radius:4px;"><div style="font-family:var(--font-mono);font-size:10px;color:var(--accent);letter-spacing:2px;margin-bottom:4px;">TEMPORAL OPERATIONS DIVISION</div><div style="font-family:var(--font-mono);font-size:10px;color:var(--text-dimmer);">"Don\'t try to understand it. Feel it." \u2014 Neil, <em>Tenet</em></div></div><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim);letter-spacing:1px;margin-bottom:8px;">SELECT TEMPORAL DESTINATION:</div><div class="rename-options" id="timeOptions"><button class="action-btn secondary" onclick="timeTravel(this,0)" style="font-size:11px;padding:10px 16px;">200 Million Years Ago</button><button class="action-btn secondary" onclick="timeTravel(this,1)" style="font-size:11px;padding:10px 16px;">14,000 Years Ago</button><button class="action-btn secondary" onclick="timeTravel(this,2)" style="font-size:11px;padding:10px 16px;">1507 AD</button><button class="action-btn secondary" onclick="timeTravel(this,3)" style="font-size:11px;padding:10px 16px;">1953 AD</button><button class="action-btn secondary" onclick="timeTravel(this,4)" style="font-size:11px;padding:10px 16px;">October 21, 2015</button><button class="action-btn secondary" onclick="timeTravel(this,5)" style="font-size:11px;padding:10px 16px;">Tomorrow</button></div><div class="canal-results" style="grid-template-columns:repeat(3,1fr);margin-top:16px;"><div class="canal-result"><div class="cr-val" id="ttParadoxes">0</div><div class="cr-label">Paradoxes Created</div></div><div class="canal-result"><div class="cr-val" id="ttEnergy">0 GW</div><div class="cr-label">Energy Required</div></div><div class="canal-result"><div class="cr-val" id="ttStraightFixed" style="color:var(--text-dim);">No</div><div class="cr-label">Strait Fixed?</div></div></div><div class="stealth-meter" style="margin-top:12px;"><div class="stealth-fill" id="ttFill" style="width:0%;background:var(--blue);"></div></div><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-dimmer);margin-top:4px;margin-bottom:12px;letter-spacing:1px;" id="ttStatus">TEMPORAL COORDINATES NOT SET</div><div class="response-panel" id="ttResponse"><div class="advisor">Temporal Advisor</div><em>Select a destination in time... What\'s happened, happened. Or has it?</em></div></div>';
   }
 
-  inner.innerHTML = '<div class="m-overline">' + data.overline + '</div><h2>' + data.title + '</h2><div class="m-body">' + data.body + '</div>' + ih + '<div class="real-talk">' + data.facts + '</div>';
+  var shareBtn = shareData[id] ? '<div class="share-bar"><button class="share-btn" onclick="shareSolution(\'' + id + '\')"><span class="share-icon">\u{1F4E4}</span> SHARE THIS SOLUTION</button></div>' : '';
+
+  inner.innerHTML = '<div class="m-overline">' + data.overline + '</div><h2>' + data.title + '</h2>' + shareBtn + '<div class="m-body">' + data.body + '</div>' + ih + '<div class="real-talk">' + data.facts + '</div>';
   overlay.classList.add('active');
   requestAnimationFrame(function() { overlay.classList.add('visible'); setTimeout(function() { initMaps(id); }, 200); });
   document.body.style.overflow = 'hidden';
+
+  // Update hash without scrolling
+  history.replaceState(null, '', '#' + id);
 }
 
 // ===== MAP INIT =====
@@ -615,7 +660,16 @@ function closeModal(e) {
   var ov = document.getElementById('modalOverlay');
   ov.classList.remove('visible');
   setTimeout(function() { ov.classList.remove('active'); document.body.style.overflow = ''; cleanupMaps(); window._canalMap = null; window._moveMap = null; }, 300);
+  history.replaceState(null, '', window.location.pathname);
 }
+
+// Auto-open modal from URL hash (for shared links)
+window.addEventListener('DOMContentLoaded', function() {
+  var hash = window.location.hash.replace('#', '');
+  if (hash && modalData[hash]) {
+    setTimeout(function() { openModal(hash); }, 400);
+  }
+});
 
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
