@@ -664,10 +664,15 @@ function closeModal(e) {
 }
 
 // Auto-open modal from URL hash (for shared links)
-window.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('load', function() {
   var hash = window.location.hash.replace('#', '');
   if (hash && modalData[hash]) {
-    setTimeout(function() { openModal(hash); }, 400);
+    // Scroll to solutions section first, then open the modal
+    var solutions = document.getElementById('solutions');
+    if (solutions) {
+      solutions.scrollIntoView({ behavior: 'smooth' });
+    }
+    setTimeout(function() { openModal(hash); }, 800);
   }
 });
 
