@@ -95,7 +95,7 @@
       var resultEl = document.getElementById('submitResult');
       document.getElementById('result-stamp').textContent = result.stamp;
       document.getElementById('result-text').textContent = result.text;
-      document.getElementById('result-id').textContent = 'Submission #' + submitCount.toLocaleString() + ' \u2014 Filed: ' + new Date().toISOString().split('T')[0] + ' \u2014 Status: ' + result.stamp;
+      document.getElementById('result-id').textContent = 'Submission #' + submitCount.toLocaleString() + ' \u2014 Filed: ' + new Date().toISOString().split('T')[0] + ' \u2014 Status: ' + result.stamp + ' \u2014 Good solutions on this website: still 0';
 
       resultEl.classList.add('visible');
       resultEl.scrollIntoView({ behavior: 'smooth', block: 'center' });

@@ -70,7 +70,7 @@ const modalData = {
   ask: {
     overline: 'Solution 01 — Radical Diplomacy',
     title: 'Just Ask Nicely',
-    body: '<p>What if — and hear us out — we just sent a really nice email? Like, <em>really</em> nice. With a subject line that shows we care. Below is a draft prepared by our top diplomatic AI (third follow-up, the first two were ignored):</p>',
+    body: '<p>What if — and hear us out — we just sent a really nice email? Like, <em>really</em> nice. With a subject line that shows we care.</p><p>You have two options: <strong>compose your own diplomatic masterpiece</strong>, or read the one our intern already sent (this is our third follow-up — the first two were ignored).</p>',
     interactive: 'email',
     facts: '<p>Diplomatic negotiations over the strait have been ongoing for decades. The 1982 UN Convention on the Law of the Sea (UNCLOS) establishes the right of "transit passage" through international straits, which Iran has intermittently acknowledged and challenged.</p><p>Iran has threatened to close the strait multiple times, most notably during tensions in 2012 and 2019. The international consensus is that closing the strait would be an act of war — but "consensus" and "reality" are different departments.</p>'
   },
@@ -181,9 +181,9 @@ function openModal(id) {
   if (data.interactive === 'canal') {
     ih = '<div class="map-container"><div class="leaflet-map" id="canalMap" style="height:400px;cursor:crosshair"></div><div class="map-controls"><button class="action-btn secondary" onclick="clearCanal()">CLEAR CANAL</button><span style="font-family:var(--font-mono);font-size:10px;color:var(--text-dimmer);letter-spacing:1px;">CLICK MAP TO PLACE WAYPOINTS</span></div></div><div class="canal-calc"><div class="canal-results"><div class="canal-result"><div class="cr-val" id="canalDist">0 km</div><div class="cr-label">Canal Length</div></div><div class="canal-result"><div class="cr-val" id="canalCost">$0</div><div class="cr-label">Estimated Cost</div></div><div class="canal-result"><div class="cr-val" id="canalYears">0 yrs</div><div class="cr-label">Construction Time</div></div></div><div class="canal-commentary" id="canalCommentary">Click on the map to start drawing your canal route. Each click adds a waypoint. Cost estimated at ~$1.2B per km for canal construction in difficult terrain.</div></div>';
   } else if (data.interactive === 'email') {
-    ih = '<div class="diplo-email"><div class="email-header"><div class="email-field"><span class="ef-label">From:</span> concerned_citizen@fixthestrait.com</div><div class="email-field"><span class="ef-label">To:</span> everyone@middleeast.gov</div><div class="email-field"><span class="ef-label">CC:</span> united_nations@un.org, opec@opec.org, jeff@amazon.com (he has boats), elonmusk@x-twitter-x-whatever.com, your_mom@aol.com</div><div class="email-field"><span class="ef-label">BCC:</span> cia@langley.gov (don\'t tell anyone)</div><div class="email-field"><span class="ef-label">Subject:</span> RE: RE: RE: FWD: Quick Question About the Strait (URGENT — 3rd Follow-Up)</div><div class="email-field"><span class="ef-label">Priority:</span> <span style="color:var(--danger)">MAXIMUM</span></div><div class="email-field"><span class="ef-label">Attach:</span> motivational_poster.pptx, shared_custody_schedule.xlsx, strait_vibes_playlist.spotify</div></div><div class="email-body">Dear Esteemed/Tolerated Leaders of the Greater Hormuz Metropolitan Area,\n\nPer my last email (and the two before that which were also ignored), I\'m circling back regarding the Strait of Hormuz situation. As per the attached PowerPoint (slide 7 is particularly moving — it\'s a stock photo of a tanker captain crying), we\'d like to propose the following:\n\n1. A "Strait Sharing Schedule." Iran gets Monday-Thursday, UAE/Oman get Friday-Sunday. The US Navy gets federal holidays and every other Wednesday. Qatar gets the third Sunday of months that start with \'J.\' Oman can have April 14th because we like Oman.\n\n2. A mandatory "Feelings Circle" every quarter, held at the Marriott in Muscat. They have a breakfast buffet, which we feel could de-escalate most geopolitical conflicts. The omelette station alone has resolved three border disputes.\n\n3. A Strait of Hormuz group chat. We\'ve already created it. It\'s called "Hormuz &amp; Chill." Iran, please stop leaving the group. UAE, please stop changing the group name. America, please stop sending aircraft carrier selfies.\n\n4. Renaming the strait to something less threatening. Current proposals include: "The Friendship Funnel," "Oily McWaterway," "The Vibe Corridor," and "Steve."\n\n5. Installation of a giant "PLEASE BE NICE" neon sign at both ends of the strait, funded by whoever lost the most money last time someone tweeted about closing it. Current bid: BP, $4.7 billion.\n\nWe understand this is a complex geopolitical situation involving centuries of territorial disputes, nuclear negotiations, proxy wars, economic sanctions, and fundamental disagreements about sovereignty and international law.\n\nHowever, we\'ve made a Google Form. It has only 47 questions. Question 23 is a vibe check. Question 38 asks you to rate the strait on a scale of 1 to 10 ("1 = major chokepoint, 10 = chill waterway"). We expect honest answers.\n\nIf we do not hear back by Friday 5pm GMT, we will be forced to escalate this to... actually, we\'re not sure who\'s above all of you. God? The ocean? Poseidon? We\'ll figure it out. We have a committee forming a subcommittee to investigate the formation of a task force.\n\nWith aggressive optimism and moderate delusion,\nThe International Community\n\nP.S. We noticed Iran changed their out-of-office to "gone fishing in the strait." We don\'t think that\'s funny. But also it kind of is.\n\nP.P.S. Bahrain, you weren\'t on the original CC list but you keep replying-all anyway, so here we are. Please stop attaching your vacation photos.\n\nP.P.P.S. Whoever keeps marking these emails as spam: we see you, Kuwait. We have read receipts.\n\nP.P.P.P.S. The Marriott in Muscat is asking for a headcount. Please RSVP. They need to know about dietary restrictions. Last time, the Iranian delegation was upset about the hummus being labeled "Israeli-style" and we really can\'t do that again.\n\nP.P.P.P.P.S. We have now spent more time writing postscripts than actually negotiating. This may be part of the problem.</div><div class="email-stamp">UNDELIVERABLE — MAILBOX FULL<br><span style="font-size:12px;letter-spacing:1px;">auto-reply: "gone fishing in the strait"</span></div></div>';
+    ih = '<div class="email-chooser" id="emailChooser"><button class="action-btn" onclick="showEmailComposer()" style="flex:1;">COMPOSE YOUR OWN</button><button class="action-btn secondary" onclick="showInternEmail()" style="flex:1;">READ THE INTERN\'S EMAIL</button></div><div id="emailContent"></div>';
   } else if (data.interactive === 'carriers') {
-    ih = '<div class="carrier-game" id="carrierGame"><div class="carrier-visual" id="carrierVisual"><div class="carrier-land-top">IRAN</div><div class="carrier-water"></div><div class="carrier-land-bottom">OMAN</div></div><div class="carrier-stats"><div><div class="carrier-stat-val" id="carrierDeployed">0</div><div class="carrier-stat-label">Carriers Deployed</div></div><div><div class="carrier-stat-val" id="carrierCost">$0</div><div class="carrier-stat-label">Total Cost</div></div><div><div class="carrier-stat-val" id="carrierYears">0 yrs</div><div class="carrier-stat-label">Build Time</div></div></div><div class="carrier-controls"><button class="action-btn" onclick="deployCarrier()">DEPLOY CARRIER ($13B)</button><button class="action-btn secondary" onclick="resetCarriers()">RESET</button></div><div class="carrier-message" id="carrierMsg">&nbsp;</div></div>';
+    ih = '<div class="carrier-game" id="carrierGame"><div class="carrier-visual" id="carrierVisual"><div class="carrier-land-top">IRAN</div><div class="carrier-water"></div><div class="carrier-land-bottom">OMAN</div></div><div class="carrier-stats"><div><div class="carrier-stat-val" id="carrierDeployed">0</div><div class="carrier-stat-label">Carriers Deployed</div></div><div><div class="carrier-stat-val" id="carrierCost">$0</div><div class="carrier-stat-label">Total Cost</div></div><div><div class="carrier-stat-val" id="carrierYears">0 yrs</div><div class="carrier-stat-label">Build Time</div></div><div><div class="carrier-stat-val" id="carrierIncidents">0</div><div class="carrier-stat-label">Incident Reports</div></div></div><div class="carrier-controls"><button class="action-btn" onclick="deployCarrier()">DEPLOY CARRIER ($13B)</button><button class="action-btn secondary" onclick="resetCarriers()">RESET</button></div><div class="carrier-message" id="carrierMsg">&nbsp;</div><div class="carrier-incidents" id="carrierIncidents2"></div></div>';
   } else if (data.interactive === 'drain') {
     ih = '<div class="drain-game"><div class="drain-progress"><div class="drain-fill" id="drainFill"></div><div class="drain-label" id="drainPercent">0.000000000%</div></div><div style="text-align:center;margin:16px 0;"><button class="action-btn" onclick="pumpWater()" style="font-size:14px;padding:16px 40px;">PUMP WATER</button></div><div class="drain-stats"><div class="drain-stat"><div class="ds-val" id="drainPumped">0 gallons</div><div class="ds-label">Water Pumped</div></div><div class="drain-stat"><div class="ds-val" id="drainRemaining">31.4 trillion gal</div><div class="ds-label">Water Remaining</div></div><div class="drain-stat"><div class="ds-val" id="drainETA">1,194 years</div><div class="ds-label">ETA at Current Rate</div></div><div class="drain-stat"><div class="ds-val" id="drainRefill">Constant</div><div class="ds-label">Ocean Refill Rate</div></div></div><div class="canal-commentary" id="drainCommentary">Click "PUMP WATER" to start draining the Strait of Hormuz. Each click pumps 50,000 gallons. Total needed: 31.4 trillion gallons. You can do this.</div></div>';
   } else if (data.interactive === 'trebuchet') {
@@ -267,19 +267,153 @@ function clearCanal() {
   document.getElementById('canalCommentary').textContent = 'Click on the map to start drawing your canal route.';
 }
 
+// ===== EMAIL COMPOSER =====
+var emailGreetings = [
+  'Dear Esteemed/Tolerated Leaders',
+  'Yo',
+  'To Whom It May Inconvenience',
+  'Greetings, Fellow Strait Enthusiasts',
+  'Hey bestie (please don\'t block us)'
+];
+var emailTones = [
+  ['Diplomatically Passive-Aggressive', 'Per my last email (and the 47 before that), I\'m circling back AGAIN regarding the Strait of Hormuz. We understand you\'re "busy" (we have satellite footage, you\'re not), but this really can\'t wait another decade.'],
+  ['Aggressively Friendly', 'GREAT NEWS!!! We\'ve decided the Strait of Hormuz situation is actually an OPPORTUNITY for FRIENDSHIP! We\'ve prepared a mandatory team-building agenda including trust falls (over the strait) and a group hug quota. Attendance is not optional. Snacks will be provided.'],
+  ['Corporate Buzzword Soup', 'We\'d like to synergize our strait-related deliverables and leverage cross-border alignment on a go-forward basis. Our stakeholder engagement matrix indicates a 340% misalignment on chokepoint KPIs. Let\'s take this offline, circle back, and put a pin in the geopolitical instability.'],
+  ['Barely Concealed Threat', 'We\'re writing to inform you that we have 12 solutions to the Strait of Hormuz situation. One involves a trebuchet. Another involves 21 million dolphins. A third involves moving your entire country. We would prefer not to use any of them. Please cooperate.'],
+  ['Emotional', 'We miss how things used to be. Remember when tankers could just... transit? Without the anxiety? Without the threats? We\'re not crying, you\'re crying. Actually, the tanker captain on slide 7 of the attached PowerPoint is crying. Please just let the oil through. We\'re begging.']
+];
+var emailDemands = [
+  ['Strait Sharing Schedule', 'Iran gets Mon-Thu. UAE/Oman get Fri-Sun. US Navy gets federal holidays. Qatar gets the third Sunday of months starting with J. Oman can have April 14th because we like Oman.'],
+  ['Mandatory Feelings Circle', 'Quarterly meeting at the Marriott in Muscat. They have a breakfast buffet. The omelette station alone has resolved three border disputes. RSVP required.'],
+  ['Giant "PLEASE BE NICE" Neon Sign', 'Installed at both ends of the strait. Funded by whoever lost the most money last time someone tweeted about closing it. Current bid: BP, $4.7 billion.'],
+  ['Strait Group Chat', 'Already created. It\'s called "Hormuz & Chill." Iran: stop leaving. UAE: stop renaming it. America: stop sending carrier selfies. Bahrain: stop replying-all with vacation photos.'],
+  ['Rename to Something Less Threatening', 'Current proposals: "The Friendship Funnel," "Steve," "The Vibe Corridor." Nobody threatens to close Steve. Steve is chill.']
+];
+
+var emailSuccessProb = 0;
+
+function showEmailComposer() {
+  var c = document.getElementById('emailContent');
+  c.innerHTML =
+    '<div class="email-composer">' +
+      '<div class="ec-meter"><span style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--text-dimmer);">DIPLOMATIC SUCCESS PROBABILITY:</span>' +
+      '<div class="stealth-meter" style="margin:8px 0 4px;"><div class="stealth-fill" id="diploFill" style="width:0%;background:var(--danger);"></div></div>' +
+      '<div style="font-family:var(--font-mono);font-size:11px;color:var(--danger);" id="diploLabel">0% — SELECT OPTIONS BELOW</div></div>' +
+      '<div class="ec-section"><div class="ec-label">GREETING:</div><div class="ec-options" id="ecGreeting">' +
+      emailGreetings.map(function(g,i) { return '<button class="action-btn secondary ec-opt" onclick="pickEmail(\'greeting\','+i+',this)" style="font-size:10px;padding:8px 12px;">'+g+'</button>'; }).join('') +
+      '</div></div>' +
+      '<div class="ec-section"><div class="ec-label">TONE:</div><div class="ec-options" id="ecTone">' +
+      emailTones.map(function(t,i) { return '<button class="action-btn secondary ec-opt" onclick="pickEmail(\'tone\','+i+',this)" style="font-size:10px;padding:8px 12px;">'+t[0]+'</button>'; }).join('') +
+      '</div></div>' +
+      '<div class="ec-section"><div class="ec-label">KEY DEMAND:</div><div class="ec-options" id="ecDemand">' +
+      emailDemands.map(function(d,i) { return '<button class="action-btn secondary ec-opt" onclick="pickEmail(\'demand\','+i+',this)" style="font-size:10px;padding:8px 12px;">'+d[0]+'</button>'; }).join('') +
+      '</div></div>' +
+      '<div class="ec-preview" id="ecPreview" style="display:none;"></div>' +
+      '<div style="text-align:center;margin-top:16px;"><button class="action-btn" id="ecSendBtn" onclick="sendComposedEmail()" style="display:none;padding:14px 40px;">SEND EMAIL</button></div>' +
+      '<div class="ec-result" id="ecResult"></div>' +
+    '</div>';
+  emailSuccessProb = 0;
+  window._emailPicks = {};
+}
+
+function pickEmail(type, idx, btn) {
+  var parent = btn.parentElement;
+  parent.querySelectorAll('.ec-opt').forEach(function(b) { b.style.background=''; b.style.color=''; });
+  btn.style.background='var(--accent)'; btn.style.color='var(--bg)';
+  window._emailPicks[type] = idx;
+
+  // Update probability (never above 3%)
+  var count = Object.keys(window._emailPicks).length;
+  emailSuccessProb = Math.min(count * 0.8, 2.4);
+  var fill = document.getElementById('diploFill');
+  var label = document.getElementById('diploLabel');
+  fill.style.width = emailSuccessProb + '%';
+  var labels = ['0% \u2014 SELECT OPTIONS BELOW', '0.8% \u2014 STILL ESSENTIALLY ZERO', '1.6% \u2014 TECHNICALLY NON-ZERO', '2.4% \u2014 MAXIMUM ACHIEVABLE BY DIPLOMACY'];
+  label.textContent = labels[count] || labels[3];
+  label.style.color = count >= 3 ? 'var(--warn)' : 'var(--danger)';
+
+  // Show preview if all picked
+  if (count >= 3) {
+    var g = emailGreetings[window._emailPicks.greeting];
+    var t = emailTones[window._emailPicks.tone];
+    var d = emailDemands[window._emailPicks.demand];
+    var preview = document.getElementById('ecPreview');
+    preview.style.display = 'block';
+    preview.innerHTML =
+      '<div class="diplo-email"><div class="email-header">' +
+      '<div class="email-field"><span class="ef-label">From:</span> you@fixthestrait.com</div>' +
+      '<div class="email-field"><span class="ef-label">To:</span> everyone@middleeast.gov</div>' +
+      '<div class="email-field"><span class="ef-label">Subject:</span> RE: RE: RE: FWD: The Strait Situation (' + t[0].toUpperCase() + ' EDITION)</div>' +
+      '<div class="email-field"><span class="ef-label">Priority:</span> <span style="color:var(--danger)">MAXIMUM</span></div>' +
+      '</div><div class="email-body">' + g + ',\n\n' + t[1] + '\n\nOur key demand:\n\n' + d[0].toUpperCase() + ': ' + d[1] + '\n\nPlease respond by Friday 5pm GMT or we escalate to Poseidon.\n\nWith ' + (window._emailPicks.tone === 1 ? 'aggressive friendship' : window._emailPicks.tone === 3 ? 'barely concealed menace' : 'moderate delusion') + ',\nYou</div></div>';
+    document.getElementById('ecSendBtn').style.display = 'inline-block';
+  }
+}
+
+function sendComposedEmail() {
+  var btn = document.getElementById('ecSendBtn');
+  btn.textContent = 'SENDING...';
+  btn.disabled = true;
+  var result = document.getElementById('ecResult');
+
+  setTimeout(function() {
+    var replies = [
+      { from: 'Iran', icon: '\uD83C\uDDEE\uD83C\uDDF7', msg: 'Read 3:02 PM. No reply.', delay: 800 },
+      { from: 'auto-reply@iran.gov', icon: '\uD83D\uDCE7', msg: 'Out of office: "Gone fishing in the strait." Returns: unclear.', delay: 1600 },
+      { from: 'Bahrain', icon: '\uD83C\uDDE7\uD83C\uDDED', msg: '[4 vacation photos attached] "wish you were here!! \uD83C\uDF34"', delay: 2500 },
+      { from: 'Kuwait', icon: '\uD83C\uDDF0\uD83C\uDDFC', msg: 'Marked as spam.', delay: 3200 },
+      { from: 'UAE', icon: '\uD83C\uDDE6\uD83C\uDDEA', msg: 'Read. Forwarded to group chat: "lol look at this"', delay: 4000 },
+      { from: 'Oman', icon: '\uD83C\uDDF4\uD83C\uDDF2', msg: '"We appreciate your email. We have no further comment at this time. Please stop."', delay: 5000 },
+      { from: 'MAILER-DAEMON', icon: '\u274C', msg: 'UNDELIVERABLE: 14 recipients. Reason: "reputational risk"', delay: 6200 }
+    ];
+    btn.textContent = 'SENT';
+    replies.forEach(function(r) {
+      setTimeout(function() {
+        var div = document.createElement('div');
+        div.className = 'ec-reply';
+        div.innerHTML = '<span class="ec-reply-from">' + r.icon + ' ' + r.from + '</span><span class="ec-reply-msg">' + r.msg + '</span>';
+        result.appendChild(div);
+      }, r.delay);
+    });
+  }, 1200);
+}
+
+function showInternEmail() {
+  var c = document.getElementById('emailContent');
+  c.innerHTML = '<div class="diplo-email"><div class="email-header"><div class="email-field"><span class="ef-label">From:</span> intern47@fixthestrait.com</div><div class="email-field"><span class="ef-label">To:</span> everyone@middleeast.gov</div><div class="email-field"><span class="ef-label">CC:</span> united_nations@un.org, opec@opec.org, jeff@amazon.com (he has boats), elonmusk@x-twitter-x-whatever.com, your_mom@aol.com</div><div class="email-field"><span class="ef-label">BCC:</span> cia@langley.gov (don\'t tell anyone)</div><div class="email-field"><span class="ef-label">Subject:</span> RE: RE: RE: FWD: Quick Question About the Strait (URGENT \u2014 3rd Follow-Up)</div><div class="email-field"><span class="ef-label">Priority:</span> <span style="color:var(--danger)">MAXIMUM</span></div><div class="email-field"><span class="ef-label">Attach:</span> motivational_poster.pptx, shared_custody_schedule.xlsx, strait_vibes_playlist.spotify</div><div class="email-field"><span class="ef-label">Sent by:</span> <span style="color:var(--warn)">The Intern (promoted twice since writing this)</span></div></div><div class="email-body">Dear Esteemed/Tolerated Leaders of the Greater Hormuz Metropolitan Area,\n\nPer my last email (and the two before that which were also ignored), I\'m circling back regarding the Strait of Hormuz situation. As per the attached PowerPoint (slide 7 is particularly moving \u2014 it\'s a stock photo of a tanker captain crying), we\'d like to propose the following:\n\n1. A "Strait Sharing Schedule." Iran gets Monday-Thursday, UAE/Oman get Friday-Sunday. The US Navy gets federal holidays and every other Wednesday. Qatar gets the third Sunday of months that start with \'J.\' Oman can have April 14th because we like Oman.\n\n2. A mandatory "Feelings Circle" every quarter, held at the Marriott in Muscat. They have a breakfast buffet, which we feel could de-escalate most geopolitical conflicts. The omelette station alone has resolved three border disputes.\n\n3. A Strait of Hormuz group chat. We\'ve already created it. It\'s called "Hormuz &amp; Chill." Iran, please stop leaving the group. UAE, please stop changing the group name. America, please stop sending aircraft carrier selfies.\n\n4. Renaming the strait to something less threatening. Current proposals include: "The Friendship Funnel," "Oily McWaterway," "The Vibe Corridor," and "Steve."\n\n5. Installation of a giant "PLEASE BE NICE" neon sign at both ends of the strait, funded by whoever lost the most money last time someone tweeted about closing it. Current bid: BP, $4.7 billion.\n\nWe understand this is a complex geopolitical situation involving centuries of territorial disputes, nuclear negotiations, proxy wars, economic sanctions, and fundamental disagreements about sovereignty and international law.\n\nHowever, we\'ve made a Google Form. It has only 47 questions. Question 23 is a vibe check. Question 38 asks you to rate the strait on a scale of 1 to 10 ("1 = major chokepoint, 10 = chill waterway"). We expect honest answers.\n\nIf we do not hear back by Friday 5pm GMT, we will be forced to escalate this to... actually, we\'re not sure who\'s above all of you. God? The ocean? Poseidon? We\'ll figure it out. We have a committee forming a subcommittee to investigate the formation of a task force.\n\nWith aggressive optimism and moderate delusion,\nThe Intern (on behalf of the International Community)\n\nP.S. We noticed Iran changed their out-of-office to "gone fishing in the strait." We don\'t think that\'s funny. But also it kind of is.\n\nP.P.S. Bahrain, you weren\'t on the original CC list but you keep replying-all anyway, so here we are. Please stop attaching your vacation photos.\n\nP.P.P.S. Whoever keeps marking these emails as spam: we see you, Kuwait. We have read receipts.\n\nP.P.P.P.S. The Marriott in Muscat is asking for a headcount. Please RSVP. They need to know about dietary restrictions. Last time, the Iranian delegation was upset about the hummus being labeled "Israeli-style" and we really can\'t do that again.\n\nP.P.P.P.P.S. We have now spent more time writing postscripts than actually negotiating. This may be part of the problem.\n\nP.P.P.P.P.P.S. The intern who wrote this has since been promoted to Secretary of State. Nobody knows how.</div><div class="email-stamp">UNDELIVERABLE \u2014 MAILBOX FULL<br><span style="font-size:12px;letter-spacing:1px;">auto-reply: "gone fishing in the strait"</span></div></div>';
+}
+
 // ===== CARRIERS =====
 var carrierMsgs = [
-  [1,"First carrier deployed. Only 99 to go. The Navy hasn't noticed yet."],
-  [5,"Five carriers. The Pentagon is getting suspicious phone calls."],
-  [11,"You've used every aircraft carrier the US Navy currently has. Time to start building."],
-  [20,"Congress is asking where the money went. Tell them it's for 'infrastructure.'"],
-  [30,"Thirty carriers. Fishermen are filing lawsuits. Ship traffic backed up for miles."],
-  [50,"HALFWAY! The bridge takes shape. Satellites can see it. Iran has tweeted about it."],
+  [1,"First carrier deployed. USS Abraham Lincoln repositioned without authorization. The Navy has questions."],
+  [5,"Five carriers. The Pentagon is getting suspicious phone calls from confused admirals."],
+  [11,"You've used every aircraft carrier the US Navy currently has. From this point on, you're building new ones."],
+  [20,"Twenty carriers. Congress passed an emergency bill titled 'What Are They Doing With Our Ships.'"],
+  [30,"Thirty carriers. Fishermen are filing lawsuits. The entire strait is a no-sail zone now — ironic."],
+  [50,"HALFWAY. The bridge takes shape. Satellites can see it. Iran has tweeted about it. Twice."],
   [69,"Nice."],
-  [75,"Carrier shipyard workers have unionized. They want hazard pay and better snacks."],
-  [90,"Almost there! The plywood order alone has deforested three countries. IKEA is jealous."],
-  [100,"BRIDGE COMPLETE! First truck crosses. Second truck falls between carriers 47 and 48. 'Partially successful.'"]
+  [75,"Shipyard workers have unionized. They want hazard pay, dental, and 'an explanation.'"],
+  [90,"Almost there. The plywood order alone has deforested three countries."],
+  [100,"BRIDGE COMPLETE! First truck attempts crossing. See incident reports below."]
 ];
+
+var carrierIncidents = [
+  { at: 2, type: 'LOGISTICS', title: 'Wi-Fi Conflict', desc: 'Carriers 1 and 2 are both broadcasting network name "USS_WIFI_5G." Neither captain will rename theirs. IT estimates 6 years to resolve.' },
+  { at: 4, type: 'DISPUTE', title: 'Parking Dispute', desc: 'Carrier 3 deployed 12 meters too far south. Carrier 4 refuses to adjust. Both captains have filed formal grievances. A mediator has been requested.' },
+  { at: 7, type: 'SUPPLY', title: 'Plywood Shortage', desc: 'Home Depot has been read into the program at CONFIDENTIAL level. They are "concerned but flattered." Every 4x8 sheet in the Middle East is now classified material.' },
+  { at: 11, type: 'CRITICAL', title: 'Fleet Exhausted', desc: 'All 11 US carriers now deployed to bridge duty. The Pacific and Atlantic Oceans are undefended. The rest of the Navy is "on hold."' },
+  { at: 15, type: 'INCIDENT', title: 'Carrier Drift Event', desc: 'Carrier 9 drifted 40m east during high tide. Bridge now has a kink. Trucks must execute a 15-degree turn at 80 km/h. Three test cones destroyed.' },
+  { at: 20, type: 'DIPLOMATIC', title: 'Iran Sends Note', desc: 'Iran\'s ambassador hand-delivered a letter reading: "We can see you building a bridge. From our window. It is right there." No further action taken.' },
+  { at: 30, type: 'LOGISTICS', title: 'Bathroom Situation', desc: '30 aircraft carriers with 5,000 crew each = 150,000 people in a line across the strait. The sewage situation has been classified as a "non-trivial engineering challenge." Oman has filed an environmental complaint.' },
+  { at: 40, type: 'MORALE', title: 'Carrier 23 Mutiny', desc: 'Crew of carrier 23 (the one in the middle) has not seen land in weeks. They can see both Iran and Oman but cannot reach either. Morale: "existential." They have started a book club.' },
+  { at: 50, type: 'STRUCTURAL', title: 'Plywood Integrity Report', desc: 'Mid-bridge plywood inspection reveals 34% of sheets are "damp," 12% are "actively warping," and one section was replaced with cardboard by a contractor who "didn\'t think anyone would check."' },
+  { at: 60, type: 'INCIDENT', title: 'Sailor Falls Between Carriers', desc: 'Seaman Rodriguez fell through a 2m gap between carriers 31 and 32 during a routine plywood inspection. He was rescued by an Iranian fishing boat. Iran returned him with a note: "You dropped this."' },
+  { at: 75, type: 'CRITICAL', title: 'Weight Capacity Exceeded', desc: 'Structural analysis reveals that a fully loaded oil truck weighs 40 tonnes. A carrier flight deck was designed for 30-tonne aircraft. The first test truck is currently 4cm lower than it should be and "still sinking slowly."' },
+  { at: 90, type: 'DIPLOMATIC', title: 'Bridge Visible From Space', desc: 'NASA confirms the carrier bridge is visible from the International Space Station. An astronaut posted a photo captioned "what is that." It has 4 million likes. Iran\'s foreign minister commented: "We told you."' },
+  { at: 100, type: 'CATASTROPHIC', title: 'First Crossing Attempt', desc: 'A brave truck driver attempts the crossing. He makes it to carrier 47 before a 3m gap, a wet plywood section, and a gust of wind combine to produce what witnesses describe as "a very expensive splash." The driver is fine. The truck, and $2M in crude oil, are at the bottom of the strait. Bridge status: PARTIALLY SUCCESSFUL.' }
+];
+
+var incidentCount = 0;
 
 function deployCarrier() {
   if (carrierCount >= 110) return;
@@ -295,19 +429,35 @@ function deployCarrier() {
   document.getElementById('carrierCost').textContent = cost >= 1000 ? '$' + (cost/1000).toFixed(2) + 'T' : '$' + cost + 'B';
   document.getElementById('carrierYears').textContent = Math.round(carrierCount * 0.45) + ' yrs';
   carrierMsgs.forEach(function(m) { if (m[0] === carrierCount) document.getElementById('carrierMsg').textContent = m[1]; });
+
+  // Check for incidents
+  var inc = document.getElementById('carrierIncidents2');
+  carrierIncidents.forEach(function(i) {
+    if (i.at === carrierCount) {
+      incidentCount++;
+      document.getElementById('carrierIncidents').textContent = incidentCount;
+      var div = document.createElement('div');
+      div.className = 'carrier-incident ci-' + i.type.toLowerCase();
+      div.innerHTML = '<div class="ci-header"><span class="ci-type">' + i.type + '</span><span class="ci-title">' + i.title + '</span><span class="ci-carrier">Carrier #' + carrierCount + '</span></div><div class="ci-desc">' + i.desc + '</div>';
+      inc.insertBefore(div, inc.firstChild);
+    }
+  });
+
   if (carrierCount === 100) setTimeout(function() {
     document.querySelectorAll('.carrier-icon').forEach(function(c) { c.style.top = (52 + (Math.random()-0.5)*20)+'px'; c.style.transition = 'top 2s ease-in-out'; });
-    setTimeout(function() { document.getElementById('carrierMsg').textContent += " UPDATE: Carriers drifting apart. Bridge integrity: compromised. The plywood is wet."; }, 2000);
   }, 3000);
 }
 
 function resetCarriers() {
   carrierCount = 0;
+  incidentCount = 0;
   document.querySelectorAll('.carrier-icon').forEach(function(c) { c.remove(); });
   document.getElementById('carrierDeployed').textContent = '0';
   document.getElementById('carrierCost').textContent = '$0';
   document.getElementById('carrierYears').textContent = '0 yrs';
+  document.getElementById('carrierIncidents').textContent = '0';
   document.getElementById('carrierMsg').innerHTML = '&nbsp;';
+  document.getElementById('carrierIncidents2').innerHTML = '';
 }
 
 // ===== DRAIN =====
@@ -653,6 +803,144 @@ function timeTravel(btn, idx) {
   document.getElementById('ttStatus').style.color = d.fillColor;
   document.getElementById('ttResponse').innerHTML = '<div class="advisor">Temporal Advisor \u2014 ' + d.era + '</div>' + d.response;
 }
+
+// ===== THE STRAIT ROOM =====
+var chatBatch = 0;
+var chatConversations = [
+  // Batch 0 — opening
+  [
+    { from: 'USA', flag: '\uD83C\uDDFA\uD83C\uDDF8', msg: 'ok team, let\'s keep this professional. this chat is for strait-related coordination ONLY.' },
+    { from: 'Bahrain', flag: '\uD83C\uDDE7\uD83C\uDDED', msg: '[vacation_photo_cancun_03.jpg]' },
+    { from: 'USA', flag: '\uD83C\uDDFA\uD83C\uDDF8', msg: 'Bahrain. What did I just say.' },
+    { from: 'Bahrain', flag: '\uD83C\uDDE7\uD83C\uDDED', msg: 'sorry wrong chat' },
+    { from: 'Bahrain', flag: '\uD83C\uDDE7\uD83C\uDDED', msg: 'wait no it\'s the right chat. look how blue that water is. why can\'t the strait look like that' },
+    { from: 'Iran', flag: '\uD83C\uDDEE\uD83C\uDDF7', msg: 'We should not be in a group chat with these people.' },
+    { from: 'UAE', flag: '\uD83C\uDDE6\uD83C\uDDEA', msg: 'Iran you say that every week and you never actually leave' },
+    { type: 'system', msg: 'Iran left the group' },
+    { type: 'system', msg: 'Iran joined the group' },
+    { from: 'Iran', flag: '\uD83C\uDDEE\uD83C\uDDF7', msg: 'I had to come back. Oman sent me the link again.' },
+    { from: 'Oman', flag: '\uD83C\uDDF4\uD83C\uDDF2', msg: 'I just want everyone to get along.' },
+  ],
+  // Batch 1 — the tanker situation
+  [
+    { type: 'system', msg: 'USA changed the group name to "STRAIT TALK (OFFICIAL)"' },
+    { from: 'Iran', flag: '\uD83C\uDDEE\uD83C\uDDF7', msg: 'Please change the group name back.' },
+    { from: 'USA', flag: '\uD83C\uDDFA\uD83C\uDDF8', msg: 'no this is more professional' },
+    { from: 'Qatar', flag: '\uD83C\uDDF6\uD83C\uDDE6', msg: 'Can we talk about the tanker that\'s been parked sideways for 3 hours' },
+    { from: 'UAE', flag: '\uD83C\uDDE6\uD83C\uDDEA', msg: 'oh THAT\'S why my LNG delivery is late' },
+    { from: 'Iran', flag: '\uD83C\uDDEE\uD83C\uDDF7', msg: 'That tanker is in our waters.' },
+    { from: 'Oman', flag: '\uD83C\uDDF4\uD83C\uDDF2', msg: 'It\'s actually in our waters.' },
+    { from: 'Iran', flag: '\uD83C\uDDEE\uD83C\uDDF7', msg: 'Debatable.' },
+    { from: 'Oman', flag: '\uD83C\uDDF4\uD83C\uDDF2', msg: 'It\'s really not. I can see it from my window.' },
+    { from: 'USA', flag: '\uD83C\uDDFA\uD83C\uDDF8', msg: 'we\'re sending a carrier to help' },
+    { from: 'Everyone', flag: '\uD83C\uDF0D', msg: 'PLEASE DO NOT SEND A CARRIER' },
+  ],
+  // Batch 2 — the dolphin situation
+  [
+    { from: 'USA', flag: '\uD83C\uDDFA\uD83C\uDDF8', msg: 'quick question and nobody freak out' },
+    { from: 'USA', flag: '\uD83C\uDDFA\uD83C\uDDF8', msg: 'has anyone seen a dolphin wearing a small backpack near the strait' },
+    { from: 'Iran', flag: '\uD83C\uDDEE\uD83C\uDDF7', msg: 'What.' },
+    { from: 'UAE', flag: '\uD83C\uDDE6\uD83C\uDDEA', msg: 'what kind of backpack' },
+    { from: 'USA', flag: '\uD83C\uDDFA\uD83C\uDDF8', msg: 'tactical' },
+    { from: 'Iran', flag: '\uD83C\uDDEE\uD83C\uDDF7', msg: 'Are you telling me America has military dolphins in the strait.' },
+    { from: 'USA', flag: '\uD83C\uDDFA\uD83C\uDDF8', msg: 'no comment. but if you see one named Steve please do not engage. he\'s having a day.' },
+    { from: 'Steve (Dolphin)', flag: '\uD83D\uDC2C', msg: 'I can read this chat. I want dental coverage and Saturdays off.' },
+    { type: 'system', msg: 'Steve (Dolphin) was added by USA' },
+    { from: 'Iran', flag: '\uD83C\uDDEE\uD83C\uDDF7', msg: 'There is a dolphin in our diplomatic group chat.' },
+    { from: 'Steve (Dolphin)', flag: '\uD83D\uDC2C', msg: 'I have a lawyer. He is also a dolphin.' },
+    { from: 'Oman', flag: '\uD83C\uDDF4\uD83C\uDDF2', msg: 'I just want everyone to get along.' },
+  ],
+  // Batch 3 — the renaming crisis
+  [
+    { type: 'system', msg: 'USA changed the group name to "The Friendship Funnel\u2122 (Official Chat)"' },
+    { from: 'Iran', flag: '\uD83C\uDDEE\uD83C\uDDF7', msg: 'Absolutely not.' },
+    { from: 'UAE', flag: '\uD83C\uDDE6\uD83C\uDDEA', msg: 'lmaooo' },
+    { from: 'Saudi Arabia', flag: '\uD83C\uDDF8\uD83C\uDDE6', msg: 'I\'ve been silent this whole time but I need to say: what is happening in this chat.' },
+    { from: 'Kuwait', flag: '\uD83C\uDDF0\uD83C\uDDFC', msg: 'I\'ve been marking everything as spam but it keeps coming through.' },
+    { from: 'USA', flag: '\uD83C\uDDFA\uD83C\uDDF8', msg: 'we had a vote and "Steve" won the rename poll but legal said we can\'t name a waterway after a dolphin' },
+    { from: 'Steve (Dolphin)', flag: '\uD83D\uDC2C', msg: 'Excuse me?' },
+    { from: 'USA', flag: '\uD83C\uDDFA\uD83C\uDDF8', msg: 'sorry Steve. you\'re not a recognized sovereign entity.' },
+    { from: 'Steve (Dolphin)', flag: '\uD83D\uDC2C', msg: 'I have more maritime experience than everyone in this chat combined.' },
+    { from: 'Bahrain', flag: '\uD83C\uDDE7\uD83C\uDDED', msg: '[vacation_photo_maldives_17.jpg]' },
+    { from: 'Bahrain', flag: '\uD83C\uDDE7\uD83C\uDDED', msg: 'the maldives are sinking btw. related to the strait thing? unclear. anyway nice beach' },
+    { type: 'system', msg: 'Iran left the group' },
+    { type: 'system', msg: 'Iran joined the group' },
+    { from: 'Iran', flag: '\uD83C\uDDEE\uD83C\uDDF7', msg: 'I keep leaving but the Oman link is right there.' },
+  ],
+  // Batch 4 — the solution proposals
+  [
+    { from: 'USA', flag: '\uD83C\uDDFA\uD83C\uDDF8', msg: 'ok serious question. has anyone considered a giant trebuchet' },
+    { from: 'Iran', flag: '\uD83C\uDDEE\uD83C\uDDF7', msg: 'A what.' },
+    { from: 'USA', flag: '\uD83C\uDDFA\uD83C\uDDF8', msg: 'medieval siege weapon. launches oil barrels at mach 1.7 across the strait.' },
+    { from: 'Saudi Arabia', flag: '\uD83C\uDDF8\uD83C\uDDE6', msg: 'I had to Google "trebuchet" and now I wish I hadn\'t.' },
+    { from: 'UAE', flag: '\uD83C\uDDE6\uD83C\uDDEA', msg: 'we actually looked into this. Oxford called us "historically illiterate"' },
+    { from: 'Iran', flag: '\uD83C\uDDEE\uD83C\uDDF7', msg: 'For once I agree with Oxford.' },
+    { from: 'USA', flag: '\uD83C\uDDFA\uD83C\uDDF8', msg: 'fine. plan B: we drain the strait.' },
+    { from: 'Oman', flag: '\uD83C\uDDF4\uD83C\uDDF2', msg: 'Please do not drain our strait.' },
+    { from: 'USA', flag: '\uD83C\uDDFA\uD83C\uDDF8', msg: 'plan C: time travel' },
+    { from: 'Iran', flag: '\uD83C\uDDEE\uD83C\uDDF7', msg: 'I am begging you to stop proposing solutions.' },
+    { from: 'Qatar', flag: '\uD83C\uDDF6\uD83C\uDDE6', msg: 'Has anyone tried just... not closing it?' },
+    { from: 'Iran', flag: '\uD83C\uDDEE\uD83C\uDDF7', msg: 'Read 4:47 PM.' },
+    { from: 'Oman', flag: '\uD83C\uDDF4\uD83C\uDDF2', msg: 'I just want everyone to get along.' },
+    { from: 'Steve (Dolphin)', flag: '\uD83D\uDC2C', msg: 'I\'ve been swimming this strait for 12 years and you people are the worst thing in it.' },
+  ],
+];
+
+function loadMoreMessages() {
+  if (chatBatch >= chatConversations.length) {
+    document.getElementById('chatLoadBtn').textContent = 'ALL MESSAGES DECLASSIFIED';
+    document.getElementById('chatLoadBtn').disabled = true;
+    return;
+  }
+  var msgs = chatConversations[chatBatch];
+  var container = document.getElementById('chatMessages');
+  var typing = document.getElementById('chatTyping');
+  var btn = document.getElementById('chatLoadBtn');
+  btn.disabled = true;
+  btn.textContent = 'DECRYPTING...';
+
+  msgs.forEach(function(m, i) {
+    setTimeout(function() {
+      var div = document.createElement('div');
+      if (m.type === 'system') {
+        div.className = 'chat-system';
+        div.textContent = m.msg;
+      } else {
+        div.className = 'chat-msg';
+        div.innerHTML = '<div class="chat-msg-header"><span class="chat-flag">' + m.flag + '</span><span class="chat-name">' + m.from + '</span></div><div class="chat-msg-body">' + m.msg + '</div>';
+      }
+      container.appendChild(div);
+      container.scrollTop = container.scrollHeight;
+
+      // Show typing indicator for next message
+      if (i < msgs.length - 1) {
+        var next = msgs[i + 1];
+        if (next.from) {
+          typing.textContent = next.flag + ' ' + next.from + ' is typing...';
+        }
+      } else {
+        typing.textContent = '';
+        btn.disabled = false;
+        btn.textContent = chatBatch >= chatConversations.length ? 'ALL MESSAGES DECLASSIFIED' : 'DECLASSIFY MORE MESSAGES';
+        if (chatBatch >= chatConversations.length) btn.disabled = true;
+      }
+    }, i * 600);
+  });
+  chatBatch++;
+}
+
+// Load first batch on scroll into view
+(function() {
+  var loaded = false;
+  var observer = new IntersectionObserver(function(entries) {
+    if (entries[0].isIntersecting && !loaded) {
+      loaded = true;
+      loadMoreMessages();
+    }
+  }, { threshold: 0.3 });
+  var el = document.getElementById('chatMessages');
+  if (el) observer.observe(el);
+})();
 
 // ===== CLOSE MODAL =====
 function closeModal(e) {

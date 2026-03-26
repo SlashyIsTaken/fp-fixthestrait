@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAGE NOT FOUND — Fix The Strait</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@700;800&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0a;
+    color: #e8e4df;
+    font-family: 'JetBrains Mono', monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+  }
+  .code {
+    font-family: 'Syne', sans-serif;
+    font-size: 120px;
+    font-weight: 800;
+    color: #ef4444;
+    letter-spacing: -4px;
+    line-height: 1;
+    margin-bottom: 16px;
+    opacity: 0.8;
+  }
+  .label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: #ef4444;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    opacity: 0.7;
+  }
+  .msg {
+    font-size: 13px;
+    color: #7a756e;
+    line-height: 1.8;
+    max-width: 500px;
+    margin-bottom: 40px;
+  }
+  .msg strong { color: #e8e4df; }
+  .classified {
+    background: #111113;
+    border: 1px solid #222220;
+    border-left: 3px solid #ef4444;
+    padding: 16px 20px;
+    font-size: 11px;
+    color: #4a4640;
+    line-height: 1.7;
+    max-width: 500px;
+    text-align: left;
+    margin-bottom: 32px;
+  }
+  .classified::before {
+    content: 'CLASSIFIED — INCIDENT REPORT';
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: #ef444488;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .home {
+    display: inline-block;
+    border: 1px solid #2a2a28;
+    color: #7a756e;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 12px 28px;
+    transition: all 0.2s;
+  }
+  .home:hover { border-color: #ff6b2b; color: #ff6b2b; }
+</style>
+</head>
+<body>
+  <div class="code">404</div>
+  <div class="label">Page Not Found</div>
+  <div class="msg">
+    This page was last seen transiting the <strong>Strait of Hormuz</strong> and has not been heard from since.
+    It may have been intercepted, rerouted through a Wendy's parking lot in Ohio, or claimed by Steve the dolphin as territorial waters.
+  </div>
+  <div class="classified">
+    SIGINT confirms the requested page departed server at 0300 UTC. Tracking was lost near the narrowest point of the URL structure.
+    Search and rescue dispatched. Iran denies involvement. Bahrain sent vacation photos.
+    The page has been reclassified from "missing" to "probably never existed."
+    All 12 proposed solutions to recover this page have been rejected.
+  </div>
+  <a href="/" class="home">Return to the Strait</a>
+</body>
+</html>

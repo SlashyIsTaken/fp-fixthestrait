@@ -491,7 +491,15 @@
 
     title.textContent = 'VOYAGE ENDED';
     subtitle.textContent = reason;
-    scoreFinal.textContent = 'Score: ' + score.toLocaleString() + ' | ' + barrels + ' barrels | ' + distance.toFixed(1) + ' km';
+    var taglines = [
+      'The strait remains unfixed.',
+      'Solutions proposed: 12. Solutions that work: 0.',
+      'The oil is still anxious.',
+      'Steve the dolphin scored higher.',
+      'The strait has not noticed your effort.',
+      'This is why we need 12 backup plans. None of which work.'
+    ];
+    scoreFinal.innerHTML = 'Score: ' + score.toLocaleString() + ' | ' + barrels + ' barrels | ' + distance.toFixed(1) + ' km<br><span style="font-size:11px;color:#7a756e;letter-spacing:1px;">' + taglines[Math.floor(Math.random() * taglines.length)] + '</span>';
     btn.textContent = 'TRY AGAIN';
     btn.onclick = startGame;
     renderLeaderboard(score);
