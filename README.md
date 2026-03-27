@@ -4,6 +4,19 @@ A satirical interactive website exploring 12 absurdly impractical solutions to t
 
 **Live site:** [fixthestrait.com](https://fixthestrait.com)
 
+---
+
+- [What Is This?](#what-is-this)
+- [The 12 Solutions](#the-12-solutions)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Run Locally](#run-locally)
+- [Contributing](#contributing)
+- [Disclaimer](#disclaimer)
+- [License](#license)
+
+---
+
 ## What Is This?
 
 The Strait of Hormuz is the world's most critical oil transit chokepoint — 33km of water between Iran and Oman, with ~21 million barrels of oil flowing through it daily. This website presents increasingly unhinged "solutions" to this geopolitical vulnerability, each one treated with the gravity of an actual classified briefing.
