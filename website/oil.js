@@ -224,6 +224,16 @@
     var cls = isUp ? 'green' : 'red';
 
     // Price panel
+    var ratio = calcVolumeRatio(data.points);
+    var volTierWord = ratio === null ? 'EARLY SESSION'
+      : ratio > 1.8 ? 'UNUSUAL'
+      : ratio > 1.2 ? 'ELEVATED'
+      : ratio > 0.8 ? 'NORMAL'
+      : 'QUIET';
+    var volTierCls = ratio === null ? ''
+      : ratio > 1.8 ? 'red'
+      : ratio > 1.2 ? 'warn'
+      : '';
     var panel = document.getElementById('oilPricePanel');
     if (panel) {
       panel.innerHTML =
@@ -235,11 +245,9 @@
         '</div>' +
         '<div class="oil-price-meta">' +
           '<div class="oil-meta-row"><span>PREV CLOSE</span><span>$' + data.prevClose.toFixed(2) + '</span></div>' +
-          '<div class="oil-meta-row"><span>SESSION VOL</span><span>' +
-            (data.totalVolume >= 1000 ? (data.totalVolume / 1000).toFixed(0) + 'K' : data.totalVolume) +
-          ' (intraday proxy)</span></div>' +
+          '<div class="oil-meta-row"><span>ACTIVITY</span><span class="' + volTierCls + '">' + volTierWord + '</span></div>' +
           '<div class="oil-meta-row"><span>CURRENCY</span><span>' + (data.currency || 'USD') + '</span></div>' +
-          '<div class="oil-meta-row"><span>ASSESSMENT</span><span class="' + cls + '">' +
+          '<div class="oil-meta-row"><span>DIRECTION</span><span class="' + cls + '">' +
             (isUp ? '&#9650; BULLISH TENSION' : '&#9660; BEARISH RELIEF') +
           '</span></div>' +
         '</div>';

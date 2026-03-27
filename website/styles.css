@@ -620,6 +620,7 @@ footer .disclaimer { margin-top: 24px; padding-top: 24px; border-top: 1px solid 
 .oil-meta-row span:last-child { color: var(--text); }
 .oil-meta-row span.green { color: #22c55e; }
 .oil-meta-row span.red { color: var(--danger); }
+.oil-meta-row span.warn { color: var(--warn); }
 
 /* Chart panel */
 .oil-chart-panel {
