@@ -1013,7 +1013,11 @@ footer .disclaimer { margin-top: 24px; padding-top: 24px; border-top: 1px solid 
   height: 16px;
   background: var(--border);
   border-radius: 8px;
-  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 2px;
+  box-sizing: border-box;
+  flex-shrink: 0;
   transition: background 0.3s;
 }
 
@@ -1022,9 +1026,7 @@ footer .disclaimer { margin-top: 24px; padding-top: 24px; border-top: 1px solid 
   height: 12px;
   background: var(--text-dim);
   border-radius: 50%;
-  position: absolute;
-  top: 2px;
-  left: 2px;
+  flex-shrink: 0;
   transition: transform 0.3s, background 0.3s;
 }
 
