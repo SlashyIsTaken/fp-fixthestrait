@@ -125,6 +125,10 @@
     var dpr = window.devicePixelRatio || 1;
     var W = canvas.offsetWidth;
     var H = parseInt(canvas.getAttribute('height'));
+    // Pin CSS size before changing internal resolution — prevents canvas from
+    // visually expanding on HiDPI/mobile when canvas.height = H * dpr is set
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
     canvas.width = W * dpr;
     canvas.height = H * dpr;
     ctx.scale(dpr, dpr);
@@ -199,6 +203,8 @@
     var dpr = window.devicePixelRatio || 1;
     var W = canvas.offsetWidth;
     var H = parseInt(canvas.getAttribute('height'));
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
     canvas.width = W * dpr;
     canvas.height = H * dpr;
     ctx.scale(dpr, dpr);

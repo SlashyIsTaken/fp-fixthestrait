@@ -633,7 +633,7 @@ footer .disclaimer { margin-top: 24px; padding-top: 24px; border-top: 1px solid 
 }
 .oil-chart-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; color: var(--text-dim); text-transform: uppercase; }
 .oil-vol-label { margin-top: 4px; }
-#oilChart, #oilVolChart { width: 100%; display: block; }
+#oilChart, #oilVolChart { width: 100%; display: block; touch-action: pan-y; }
 
 /* Probability panel */
 .oil-probability-panel {
