@@ -585,6 +585,124 @@ footer .disclaimer { margin-top: 24px; padding-top: 24px; border-top: 1px solid 
 .leaflet-control-zoom a { background: var(--bg-card) !important; color: var(--text) !important; border-color: var(--border) !important; }
 .leaflet-control-zoom a:hover { background: var(--accent) !important; color: var(--bg) !important; }
 
+/* ===== OIL SITUATION ROOM ===== */
+.oil-section { border-top: 1px solid var(--border); }
+.oil-inner { max-width: 1100px; margin: 0 auto; padding: 0 40px 80px; display: flex; flex-direction: column; gap: 20px; }
+
+/* Top row: price panel + chart panel */
+.oil-top-row { display: grid; grid-template-columns: 260px 1fr; gap: 16px; align-items: stretch; }
+
+/* Price panel */
+.oil-price-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: space-between;
+}
+.oil-loading-msg { font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); letter-spacing: 1px; padding: 20px 0; }
+.oil-error { font-family: var(--font-mono); font-size: 11px; color: var(--danger); line-height: 1.6; }
+.oil-error span { color: var(--text-dim); }
+.oil-price-ticker { font-family: var(--font-mono); font-size: 9px; letter-spacing: 3px; color: var(--text-dim); text-transform: uppercase; }
+.oil-price-value { font-family: var(--font-mono); font-size: 36px; font-weight: 700; letter-spacing: -1px; line-height: 1; margin: 6px 0 4px; }
+.oil-price-value.green { color: #22c55e; }
+.oil-price-value.red { color: var(--danger); }
+.oil-price-delta { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.5px; }
+.oil-price-delta.green { color: #22c55e; }
+.oil-price-delta.red { color: var(--danger); }
+.oil-price-meta { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid var(--border); padding-top: 14px; }
+.oil-meta-row { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); }
+.oil-meta-row span:last-child { color: var(--text); }
+.oil-meta-row span.green { color: #22c55e; }
+.oil-meta-row span.red { color: var(--danger); }
+
+/* Chart panel */
+.oil-chart-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 14px 16px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.oil-chart-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; color: var(--text-dim); text-transform: uppercase; }
+.oil-vol-label { margin-top: 4px; }
+#oilChart, #oilVolChart { width: 100%; display: block; }
+
+/* Probability panel */
+.oil-probability-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--danger);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.oil-prob-header { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.oil-prob-tag { font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; color: var(--danger); background: rgba(239,68,68,0.1); padding: 3px 8px; border: 1px solid rgba(239,68,68,0.3); }
+.oil-prob-title { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 1px; color: var(--text); flex: 1; }
+.oil-prob-pct { font-family: var(--font-mono); font-size: 22px; font-weight: 700; color: var(--danger); min-width: 50px; text-align: right; }
+.oil-prob-bar-wrap {
+  position: relative;
+  height: 10px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.oil-prob-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(90deg, var(--warn), var(--danger));
+}
+.oil-prob-fill.crit { background: linear-gradient(90deg, var(--danger), #ff0000); }
+.oil-prob-fill.elev { background: linear-gradient(90deg, var(--warn), var(--danger)); }
+.oil-prob-fill.mod { background: linear-gradient(90deg, #eab308, var(--warn)); }
+.oil-prob-zones {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 6px;
+  pointer-events: none;
+}
+.oil-prob-zones span { font-family: var(--font-mono); font-size: 7px; letter-spacing: 0.5px; color: rgba(255,255,255,0.25); }
+.oil-prob-breakdown { display: flex; flex-wrap: wrap; gap: 6px 20px; }
+.prob-item { display: flex; gap: 8px; align-items: baseline; }
+.prob-item-label { font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); }
+.prob-item-val { font-family: var(--font-mono); font-size: 10px; color: var(--danger); white-space: nowrap; }
+
+/* Analyst note */
+.oil-analyst-note {
+  background: rgba(239,68,68,0.05);
+  border: 1px solid rgba(239,68,68,0.2);
+  padding: 12px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.5;
+}
+.oil-analyst-tag { color: var(--danger); font-weight: 700; letter-spacing: 1px; white-space: nowrap; flex-shrink: 0; }
+#oilAnalystText { color: var(--text-dim); }
+
+/* Footer note */
+.oil-footer-note { font-family: var(--font-mono); font-size: 9px; color: var(--text-dim); letter-spacing: 0.5px; }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .oil-inner { padding: 0 20px 60px; }
+  .oil-top-row { grid-template-columns: 1fr; }
+  .oil-prob-breakdown { flex-direction: column; gap: 4px; }
+  .oil-prob-zones span { display: none; }
+  .oil-prob-zones span:first-child, .oil-prob-zones span:last-child { display: block; }
+}
+
 /* ===== SUBMIT YOUR SOLUTION ===== */
 .submit-section { max-width: 800px; margin: 0 auto; padding: 0 40px 80px; }
 

@@ -107,6 +107,7 @@
     <span></span><span></span><span></span>
   </button>
   <ul class="nav-links" id="navLinks">
+    <li><a href="#oil" onclick="closeMobileNav()">Oil</a></li>
     <li><a href="#solutions" onclick="closeMobileNav()">Solutions</a></li>
     <li><a href="#compare" onclick="closeMobileNav()">Compare</a></li>
     <li><a href="#what-if" onclick="closeMobileNav()">What If?</a></li>
@@ -177,6 +178,48 @@
     <div class="ticker-item"><span class="tag blue">REPORT</span> Elon announces "Strait Tunnel" — delivery date: 2019 (retroactively)</div>
   </div>
 </div>
+
+<section class="oil-section" id="oil">
+  <div class="section-header">
+    <div class="overline">LIVE MARKET INTELLIGENCE</div>
+    <h2>Crude Oil Situation Room</h2>
+    <p>Real-time WTI crude pricing. Because nothing says "geopolitical stability" like watching oil prices tick in real time.</p>
+  </div>
+  <div class="oil-inner">
+    <div class="oil-top-row">
+      <div class="oil-price-panel" id="oilPricePanel">
+        <div class="oil-loading-msg">&#9632;&#9632;&#9632; DECRYPTING MARKET DATA&#8230;</div>
+      </div>
+      <div class="oil-chart-panel">
+        <div class="oil-chart-label">WTI CRUDE &mdash; INTRADAY PRICE (USD/bbl)</div>
+        <canvas id="oilChart" height="110"></canvas>
+        <div class="oil-chart-label oil-vol-label">TRADING VOLUME</div>
+        <canvas id="oilVolChart" height="36"></canvas>
+      </div>
+    </div>
+    <div class="oil-probability-panel">
+      <div class="oil-prob-header">
+        <span class="oil-prob-tag">&#9650; CLASSIFIED ASSESSMENT</span>
+        <span class="oil-prob-title">Strait Incident Probability&#8482;</span>
+        <span class="oil-prob-pct" id="oilProbPct">&mdash;</span>
+      </div>
+      <div class="oil-prob-bar-wrap">
+        <div class="oil-prob-fill" id="oilProbFill"></div>
+        <div class="oil-prob-zones">
+          <span>FINE</span><span>CONCERNING</span><span>BAD</span><span>VERY BAD</span><span>CLASSIC</span>
+        </div>
+      </div>
+      <div class="oil-prob-breakdown" id="oilProbBreakdown"></div>
+    </div>
+    <div class="oil-analyst-note" id="oilAnalystNote">
+      <span class="oil-analyst-tag">&#9632; ANALYST NOTE</span>
+      <span id="oilAnalystText">Awaiting intelligence assessment&hellip;</span>
+    </div>
+    <div class="oil-footer-note">
+      Data: WTI Crude Futures (CL=F) via Yahoo Finance &middot; Cached 15 min &middot; <span id="oilUpdated"></span> &middot; Probability updated continuously since 2019, still wrong
+    </div>
+  </div>
+</section>
 
 <main>
 <div class="section-header" id="solutions">
@@ -663,6 +706,7 @@ function closeMobileNav() {
   document.getElementById('navHamburger').classList.remove('open');
 }
 </script>
+<script src="oil.js"></script>
 <script src="app.js"></script>
 <script src="form.js"></script>
 <script src="game.js"></script>
