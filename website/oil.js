@@ -51,23 +51,36 @@
   // or null if there are not enough candles to split meaningfully.
   function calcVolumeRatio(points) {
     var active = points.filter(function (p) { return p.v > 0; });
-    if (active.length < 10) return null;
-    // Recent window: last 6 candles (~30 min), capped at half the session
-    var recentCount = Math.min(6, Math.floor(active.length / 2));
+
+    // Need at least 18 candles (90 min) to have both windows populated
+    // Recent: last 6 candles (~30 min)
+    // Baseline: the 12 candles before that (~60 min)
+    // Using only the adjacent prior hour avoids flagging the natural
+    // morning ramp-up or evening wind-down as anomalies.
+    var recentCount = 6;
+    var baselineCount = 12;
+    if (active.length < recentCount + baselineCount) return null;
+
     var recent = active.slice(-recentCount);
-    var baseline = active.slice(0, -recentCount);
-    if (baseline.length < 4) return null;
+    var baseline = active.slice(-(recentCount + baselineCount), -recentCount);
+
     var recentAvg = recent.reduce(function (s, p) { return s + p.v; }, 0) / recent.length;
     var baselineAvg = baseline.reduce(function (s, p) { return s + p.v; }, 0) / baseline.length;
+
+    // If the baseline window is off-hours thin (< 15% of session average),
+    // the comparison is noise — return null rather than a misleading ratio
+    var sessionAvg = active.reduce(function (s, p) { return s + p.v; }, 0) / active.length;
+    if (baselineAvg < sessionAvg * 0.15) return null;
+
     return baselineAvg > 0 ? recentAvg / baselineAvg : null;
   }
 
   function volumeLabel(ratio) {
-    if (ratio === null) return 'Early session — insufficient data for comparison';
-    if (ratio > 1.8) return 'Materially above earlier session levels (make of that what you will)';
-    if (ratio > 1.2) return 'Stronger participation than earlier in session (people are positioning)';
-    if (ratio > 0.8) return 'Near earlier session levels (normal. for now.)';
-    return 'Below earlier session levels (suspiciously quiet)';
+    if (ratio === null) return 'Insufficient data for comparison (early session or off-hours)';
+    if (ratio > 1.8) return 'Materially above prior hour (make of that what you will)';
+    if (ratio > 1.2) return 'Stronger than prior hour (people are positioning. why? unclear.)';
+    if (ratio > 0.8) return 'In line with prior hour (normal. for now.)';
+    return 'Below prior hour (quieting down)';
   }
 
   function getNote(pct, ratio) {
