@@ -1514,36 +1514,41 @@ body.classified::after {
 
 @media (max-width: 1000px) { .solutions-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 768px) {
-  nav { padding: 16px 20px; }
-  nav { z-index: 10000; }
-  .nav-hamburger { display: flex; position: relative; z-index: 2; }
+  /* Banner: let it scroll naturally on mobile, nav takes top-0 */
+  .classified-banner { position: relative; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: 1px; }
+  nav { padding: 16px 20px; position: sticky; top: 0; z-index: 10000; backdrop-filter: none; background: #0a0a0a; }
+  .nav-hamburger { display: flex; position: relative; z-index: 10002; }
   .nav-links {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #0a0a0a;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 10, 10, 0.98);
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 20px;
-    z-index: 1;
-    font-size: 14px;
+    justify-content: flex-start;
+    gap: 0;
+    z-index: 10001;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
     display: flex !important;
     overflow-y: auto;
-    padding: 80px 20px;
+    padding: 100px 20px 40px;
+    -webkit-overflow-scrolling: touch;
   }
   .nav-links.nav-open { opacity: 1; pointer-events: auto; }
-  .nav-links li { list-style: none; }
-  .nav-links a { color: var(--text); font-size: 16px; }
-  .nav-links .classified-toggle { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+  .nav-links li { list-style: none; width: 100%; text-align: center; }
+  .nav-links a { color: var(--text); font-size: 18px; display: block; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .nav-links li:first-child a { border-top: 1px solid rgba(255,255,255,0.06); }
+  .nav-links .classified-toggle { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border); }
+  /* Threat bar: make meter visible in column layout */
+  .threat-bar { flex-direction: column; gap: 10px; align-items: stretch; padding: 16px 20px; overflow: visible; }
+  .threat-meter { width: 100%; max-width: 100%; flex: none; height: 8px; }
+  .threat-label, .threat-status { text-align: center; }
   .hero { padding: 60px 20px; }
   .hero-stats { flex-direction: column; gap: 24px; }
-  .threat-bar { flex-direction: column; gap: 12px; }
   .section-header { padding: 60px 20px 30px; }
   .solutions-grid { padding: 0 20px 60px; grid-template-columns: 1fr; }
   .modal { padding: 32px 24px; margin-top: 20px; }

@@ -898,35 +898,47 @@ function loadMoreMessages() {
   var btn = document.getElementById('chatLoadBtn');
   btn.disabled = true;
   btn.textContent = 'DECRYPTING...';
+  chatBatch++;
 
-  msgs.forEach(function(m, i) {
-    setTimeout(function() {
+  // Deliver messages sequentially: show typing → wait → drop message → repeat
+  function deliverNext(index) {
+    if (index >= msgs.length) {
+      typing.textContent = '';
+      btn.disabled = false;
+      btn.textContent = chatBatch >= chatConversations.length ? 'ALL MESSAGES DECLASSIFIED' : 'DECLASSIFY MORE MESSAGES';
+      if (chatBatch >= chatConversations.length) btn.disabled = true;
+      return;
+    }
+    var m = msgs[index];
+    // System messages appear quickly with no typing indicator
+    if (m.type === 'system') {
       var div = document.createElement('div');
-      if (m.type === 'system') {
-        div.className = 'chat-system';
-        div.textContent = m.msg;
-      } else {
-        div.className = 'chat-msg';
-        div.innerHTML = '<div class="chat-msg-header"><span class="chat-flag">' + m.flag + '</span><span class="chat-name">' + m.from + '</span></div><div class="chat-msg-body">' + m.msg + '</div>';
-      }
+      div.className = 'chat-system';
+      div.textContent = m.msg;
       container.appendChild(div);
       container.scrollTop = container.scrollHeight;
+      setTimeout(function() { deliverNext(index + 1); }, 400 + Math.random() * 300);
+      return;
+    }
+    // Show typing indicator first
+    typing.textContent = m.flag + ' ' + m.from + ' is typing...';
+    container.scrollTop = container.scrollHeight;
+    // Typing delay: short messages type fast, long ones slower
+    var typingDelay = 700 + Math.random() * 800 + Math.min(m.msg.length * 8, 600);
+    setTimeout(function() {
+      typing.textContent = '';
+      var div = document.createElement('div');
+      div.className = 'chat-msg';
+      div.innerHTML = '<div class="chat-msg-header"><span class="chat-flag">' + m.flag + '</span><span class="chat-name">' + m.from + '</span></div><div class="chat-msg-body">' + m.msg + '</div>';
+      container.appendChild(div);
+      container.scrollTop = container.scrollHeight;
+      // Pause between messages before next typing indicator
+      var pauseDelay = 300 + Math.random() * 500;
+      setTimeout(function() { deliverNext(index + 1); }, pauseDelay);
+    }, typingDelay);
+  }
 
-      // Show typing indicator for next message
-      if (i < msgs.length - 1) {
-        var next = msgs[i + 1];
-        if (next.from) {
-          typing.textContent = next.flag + ' ' + next.from + ' is typing...';
-        }
-      } else {
-        typing.textContent = '';
-        btn.disabled = false;
-        btn.textContent = chatBatch >= chatConversations.length ? 'ALL MESSAGES DECLASSIFIED' : 'DECLASSIFY MORE MESSAGES';
-        if (chatBatch >= chatConversations.length) btn.disabled = true;
-      }
-    }, i * 600);
-  });
-  chatBatch++;
+  deliverNext(0);
 }
 
 // Load first batch on scroll into view
