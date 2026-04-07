@@ -633,18 +633,30 @@ footer .disclaimer { margin-top: 24px; padding-top: 24px; border-top: 1px solid 
 }
 .oil-chart-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; color: var(--text-dim); text-transform: uppercase; }
 .oil-vol-label { margin-top: 4px; }
-#oilChart, #oilVolChart {
+/* The canvas is wrapped in a fixed-height, position:relative box and
+   absolutely positioned inside it. This makes the canvas physically
+   incapable of affecting the layout of its parent — no matter what JS
+   does to its width/height attributes or its inline style, the wrapper
+   stays exactly 110px / 36px tall. This is the only reliable defence
+   against the iOS Safari URL-bar-collapse + HiDPI-canvas-resize feedback
+   loop that was making the chart grow in chunks while scrolling. */
+.oil-canvas-wrap {
+  position: relative;
   width: 100%;
-  display: block;
+  overflow: hidden;
+  /* Stop touch events on the canvas from triggering layout-affecting
+     scroll gestures that fire `resize` on iOS Safari. */
   touch-action: pan-y;
-  /* Pin heights in CSS so that nothing — viewport resize, HiDPI canvas
-     bitmap swaps, iOS Safari URL-bar collapse — can ever let the canvas
-     element grow vertically. The HTML `height` attribute only sets the
-     bitmap; the CSS height is what governs the rendered box. */
-  max-height: 110px;
 }
-#oilChart { height: 110px; }
-#oilVolChart { height: 36px; max-height: 36px; }
+.oil-canvas-wrap-price { height: 110px; }
+.oil-canvas-wrap-vol   { height: 36px;  margin-top: 2px; }
+.oil-canvas-wrap > canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
 
 /* Secondary asset strip — Brent, Nat Gas, Gold, VIX, etc. */
 .oil-asset-strip {

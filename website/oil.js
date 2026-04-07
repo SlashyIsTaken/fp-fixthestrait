@@ -125,12 +125,13 @@
     if (!canvas || !points || points.length < 2) return;
     var ctx = canvas.getContext('2d');
     var dpr = window.devicePixelRatio || 1;
-    var W = canvas.offsetWidth;
+    // Read display size from the wrapper, not the canvas itself.
+    // The canvas is absolutely positioned inside a fixed-height wrapper,
+    // so we must NOT write inline width/height onto the canvas — CSS
+    // governs the rendered box. We only set the bitmap resolution.
+    var W = canvas.offsetWidth || (canvas.parentNode && canvas.parentNode.offsetWidth) || 0;
     var H = parseInt(canvas.getAttribute('height'));
-    // Pin CSS size before changing internal resolution — prevents canvas from
-    // visually expanding on HiDPI/mobile when canvas.height = H * dpr is set
-    canvas.style.width = W + 'px';
-    canvas.style.height = H + 'px';
+    if (W <= 0) return;
     canvas.width = W * dpr;
     canvas.height = H * dpr;
     ctx.scale(dpr, dpr);
@@ -203,10 +204,9 @@
     if (!canvas || !points || points.length < 2) return;
     var ctx = canvas.getContext('2d');
     var dpr = window.devicePixelRatio || 1;
-    var W = canvas.offsetWidth;
+    var W = canvas.offsetWidth || (canvas.parentNode && canvas.parentNode.offsetWidth) || 0;
     var H = parseInt(canvas.getAttribute('height'));
-    canvas.style.width = W + 'px';
-    canvas.style.height = H + 'px';
+    if (W <= 0) return;
     canvas.width = W * dpr;
     canvas.height = H * dpr;
     ctx.scale(dpr, dpr);
@@ -477,16 +477,31 @@
       });
   }
 
-  // Re-draw charts on resize
+  // Re-draw charts on resize — but ONLY when the chart's width actually
+  // changes. iOS Safari fires `resize` constantly while you scroll, because
+  // the URL bar collapses/expands and changes viewport height. Re-running
+  // the full render() on every one of those events caused a feedback loop
+  // that visually grew the chart "in chunks" while the user's finger was on
+  // the screen. Width-only gating eliminates that entirely.
+  var lastChartWidth = 0;
   var resizeTimer;
+  function maybeRedraw() {
+    var wrap = document.querySelector('.oil-canvas-wrap-price');
+    var w = wrap ? wrap.offsetWidth : 0;
+    if (w === lastChartWidth) return;
+    lastChartWidth = w;
+    try {
+      var raw = sessionStorage.getItem(CACHE_KEY);
+      if (!raw) return;
+      var data = JSON.parse(raw);
+      // Only redraw the canvases — no need to re-stamp the price panel HTML.
+      drawPriceChart(document.getElementById('oilChart'), data.points);
+      drawVolumeChart(document.getElementById('oilVolChart'), data.points);
+    } catch (e) { /* ignore */ }
+  }
   window.addEventListener('resize', function () {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function () {
-      try {
-        var raw = sessionStorage.getItem(CACHE_KEY);
-        if (raw) render(JSON.parse(raw));
-      } catch (e) { /* ignore */ }
-    }, 150);
+    resizeTimer = setTimeout(maybeRedraw, 150);
   });
 
   document.addEventListener('DOMContentLoaded', load);
