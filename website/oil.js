@@ -1,6 +1,8 @@
 (function () {
   var WORKER_URL = 'https://oil.fixthestrait.com';
-  var CACHE_KEY = 'oildata_v2';
+  // Bumped from v2 → v3 because the response shape now includes a secondary
+  // `assets` array. Old cached entries would be missing it, so invalidate.
+  var CACHE_KEY = 'oildata_v3';
   var CACHE_TTL = 14 * 60 * 1000; // 14 min client-side cache (worker caches 15 min)
 
   // ── Analyst notes ─────────────────────────────────────────────────────────
@@ -223,6 +225,91 @@
     });
   }
 
+  // ── Secondary asset strip ──────────────────────────────────────────────────
+  // Snarky one-liners keyed by symbol. Picked deterministically from the
+  // change percent so the line is stable within a render but rotates as the
+  // market moves. Up = first half, down = second half.
+  var assetQuips = {
+    'BZ=F': {
+      up: [
+        'Europeans noticing.',
+        'Brent leading WTI is never a good sign.',
+      ],
+      down: [
+        'Brent calm. North Sea unbothered. For now.',
+        'Brent down. Probably nothing.',
+      ],
+    },
+    'NG=F': {
+      up: [
+        'Nat gas rallying. Someone is cold somewhere.',
+        'Heating bills entering the chat.',
+      ],
+      down: [
+        'Nat gas slipping. Mild winter cope.',
+        'Nat gas down. Russia presumably annoyed.',
+      ],
+    },
+    'GC=F': {
+      up: [
+        'Gold up. The smart money is wearing tinfoil.',
+        'Goldbugs vindicated, again, briefly.',
+      ],
+      down: [
+        'Gold down. Confidence detected. Suspicious.',
+        'Gold slipping. Risk-on or denial — your call.',
+      ],
+    },
+    '^VIX': {
+      up: [
+        'VIX up. Vibes: deteriorating.',
+        'Fear index waking up. Pour another coffee.',
+      ],
+      down: [
+        'VIX calm. Suspiciously calm.',
+        'Volatility napping. Do not trust the nap.',
+      ],
+    },
+  };
+
+  function quipFor(symbol, changePct) {
+    var pool = assetQuips[symbol];
+    if (!pool) return '';
+    var arr = changePct >= 0 ? pool.up : pool.down;
+    // Stable index based on the price (so it doesn't flicker every render
+    // but does rotate as the market moves)
+    var idx = Math.abs(Math.round(changePct * 100)) % arr.length;
+    return arr[idx];
+  }
+
+  function renderAssetStrip(assets) {
+    var strip = document.getElementById('oilAssetStrip');
+    if (!strip) return;
+    if (!assets || !assets.length) {
+      strip.innerHTML = '';
+      return;
+    }
+    strip.innerHTML = assets.map(function (a) {
+      var isUp = a.change >= 0;
+      var sign = isUp ? '+' : '';
+      var cls = isUp ? 'green' : 'red';
+      var arrow = isUp ? '&#9650;' : '&#9660;';
+      var quip = quipFor(a.symbol, a.changePct);
+      return (
+        '<div class="oil-asset-card">' +
+          '<div class="oil-asset-head">' +
+            '<span class="oil-asset-sym">' + a.symbol + '</span>' +
+            '<span class="oil-asset-name">' + (a.name || '') + '</span>' +
+          '</div>' +
+          '<div class="oil-asset-price">$' + a.price.toFixed(2) + '</div>' +
+          '<div class="oil-asset-delta ' + cls + '">' + arrow + ' ' + sign +
+            a.change.toFixed(2) + ' (' + sign + a.changePct.toFixed(2) + '%)</div>' +
+          (quip ? '<div class="oil-asset-quip">' + quip + '</div>' : '') +
+        '</div>'
+      );
+    }).join('');
+  }
+
   // ── Render ─────────────────────────────────────────────────────────────────
   function render(data) {
     var isUp = data.change >= 0;
@@ -289,6 +376,9 @@
     // Analyst note
     var noteEl = document.getElementById('oilAnalystText');
     if (noteEl) noteEl.textContent = getNote(data.changePct, calcVolumeRatio(data.points));
+
+    // Secondary assets strip (Brent, Nat Gas, Gold, VIX...)
+    renderAssetStrip(data.assets);
 
     // Updated timestamp
     var updEl = document.getElementById('oilUpdated');

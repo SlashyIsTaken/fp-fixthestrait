@@ -633,7 +633,43 @@ footer .disclaimer { margin-top: 24px; padding-top: 24px; border-top: 1px solid 
 }
 .oil-chart-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; color: var(--text-dim); text-transform: uppercase; }
 .oil-vol-label { margin-top: 4px; }
-#oilChart, #oilVolChart { width: 100%; display: block; touch-action: pan-y; }
+#oilChart, #oilVolChart {
+  width: 100%;
+  display: block;
+  touch-action: pan-y;
+  /* Pin heights in CSS so that nothing — viewport resize, HiDPI canvas
+     bitmap swaps, iOS Safari URL-bar collapse — can ever let the canvas
+     element grow vertically. The HTML `height` attribute only sets the
+     bitmap; the CSS height is what governs the rendered box. */
+  max-height: 110px;
+}
+#oilChart { height: 110px; }
+#oilVolChart { height: 36px; max-height: 36px; }
+
+/* Secondary asset strip — Brent, Nat Gas, Gold, VIX, etc. */
+.oil-asset-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+.oil-asset-strip:empty { display: none; }
+.oil-asset-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: var(--font-mono);
+}
+.oil-asset-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.oil-asset-sym { font-size: 9px; letter-spacing: 2px; color: var(--text-dim); text-transform: uppercase; }
+.oil-asset-name { font-size: 9px; letter-spacing: 1px; color: var(--text-dim); text-transform: uppercase; text-align: right; }
+.oil-asset-price { font-size: 20px; font-weight: 700; color: var(--text); letter-spacing: -0.5px; margin-top: 2px; }
+.oil-asset-delta { font-size: 11px; letter-spacing: 0.5px; }
+.oil-asset-delta.green { color: #22c55e; }
+.oil-asset-delta.red { color: var(--danger); }
+.oil-asset-quip { font-size: 10px; color: var(--text-dim); line-height: 1.4; margin-top: 4px; font-style: italic; }
 
 /* Probability panel */
 .oil-probability-panel {
