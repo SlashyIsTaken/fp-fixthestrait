@@ -1017,3 +1017,74 @@ document.addEventListener('keydown', function(e) {
     countUp();
   }
 })();
+
+// ===== ASK THE ANALYST (STEVE) =====
+// Pure client-side. No backend, no LLM. The bureaucratic non-engagement is
+// the entire joke; an actual answering system would ruin it. Responses are
+// drawn deterministically from the question text so the same question always
+// returns the same non-answer (subtle, but rewards experimentation).
+const ANALYST_RESPONSES = [
+  "That is a very good question. We are not permitted to answer it.",
+  "Steve has reviewed your question and declined to comment.",
+  "This question has been forwarded to a department that does not exist.",
+  "Steve says: blub. Translation pending.",
+  "Your question is on file. The file is classified. So is the cabinet.",
+  "We have considered your question for the standard 0.4 seconds. The answer is no.",
+  "Analysts are looking into it. The analysts are also looking into a different thing entirely. We cannot say which.",
+  "Your question contains keywords we are not legally allowed to acknowledge.",
+  "Please rephrase your question without using any nouns, verbs, or punctuation.",
+  "An answer has been prepared. The answer is in another building. The building is on fire.",
+  "We will respond once Steve returns from his vacation. Steve does not take vacations.",
+  "Question received. Answer pending. Pending since 2003.",
+  "We are unable to comment on operational matters, hypothetical matters, or matters.",
+  "Have you tried not asking?",
+  "The relevant department is currently in a meeting with itself.",
+  "Steve does not negotiate with curiosity.",
+  "Your question has been escalated to a level we do not have.",
+  "Per agency policy, we cannot confirm or deny whether your question was understood.",
+  "We took your question to the analysts. The analysts asked us to leave.",
+  "An answer exists. We are not the ones who get to know it.",
+  "Steve says the answer is in the chart. We checked. There is no chart.",
+  "Your question is being processed in a queue. The queue is also classified.",
+  "We considered three possible answers. We disliked all of them. We are not telling you which we disliked least.",
+  "The honest answer to your question would be devastating. So we are giving you this one instead.",
+  "Steve has declined to be quoted on this. Steve has also declined to be paraphrased, hinted at, or vaguely gestured toward.",
+  "Question logged. Action: none. Reasoning: classified. Confidence: high.",
+  "We cannot answer that. The answer would imply that we know things, and we have a strict no-knowing policy.",
+  "Forward this question to anyone other than us, and we will deny ever receiving it.",
+  "Our records indicate this question has already been asked 47 times today. By you. We do not appreciate this.",
+  "The answer is yes. Or no. We are not permitted to say which one is the answer.",
+];
+
+function askAnalyst(event) {
+  if (event && event.preventDefault) event.preventDefault();
+  const input = document.getElementById('ask-input');
+  const result = document.getElementById('askResult');
+  const text = document.getElementById('askResultText');
+  const meta = document.getElementById('askResultMeta');
+  if (!input || !result || !text || !meta) return false;
+
+  const question = (input.value || '').trim();
+  if (!question) {
+    text.textContent = 'No question detected. We cannot decline to answer a question that does not exist. Please supply one and try again.';
+    meta.textContent = 'STATUS: NO QUESTION ON FILE';
+    result.classList.add('show');
+    return false;
+  }
+
+  // Deterministic pick: same question → same response. Stable hash over the
+  // characters so users can re-submit and get the same dead-eyed reply.
+  let hash = 0;
+  for (let i = 0; i < question.length; i++) {
+    hash = ((hash << 5) - hash + question.charCodeAt(i)) | 0;
+  }
+  const idx = Math.abs(hash) % ANALYST_RESPONSES.length;
+  text.textContent = ANALYST_RESPONSES[idx];
+
+  // Generate a fake case number from the same hash for bureaucratic flavour.
+  const caseNum = String(Math.abs(hash) % 999983).padStart(6, '0');
+  meta.textContent = 'CASE #' + caseNum + ' \u00B7 ANALYST: STEVE \u00B7 STATUS: CLOSED';
+  result.classList.add('show');
+  return false;
+}
+

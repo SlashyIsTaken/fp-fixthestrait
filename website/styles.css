@@ -728,6 +728,142 @@ footer .disclaimer { margin-top: 24px; padding-top: 24px; border-top: 1px solid 
 .prob-item-label { font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); }
 .prob-item-val { font-family: var(--font-mono); font-size: 10px; color: var(--danger); white-space: nowrap; }
 
+/* Ceasefire / de-escalation banner inside the price panel */
+.oil-ceasefire-banner {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #22c55e;
+  background: rgba(34,197,94,0.08);
+  border: 1px solid rgba(34,197,94,0.35);
+  padding: 6px 8px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* ===== SOURCES & METHODS ===== */
+.sources-block {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--text-dim);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 4px;
+}
+.sources-header { display: flex; flex-direction: column; gap: 4px; }
+.sources-tag { font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; color: var(--text-dim); text-transform: uppercase; }
+.sources-title { font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--text); letter-spacing: 1px; }
+.sources-sub { font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); line-height: 1.6; max-width: 720px; }
+.sources-list { display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--border); }
+.source-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr auto;
+  gap: 16px;
+  align-items: baseline;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--border);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+.source-name { color: var(--text); font-weight: 700; letter-spacing: 0.5px; }
+.source-desc { color: var(--text-dim); line-height: 1.5; }
+.source-rating { color: var(--warn); font-size: 9px; letter-spacing: 1.5px; padding: 2px 8px; border: 1px solid rgba(234,179,8,0.4); background: rgba(234,179,8,0.08); white-space: nowrap; }
+.sources-footer { font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); line-height: 1.5; font-style: italic; padding-top: 4px; }
+@media (max-width: 700px) {
+  .source-row { grid-template-columns: 1fr; gap: 4px; padding: 12px 0; }
+  .source-rating { justify-self: start; }
+}
+
+/* ===== ASK THE ANALYST ===== */
+.ask-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 40px 60px;
+}
+.ask-form {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--warn);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ask-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; color: var(--text-dim); text-transform: uppercase; }
+.ask-form textarea {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 12px;
+  resize: vertical;
+  line-height: 1.5;
+}
+.ask-form textarea:focus { outline: none; border-color: var(--warn); }
+.ask-submit { width: 100%; padding: 14px; font-size: 11px; }
+.ask-result {
+  display: none;
+  margin-top: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--danger);
+  padding: 18px 20px;
+  flex-direction: column;
+  gap: 10px;
+}
+.ask-result.show { display: flex; }
+.ask-result-tag { font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; color: var(--danger); text-transform: uppercase; }
+.ask-result-text { font-family: var(--font-mono); font-size: 13px; color: var(--text); line-height: 1.6; }
+.ask-result-meta { font-family: var(--font-mono); font-size: 9px; letter-spacing: 1px; color: var(--text-dim); text-transform: uppercase; padding-top: 6px; border-top: 1px dashed var(--border); }
+@media (max-width: 700px) {
+  .ask-section { padding: 0 20px 40px; }
+}
+
+/* ===== GLOSSARY ===== */
+.glossary-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px 60px;
+}
+.glossary-list {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 14px 22px;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 32px;
+}
+.glossary-entry {
+  padding: 12px 0;
+  border-bottom: 1px dashed var(--border);
+}
+.glossary-entry dt {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+.glossary-pos { color: var(--text-dim); font-weight: 400; font-style: italic; letter-spacing: 0; }
+.glossary-entry dd {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin: 0;
+}
+.glossary-entry dd em { color: var(--text); font-style: italic; }
+@media (max-width: 700px) {
+  .glossary-section { padding: 0 20px 40px; }
+  .glossary-list { grid-template-columns: 1fr; padding: 8px 16px; }
+}
+
 /* Analyst note */
 .oil-analyst-note {
   background: rgba(239,68,68,0.05);

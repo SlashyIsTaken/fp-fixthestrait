@@ -35,6 +35,22 @@
       'Volume is up. We are not saying anyone knew anything in advance. We are simply noting that someone seems to have known something in advance.',
       'Elevated trading volume observed. This is either rational market behavior or the least subtle thing we have ever seen. Possibly both.',
     ],
+    deescalation: [
+      'DE-ESCALATION SIGNAL DETECTED. Our analysts are taking it personally.',
+      'Oil down. Fear gauges down. We have triple-checked. We are not pleased.',
+      'Markets pricing in calm. Our threat models do not have a "calm" setting. We are improvising.',
+      'Risk premium evaporating. Whoever was hedging this just took the L. We are watching them too.',
+      'CEASEFIRE DETECTED. We are obligated to note this. We are not obligated to like it.',
+      'Stability indicators flashing green. Our entire methodology requires red. We are reviewing our methodology.',
+      'The market believes the situation is improving. The market is often wrong. Stay tuned.',
+      'Three of our most reliable indicators just agreed with each other. This is unprecedented and frankly suspicious.',
+      'Oil dropping. Brent confirming. VIX calming. We are now actively looking for the catch.',
+      'Spread between fear and reality narrowing. Our consultants warn this is exactly what it looks like before things get worse. Or better. They were unclear.',
+      'Diplomatic channels reportedly "open." We have not been told which ones. We have not asked.',
+      'Tension easing across the board. Nobody on our floor knows what to do with their hands.',
+      'A ceasefire holds until it does not. We are timing this one with a stopwatch.',
+      'Market relief detected. Steve (dolphin) has not commented. Steve\'s silence is, traditionally, the actual signal.',
+    ],
     generic: [
       'Pattern analysis complete. Pattern: concerning. Confidence: high. Action taken: this website.',
       'Three hedge funds, one trebuchet operator, and Iran have all gone suspiciously quiet.',
@@ -85,7 +101,15 @@
     return 'Below prior hour (quieting down)';
   }
 
-  function getNote(pct, ratio) {
+  function getNote(pct, ratio, ceasefire) {
+    if (ceasefire) {
+      // In de-escalation mode the analyst note pool is fixed to the
+      // disappointed-analysts pool (plus generic), so it never accidentally
+      // says "PRICE SURGE DETECTED" while the market is calming down.
+      return notes.deescalation.concat(notes.generic)[
+        Math.floor(Math.random() * (notes.deescalation.length + notes.generic.length))
+      ];
+    }
     var elevated = ratio !== null && ratio > 1.2;
     var pool = pct > 2 ? notes.up : pct < -2 ? notes.down : notes.flat;
     if (elevated) pool = notes.highVolume.concat(pool);
@@ -93,10 +117,37 @@
     return pool[Math.floor(Math.random() * pool.length)];
   }
 
+  // ── Ceasefire / de-escalation detection ────────────────────────────────────
+  // Triggers when WTI is dropping AND at least one cross-asset signal
+  // confirms that the move is genuine "risk-off" rather than just oil-specific
+  // weakness. The supporting signals are deliberately loose: VIX calming,
+  // Brent confirming the WTI move, or Gold reacting meaningfully in either
+  // direction (gold can spike on lingering uncertainty even as oil de-risks,
+  // OR fall as fear premium evaporates — both count as "the market is
+  // repricing risk").
+  function detectCeasefire(data) {
+    if (!data || data.changePct >= -1) return false;
+    if (!data.assets || !data.assets.length) return false;
+    var bySym = {};
+    for (var i = 0; i < data.assets.length; i++) {
+      bySym[data.assets[i].symbol] = data.assets[i];
+    }
+    var supports = 0;
+    if (bySym['^VIX'] && bySym['^VIX'].changePct < -0.5) supports++;
+    if (bySym['BZ=F'] && bySym['BZ=F'].changePct < -0.5) supports++;
+    if (bySym['GC=F'] && Math.abs(bySym['GC=F'].changePct) > 0.4) supports++;
+    return supports >= 1;
+  }
+
   // ── Probability calculation ────────────────────────────────────────────────
   function calcProbability(data) {
+    var ceasefire = detectCeasefire(data);
     var base = 47; // always elevated, we've been saying this since 2019
-    var priceFactor = Math.min(Math.abs(data.changePct) * 4, 18);
+    // In normal times, *any* movement (up or down) is treated as evidence of
+    // tension. In de-escalation mode, a big drop becomes a stability discount
+    // — the analysts grudgingly subtract from the probability instead.
+    var rawPriceFactor = Math.min(Math.abs(data.changePct) * 4, 18);
+    var priceFactor = ceasefire ? -rawPriceFactor : rawPriceFactor;
     var ratio = calcVolumeRatio(data.points);
     var volumeFactor = ratio === null ? 2
       : ratio > 1.8 ? 12
@@ -105,14 +156,22 @@
       : 1;
     var iranFactor = (new Date().getDate() % 6) * 2; // 0–10, rotates daily
     var cosmicFactor = Math.round(Math.abs(Math.sin(Date.now() / 8640000)) * 5); // sunspot correlation (obviously)
-    var total = Math.min(Math.round(base + priceFactor + volumeFactor + iranFactor + cosmicFactor), 99);
-    // 100% certainty costs extra
+    var raw = base + priceFactor + volumeFactor + iranFactor + cosmicFactor;
+    // Floor at 22 even in de-escalation — base tension is structural and
+    // permanent. The strait does not stop being narrow because of a ceasefire.
+    var total = Math.max(22, Math.min(Math.round(raw), 99));
     return {
       total: total,
+      ceasefire: ceasefire,
       volume: data.totalVolume,
       items: [
         { label: 'Base tension (structural, chronic since 1979)', val: base },
-        { label: 'Price movement volatility', val: Math.round(priceFactor) },
+        {
+          label: ceasefire
+            ? 'Stability discount (de-escalation, grudgingly applied)'
+            : 'Price movement volatility',
+          val: Math.round(priceFactor),
+        },
         { label: volumeLabel(ratio), val: volumeFactor },
         { label: 'Iran factor (day ' + new Date().getDate() + ' of month)', val: iranFactor },
         { label: 'Cosmic background correlation', val: cosmicFactor },
@@ -367,6 +426,7 @@
     var isUp = data.change >= 0;
     var sign = isUp ? '+' : '';
     var cls = isUp ? 'green' : 'red';
+    var ceasefire = detectCeasefire(data);
 
     // Price panel
     var ratio = calcVolumeRatio(data.points);
@@ -379,9 +439,16 @@
       : ratio > 1.8 ? 'red'
       : ratio > 1.2 ? 'warn'
       : '';
+    var directionLabel = ceasefire
+      ? '&#9660; DE-ESCALATION DETECTED'
+      : (isUp ? '&#9650; BULLISH TENSION' : '&#9660; BEARISH RELIEF');
+    var directionCls = ceasefire ? 'green' : cls;
     var panel = document.getElementById('oilPricePanel');
     if (panel) {
       panel.innerHTML =
+        (ceasefire
+          ? '<div class="oil-ceasefire-banner">CEASEFIRE / DE-ESCALATION SIGNAL &mdash; analysts notified, analysts unhappy</div>'
+          : '') +
         '<div class="oil-price-main">' +
           '<div class="oil-price-ticker">WTI CRUDE OIL &mdash; CL=F</div>' +
           '<div class="oil-price-value ' + cls + '">$' + data.price.toFixed(2) + '</div>' +
@@ -392,8 +459,8 @@
           '<div class="oil-meta-row"><span>PREV CLOSE</span><span>$' + data.prevClose.toFixed(2) + '</span></div>' +
           '<div class="oil-meta-row"><span>ACTIVITY</span><span class="' + volTierCls + '">' + volTierWord + '</span></div>' +
           '<div class="oil-meta-row"><span>CURRENCY</span><span>' + (data.currency || 'USD') + '</span></div>' +
-          '<div class="oil-meta-row"><span>DIRECTION</span><span class="' + cls + '">' +
-            (isUp ? '&#9650; BULLISH TENSION' : '&#9660; BEARISH RELIEF') +
+          '<div class="oil-meta-row"><span>POSTURE</span><span class="' + directionCls + '">' +
+            directionLabel +
           '</span></div>' +
         '</div>';
     }
@@ -427,7 +494,13 @@
 
     // Analyst note
     var noteEl = document.getElementById('oilAnalystText');
-    if (noteEl) noteEl.textContent = getNote(data.changePct, calcVolumeRatio(data.points));
+    if (noteEl) noteEl.textContent = getNote(data.changePct, calcVolumeRatio(data.points), ceasefire);
+    var noteTagEl = document.querySelector('.oil-analyst-tag');
+    if (noteTagEl) {
+      noteTagEl.innerHTML = ceasefire
+        ? '&#9632; ANALYST NOTE &mdash; DE-ESCALATION'
+        : '&#9632; ANALYST NOTE';
+    }
 
     // Secondary assets strip (Brent, Nat Gas, Gold, VIX...)
     renderAssetStrip(data.assets);

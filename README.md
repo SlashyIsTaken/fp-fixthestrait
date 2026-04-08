@@ -69,6 +69,8 @@ A thirteenth solution is currently under consideration. We are not at liberty to
 
 ### Intelligence Products
 - **Crude Oil Situation Room** — live WTI crude pricing, intraday price and volume charts, secondary asset strip (Brent, Natural Gas, Gold, VIX), and the proprietary **Strait Incident Probability™** gauge, which is always elevated and always wrong
+- **Ceasefire detection** — when WTI drops meaningfully and cross-asset signals (VIX, Brent, Gold) confirm genuine risk-off behaviour, the Situation Room enters a de-escalation posture: the probability gauge applies a stability discount, the analyst note switches to a dedicated grudging-disappointment pool, and a green CEASEFIRE banner appears in the price panel. Analysts remain unhappy about it.
+- **Sources & Methods** — a dossier sub-section listing the intelligence sources from which all assessments are derived. Includes ████████, the vibes, an intercepted text message that just said "lol", and Steve. All sources rated MEDIUM-HIGH; the rating scale is one rung tall by design.
 - **Classified Mode** — toggle to reveal hidden analyst notes, internal memos, intercepted communications, and a market intelligence assessment regarding Steve (dolphin)
 - **Satirical news ticker** — rotating intelligence intercepts of varying credibility (range: low to extremely low)
 
@@ -82,6 +84,10 @@ A thirteenth solution is currently under consideration. We are not at liberty to
 - **The Strait Room** — a fake group chat between the USA, Iran, the UAE, Oman, Saudi Arabia, Qatar, Bahrain, Kuwait, and Steve (dolphin)
 - **Comparison Matrix** — all twelve solutions rated across cost, feasibility, dolphin involvement, and probable geopolitical fallout
 - **What If? Timeline** — day-by-day projection of global economic collapse following hypothetical strait closure
+
+### Reference Materials
+- **Ask the Analyst (Steve)** — submit any question about the Strait, the oil market, or anything related, and receive an official non-answer from Steve's desk. Pure client-side, no LLM, no backend, no engagement; the bureaucratic non-engagement is the entire joke. Same question always returns the same case number and the same dead-eyed reply.
+- **Glossary** — twenty deadpan definitions of terminology used elsewhere on the dossier (CHOKEPOINT, STEVE, SAFE HAVEN ASSET, OPEC+, *etc.*). Each definition sounds like it belongs in an actual textbook and contains exactly one off note.
 
 ### Quality of Life
 - **Solution submission form** — submit your own solution; it will be rejected in increasingly creative ways

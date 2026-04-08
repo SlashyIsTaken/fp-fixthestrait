@@ -113,6 +113,8 @@
     <li><a href="#what-if" onclick="closeMobileNav()">What If?</a></li>
     <li><a href="#strait-room" onclick="closeMobileNav()">Strait Room</a></li>
     <li><a href="#simulator" onclick="closeMobileNav()">Simulator</a></li>
+    <li><a href="#ask-analyst" onclick="closeMobileNav()">Ask Steve</a></li>
+    <li><a href="#glossary" onclick="closeMobileNav()">Glossary</a></li>
     <li><a href="#submit-solution" onclick="closeMobileNav()">Submit</a></li>
     <li><a href="#about" onclick="closeMobileNav()">Intel</a></li>
     <li><a href="https://en.wikipedia.org/wiki/Strait_of_Hormuz" target="_blank">Wikipedia</a></li>
@@ -223,6 +225,68 @@
       <div class="classified-hint-label">EYES ONLY &mdash; MARKET INTELLIGENCE INTERCEPT</div>
       <div class="classified-hint-body">SIGINT analysis confirms that 73% of volume spikes in CL=F in the past 18 months occurred within 4 hours of an undisclosed meeting between parties we are not permitted to name, in a location we are not permitted to specify, regarding a topic described in the filing only as "logistical alignment." The remaining 27% was Steve. We are still not sure what Steve is doing but he has been consistently right since 2021. An investigation was opened. The investigation has been closed. The investigator now works for Steve.</div>
       <div class="classified-hint-footer">This assessment is based on pattern analysis and should not be construed as an accusation of anything by anyone. It is simply a description of observable patterns that are, frankly, very hard to explain.</div>
+    </div>
+
+    <!-- ===== SOURCES ===== -->
+    <div class="sources-block" id="sources">
+      <div class="sources-header">
+        <div class="sources-tag">SOURCES &amp; METHODS</div>
+        <div class="sources-title">Intelligence Sources</div>
+        <div class="sources-sub">All assessments on this page are derived from the following primary sources. Reliability ratings are issued by the same office that authored the assessments. We see no conflict.</div>
+      </div>
+      <div class="sources-list">
+        <div class="source-row">
+          <div class="source-name">&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</div>
+          <div class="source-desc">Former &#9608;&#9608;&#9608;&#9608;&#9608; official, now consults for &#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;. Has not been seen in person since 2017. Still answers email.</div>
+          <div class="source-rating">MEDIUM-HIGH</div>
+        </div>
+        <div class="source-row">
+          <div class="source-name">A man who claimed to be Steve</div>
+          <div class="source-desc">Could not verify dolphin status. Voice was muffled. Spoke exclusively in market timing predictions. Has been correct twice.</div>
+          <div class="source-rating">MEDIUM-HIGH</div>
+        </div>
+        <div class="source-row">
+          <div class="source-name">The vibes</div>
+          <div class="source-desc">Reliable across nineteen distinct asset classes. Cannot be subpoenaed. Cannot be cross-examined. Cannot be quantified, but we have tried.</div>
+          <div class="source-rating">MEDIUM-HIGH</div>
+        </div>
+        <div class="source-row">
+          <div class="source-name">An intercepted text message that just said "lol"</div>
+          <div class="source-desc">Sender unknown. Recipient unknown. Context: classified. We have been studying it for nine months.</div>
+          <div class="source-rating">MEDIUM-HIGH</div>
+        </div>
+        <div class="source-row">
+          <div class="source-name">A satellite image of what is definitely a tanker, probably</div>
+          <div class="source-desc">Resolution: poor. Angle: unhelpful. Wake pattern: suggestive. We have submitted it to a panel of experts. The panel is also a tanker.</div>
+          <div class="source-rating">MEDIUM-HIGH</div>
+        </div>
+        <div class="source-row">
+          <div class="source-name">&#9608;&#9608;&#9608;&#9608; &#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</div>
+          <div class="source-desc">Insists on being called "the analyst" despite holding no relevant credentials, no relevant employment, and no fixed address. Tips have been 64% accurate. We do not know why.</div>
+          <div class="source-rating">MEDIUM-HIGH</div>
+        </div>
+        <div class="source-row">
+          <div class="source-name">A Bloomberg terminal someone left logged in at 3am</div>
+          <div class="source-desc">We did not touch it. We simply observed. Nothing was downloaded. Several things were screenshotted. The screenshots are also classified.</div>
+          <div class="source-rating">MEDIUM-HIGH</div>
+        </div>
+        <div class="source-row">
+          <div class="source-name">A LinkedIn post by an oil executive that has since been deleted</div>
+          <div class="source-desc">We have a copy. We are not permitted to say how. The post contained the word "interesting" three times in two sentences. This is unusual for him.</div>
+          <div class="source-rating">MEDIUM-HIGH</div>
+        </div>
+        <div class="source-row">
+          <div class="source-name">The ambient anxiety of the trading floor</div>
+          <div class="source-desc">Measured via a calibrated instrument we developed in-house and cannot describe. Currently reading: elevated. Has been reading elevated since 2019.</div>
+          <div class="source-rating">MEDIUM-HIGH</div>
+        </div>
+        <div class="source-row">
+          <div class="source-name">Steve. Just Steve.</div>
+          <div class="source-desc">No further details available. No further details necessary.</div>
+          <div class="source-rating">MEDIUM-HIGH</div>
+        </div>
+      </div>
+      <div class="sources-footer">All sources rated MEDIUM-HIGH. We do not maintain a higher rating. We do not maintain a lower one either. The scale is one rung tall by design.</div>
     </div>
   </div>
 </section>
@@ -621,6 +685,56 @@
       <div class="lb-entries" id="leaderboard"></div>
     </div>
   </div>
+</div>
+
+<!-- ===== ASK THE ANALYST (STEVE) ===== -->
+<div class="section-header" id="ask-analyst">
+  <div class="overline">Public Inquiry Channel</div>
+  <h2>Ask the Analyst</h2>
+  <p>Have a question about the Strait of Hormuz, the global oil market, or anything related? Submit it below. Our senior analyst (Steve) will review it personally and provide a response, in the loosest possible interpretation of the word "response."</p>
+</div>
+<div class="ask-section">
+  <form class="ask-form" onsubmit="askAnalyst(event)">
+    <label for="ask-input" class="ask-label">YOUR QUESTION</label>
+    <textarea id="ask-input" rows="3" placeholder="e.g., Will the strait remain open through Q4? What is Steve's current position? Is the situation under control?" maxlength="500"></textarea>
+    <button type="submit" class="action-btn ask-submit">SUBMIT TO ANALYST</button>
+  </form>
+  <div class="ask-result" id="askResult">
+    <div class="ask-result-tag">&#9632; OFFICIAL RESPONSE &mdash; ANALYST DESK</div>
+    <div class="ask-result-text" id="askResultText"></div>
+    <div class="ask-result-meta" id="askResultMeta"></div>
+  </div>
+</div>
+
+<!-- ===== GLOSSARY ===== -->
+<div class="section-header" id="glossary">
+  <div class="overline">Reference Materials</div>
+  <h2>Glossary of Terms</h2>
+  <p>Definitions of terminology used elsewhere on this dossier. Compiled by our editorial committee, which is also the analyst desk, which is also Steve.</p>
+</div>
+<div class="glossary-section">
+  <dl class="glossary-list">
+    <div class="glossary-entry"><dt>CHOKEPOINT <span class="glossary-pos">(n.)</span></dt><dd>A narrow body of water that geopolitical analysts have strong feelings about. See also: every analyst we have ever employed.</dd></div>
+    <div class="glossary-entry"><dt>STRAIT INCIDENT PROBABILITY&trade; <span class="glossary-pos">(n.)</span></dt><dd>A proprietary index measuring the likelihood of a thing we are not permitted to define. Updated continuously since 2019. Still wrong.</dd></div>
+    <div class="glossary-entry"><dt>STEVE <span class="glossary-pos">(n.)</span></dt><dd>See Steve.</dd></div>
+    <div class="glossary-entry"><dt>WTI <span class="glossary-pos">(n.)</span></dt><dd>West Texas Intermediate. A grade of crude oil that has never been to West Texas, has never been intermediate, and is not always crude.</dd></div>
+    <div class="glossary-entry"><dt>BRENT <span class="glossary-pos">(n.)</span></dt><dd>A grade of oil named after a goose. We are not making this up. The goose has no comment.</dd></div>
+    <div class="glossary-entry"><dt>CEASEFIRE <span class="glossary-pos">(n.)</span></dt><dd>A temporary state in which the parties involved agree, in writing, to disagree more politely. Duration: variable. Historical median: shorter than expected.</dd></div>
+    <div class="glossary-entry"><dt>ESCALATION <span class="glossary-pos">(n.)</span></dt><dd>The natural state of any geopolitical situation given enough time, sufficient ego, and at least one Twitter account.</dd></div>
+    <div class="glossary-entry"><dt>DE-ESCALATION <span class="glossary-pos">(n.)</span></dt><dd>A pause in escalation, traditionally followed by escalation. See also: <em>escalation</em>.</dd></div>
+    <div class="glossary-entry"><dt>ANALYST <span class="glossary-pos">(n.)</span></dt><dd>A person paid to be wrong with great confidence. See also: us.</dd></div>
+    <div class="glossary-entry"><dt>INTELLIGENCE <span class="glossary-pos">(n.)</span></dt><dd>Information of unknown accuracy from sources of unknown reliability presented with known certainty.</dd></div>
+    <div class="glossary-entry"><dt>DOSSIER <span class="glossary-pos">(n.)</span></dt><dd>A folder containing things we already knew, formatted to look like things we have just discovered.</dd></div>
+    <div class="glossary-entry"><dt>STRATEGIC RESERVE <span class="glossary-pos">(n.)</span></dt><dd>A barrel of oil set aside for an emergency. Owned by no one in particular. Located somewhere. Possibly two barrels.</dd></div>
+    <div class="glossary-entry"><dt>TANKER <span class="glossary-pos">(n.)</span></dt><dd>A boat with too much oil and not enough opinions about where to go.</dd></div>
+    <div class="glossary-entry"><dt>CHATTER <span class="glossary-pos">(n.)</span></dt><dd>What we call communications when we want to imply we are listening, without admitting we are listening.</dd></div>
+    <div class="glossary-entry"><dt>SIGINT <span class="glossary-pos">(n.)</span></dt><dd>Signals intelligence. Mostly text messages we should not have read.</dd></div>
+    <div class="glossary-entry"><dt>HUMINT <span class="glossary-pos">(n.)</span></dt><dd>Human intelligence. Mostly things people told us at parties.</dd></div>
+    <div class="glossary-entry"><dt>OPEC+ <span class="glossary-pos">(n.)</span></dt><dd>A group of oil-producing nations. The "+" stands for "and Russia, but we did not want to put it on the masthead."</dd></div>
+    <div class="glossary-entry"><dt>GEOPOLITICS <span class="glossary-pos">(n.)</span></dt><dd>The study of why nothing has worked out and what might cause it to continue not working out.</dd></div>
+    <div class="glossary-entry"><dt>RISK PREMIUM <span class="glossary-pos">(n.)</span></dt><dd>The amount the market charges for being nervous. Currently elevated. Always currently elevated.</dd></div>
+    <div class="glossary-entry"><dt>SAFE HAVEN ASSET <span class="glossary-pos">(n.)</span></dt><dd>An asset people buy when they are scared. Notable safe haven assets include gold, US Treasuries, and a sufficiently strong drink.</dd></div>
+  </dl>
 </div>
 
 <!-- ===== SUBMIT YOUR SOLUTION ===== -->
