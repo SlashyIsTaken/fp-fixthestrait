@@ -505,12 +505,62 @@
     // Secondary assets strip (Brent, Nat Gas, Gold, VIX...)
     renderAssetStrip(data.assets);
 
+    // Inject 2 live-data ticker entries (real numbers, dossier framing)
+    injectOilTicker(data, ratio);
+
     // Updated timestamp
     var updEl = document.getElementById('oilUpdated');
     if (updEl) {
       var mins = Math.round((Date.now() - data.updated) / 60000);
       updEl.textContent = mins < 1 ? 'live' : 'data ~' + mins + ' min old';
     }
+  }
+
+  // ── Live ticker injection ─────────────────────────────────────────────────
+  // Pulls one or two REAL numbers from the oil feed and dresses them up as
+  // intelligence chatter. Inserted symmetrically into the scrolling ticker
+  // (prepend + append) so the duplicate-half loop animation stays seamless.
+  var oilTickerInjected = false;
+  function injectOilTicker(data, ratio) {
+    if (oilTickerInjected) return;
+    var ticker = document.getElementById('ticker');
+    if (!ticker || !data) return;
+
+    var isUp = data.change >= 0;
+    var dirWord = isUp ? 'up' : 'down';
+    var pct = Math.abs(data.changePct).toFixed(2);
+    var price = data.price.toFixed(2);
+    var volWord = ratio === null ? 'normal'
+      : ratio > 1.8 ? 'highly elevated'
+      : ratio > 1.2 ? 'elevated'
+      : ratio > 0.8 ? 'normal'
+      : 'suspiciously quiet';
+
+    // Pool of templated entries — pick 2 deterministically off the timestamp
+    // so successive page loads vary but a single load is stable.
+    var pool = [
+      { tag: 'red',  label: 'BREAKING', text: 'WTI ' + dirWord + ' ' + pct + '% today. Source: looking at the chart.' },
+      { tag: '',     label: 'INTEL',    text: 'WTI now $' + price + '. This number is real. Make of it what you will.' },
+      { tag: 'red',  label: 'ALERT',    text: 'Trading volume ' + volWord + '. We are not saying anyone knew anything in advance.' },
+      { tag: 'blue', label: 'REPORT',   text: 'Crude moved ' + pct + '% in the last session. The strait remains where it has always been.' },
+      { tag: '',     label: 'ANALYSIS', text: 'CL=F closed at $' + price + '. We have logged this. We are not sure why.' },
+      { tag: 'blue', label: 'INTEL',    text: 'Volume profile classified as ' + volWord.toUpperCase() + '. Steve was, as always, already in position.' }
+    ];
+
+    var seed = (data.updated || Date.now()) % pool.length;
+    var picks = [pool[seed], pool[(seed + 3) % pool.length]];
+
+    for (var i = 0; i < picks.length; i++) {
+      var p = picks[i];
+      var html = '<span class="tag' + (p.tag ? ' ' + p.tag : '') + '">' + p.label + '</span> ' + p.text;
+      var a = document.createElement('div');
+      a.className = 'ticker-item';
+      a.innerHTML = html;
+      var b = a.cloneNode(true);
+      ticker.insertBefore(a, ticker.firstChild);
+      ticker.appendChild(b);
+    }
+    oilTickerInjected = true;
   }
 
   function showError() {

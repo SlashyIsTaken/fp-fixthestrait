@@ -113,6 +113,7 @@
     <li><a href="#what-if" onclick="closeMobileNav()">What If?</a></li>
     <li><a href="#strait-room" onclick="closeMobileNav()">Strait Room</a></li>
     <li><a href="#simulator" onclick="closeMobileNav()">Simulator</a></li>
+    <li><a href="#incident-sim" onclick="closeMobileNav()">Incident Sim</a></li>
     <li><a href="#ask-analyst" onclick="closeMobileNav()">Ask Steve</a></li>
     <li><a href="#glossary" onclick="closeMobileNav()">Glossary</a></li>
     <li><a href="#submit-solution" onclick="closeMobileNav()">Submit</a></li>
@@ -686,6 +687,50 @@
       <div class="lb-entries" id="leaderboard"></div>
     </div>
   </div>
+</div>
+
+<!-- ===== INCIDENT SIMULATOR ===== -->
+<div class="section-header" id="incident-sim">
+  <div class="overline">Tabletop Exercise</div>
+  <h2>Incident Simulator</h2>
+  <p>A controlled environment in which you, the user, may simulate geopolitical actions and observe how the global oil market responds. Each button triggers a real-time intelligence feed update. The Tension Index never decreases. This is by design.</p>
+</div>
+
+<div class="incident-section">
+  <div class="incident-header">
+    <div class="incident-header-left">
+      <div class="incident-tag">LIVE FEED &mdash; SECURE</div>
+      <div class="incident-title">Bloomberg-Adjacent Intelligence Wire</div>
+    </div>
+    <div class="incident-header-right">
+      <div class="incident-index-label">TENSION INDEX</div>
+      <div class="incident-index-val" id="incidentIndexVal">42</div>
+      <div class="incident-index-sub" id="incidentIndexSub">structurally elevated</div>
+    </div>
+  </div>
+
+  <div class="incident-buttons">
+    <button class="incident-btn" data-action="iran-statement">Iran issues statement</button>
+    <button class="incident-btn" data-action="us-carrier">US sends carrier</button>
+    <button class="incident-btn" data-action="saudi-sigh">Saudi Arabia sighs audibly</button>
+    <button class="incident-btn" data-action="steve-long">Steve goes long</button>
+    <button class="incident-btn" data-action="opec-call">OPEC+ schedules informal call</button>
+    <button class="incident-btn" data-action="long-way">Tanker takes the long way around Africa</button>
+    <button class="incident-btn" data-action="analyst-tweet">An analyst tweets</button>
+    <button class="incident-btn" data-action="bahrain-replyall">Bahrain replies-all by mistake</button>
+    <button class="incident-btn" data-action="russia-mediate">Russia offers to mediate</button>
+    <button class="incident-btn" data-action="dolphin-sighting">Dolphin sighted in unusual lane</button>
+    <button class="incident-btn" data-action="un-strongly">UN expresses concern</button>
+    <button class="incident-btn" data-action="elon-tweets">Elon tweets about the strait</button>
+  </div>
+
+  <div class="incident-feed-wrap">
+    <div class="incident-feed-header">INTELLIGENCE FEED &mdash; reverse chronological</div>
+    <div class="incident-feed" id="incidentFeed">
+      <div class="incident-empty">No events on file. The strait is quiet. The strait is never quiet. Begin simulation.</div>
+    </div>
+  </div>
+  <div class="incident-footer">All events are simulated. The Tension Index is calibrated by an instrument we are not at liberty to describe. It does not go down. It has never gone down. We have asked.</div>
 </div>
 
 <!-- ===== ASK THE ANALYST (STEVE) ===== -->

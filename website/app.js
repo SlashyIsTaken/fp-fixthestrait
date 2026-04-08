@@ -1088,3 +1088,210 @@ function askAnalyst(event) {
   return false;
 }
 
+// ===== INCIDENT SIMULATOR =====
+// Pure client-side. Each button has a pool of templated headlines and a
+// tension-index delta. The index never decreases — even buttons that *sound*
+// de-escalatory nudge it up, because in this dossier nothing is ever good news.
+const INCIDENT_POOL = {
+  'iran-statement': {
+    label: 'Iran Foreign Ministry',
+    delta: [3, 7],
+    lines: [
+      'Iran Foreign Ministry releases 12-page statement. Pages 1-11 are blank. Page 12 contains a single comma.',
+      'Iranian state media uses the word "calibrated" four times in one sentence. Analysts described as "concerned by the calibration of the calibrated calibration."',
+      'Tehran issues warning. Translation services disagree on whether it is a warning or a recipe.',
+      'Iran says it "reserves the right to respond." Has not specified to what. Has not specified how. Has reserved the right.',
+      'Iranian official quoted as saying "no comment." Quote attributed. Quote denied. Quote re-attributed. Quote re-denied.',
+    ],
+  },
+  'us-carrier': {
+    label: 'US Fifth Fleet',
+    delta: [4, 9],
+    lines: [
+      'US deploys carrier strike group to "the general vicinity." Pentagon declines to define "general." Or "vicinity."',
+      'Fifth Fleet announces "routine transit." Analysts note that the routine transit is the fourth routine transit this week.',
+      'Carrier USS [REDACTED] enters strait. Carrier USS [REDACTED] exits strait. Carrier USS [REDACTED] re-enters strait. Reasons unspecified.',
+      'Pentagon spokesperson confirms ship movements "should not be interpreted as a signal." Three other countries interpret it as a signal.',
+      'US Navy releases photo of carrier. Caption: "Just out here." No further context provided.',
+    ],
+  },
+  'saudi-sigh': {
+    label: 'Riyadh',
+    delta: [2, 5],
+    lines: [
+      'Saudi Foreign Ministry sighs audibly during press conference. Sigh duration: 4.2 seconds. Tape has been forwarded to analysts.',
+      'Riyadh issues no statement. Riyadh issued no statement yesterday. Riyadh has been issuing no statements with increasing intensity.',
+      'Saudi diplomat seen pinching the bridge of his nose for an extended period. The bridge has been classified.',
+      'Saudi Arabia reportedly "tired." Source: the Saudi diplomat\'s body language at a buffet in Geneva.',
+    ],
+  },
+  'steve-long': {
+    label: 'Steve',
+    delta: [6, 12],
+    lines: [
+      'Steve goes long on crude. Steve has not been wrong since 2019. Trading desks reach for their phones.',
+      'Unusual options activity detected on CL=F. Counterparty: a shell company registered to a P.O. box in a town that does not appear on most maps. The town is Steve.',
+      'Steve was seen at the marina at 04:00. He was not carrying anything. He was not doing anything. The market moved 1.4% within the hour.',
+      'Steve has updated his position. He has not announced what his position is. He has not announced what it was. We are reading the silence.',
+      'Senior trader reportedly says "Steve\'s in." Trading floor goes very, very quiet. The quiet has been logged as a market event.',
+    ],
+  },
+  'opec-call': {
+    label: 'OPEC+',
+    delta: [3, 6],
+    lines: [
+      'OPEC+ schedules "informal call." Informal call has 14 mandatory attendees, two interpreters, and a security detail.',
+      'OPEC+ delegates seen entering hotel. OPEC+ delegates seen exiting hotel. OPEC+ delegates seen re-entering same hotel forty minutes later. Hotel has not been named.',
+      'Cartel sources describe atmosphere as "constructive." The same sources described last month\'s atmosphere as "constructive." Production has not changed.',
+      'OPEC+ statement uses the phrase "market stability" 11 times. The market reads it as a threat.',
+    ],
+  },
+  'long-way': {
+    label: 'Maritime Tracking',
+    delta: [4, 8],
+    lines: [
+      'VLCC tanker [REDACTED] alters course around the Cape of Good Hope. Detour adds 21 days. Insurer described as "vindicated."',
+      'AIS data shows three tankers diverting south. The captains have not commented. The captains have stopped responding to email.',
+      'Shipping firm announces "routing optimization." Optimization adds 7,400 nautical miles. Firm describes this as efficient.',
+      'A tanker has gone the long way around Africa. The tanker has not said why. The tanker has been very clear that it does not wish to elaborate.',
+    ],
+  },
+  'analyst-tweet': {
+    label: 'X (formerly Twitter)',
+    delta: [1, 4],
+    lines: [
+      'Analyst at major bank tweets a single emoji. The emoji has been forwarded to compliance. Compliance has forwarded it to legal. Legal has forwarded it to us. We do not know what it means.',
+      'Energy analyst posts: "Hmm." 47,000 retweets. CL=F moves 0.3%. Causation unestablished. Correlation undeniable.',
+      'Analyst tweets a screenshot of a chart. The chart is unlabeled. The chart is being studied.',
+      'A junior analyst at a firm we are not permitted to name tweeted "interesting" and immediately deleted it. We have a copy.',
+    ],
+  },
+  'bahrain-replyall': {
+    label: 'Manama',
+    delta: [1, 3],
+    lines: [
+      'Bahrain accidentally replies-all to a 47-country diplomatic chain. Attached: vacation photos.',
+      'Bahraini official forwards classified memo to "everyone in contacts." Contacts include four journalists, two competitors, and one Steve.',
+      'Manama issues a "please disregard" email. The email has been forwarded 14,000 times. The disregarding is not going well.',
+      'Bahrain has done it again. We do not have the energy to explain what they have done. They have done it.',
+    ],
+  },
+  'russia-mediate': {
+    label: 'Moscow',
+    delta: [3, 7],
+    lines: [
+      'Russia "offers to mediate." All parties decline. Russia mediates anyway.',
+      'Moscow announces it is "uniquely positioned" to broker peace. The position has not been disclosed. We assume it is sitting down.',
+      'Russian foreign minister proposes a summit. Venue: undisclosed. Date: undisclosed. Attendance: mandatory. Topic: also undisclosed.',
+      'Kremlin describes situation as "an opportunity." Markets agree. Markets do not agree on for whom.',
+    ],
+  },
+  'dolphin-sighting': {
+    label: 'Marine SIGINT',
+    delta: [2, 5],
+    lines: [
+      'Dolphin sighted in shipping lane wearing what appears to be a small backpack. Backpack contents unknown. Dolphin not available for comment.',
+      'A pod of dolphins observed swimming in tight formation. Formation matches a known naval signaling pattern from 1987. We are not making this up.',
+      'Marine biologists describe dolphin behavior as "purposeful." Purpose unclear. Purpose classified. Purpose Steve.',
+      'Single dolphin photographed near a tanker hull. Photographer cannot be reached. Photographer is also a dolphin.',
+    ],
+  },
+  'un-strongly': {
+    label: 'United Nations',
+    delta: [1, 3],
+    lines: [
+      'UN expresses "deep concern." This is the 84th expression of deep concern this year. Concern reservoirs are reportedly full.',
+      'Security Council meets for 6 hours. Outcome: a 2-page statement that says nothing in three languages.',
+      'UN Secretary-General "calls on all parties to exercise restraint." All parties have noted the call. None have answered.',
+      'UN passes resolution 2847. Resolution 2847 reaffirms resolution 2846. Resolution 2846 reaffirms resolution 2845. The strait is unmoved.',
+    ],
+  },
+  'elon-tweets': {
+    label: 'X (formerly Twitter)',
+    delta: [2, 6],
+    lines: [
+      'Elon tweets "interesting" with a strait-of-hormuz emoji that does not exist. Engineers are working on it.',
+      'Elon proposes a tunnel under the strait. Delivery: Q3 2019. Funding: a poll on his timeline. Poll results: 51% yes.',
+      'Elon tweets a meme of the strait. Meme is somehow up 4% premarket. Analysts are reviewing whether memes are now an asset class. They are.',
+      'Elon announces "Strait Coin." Strait Coin gains $400M market cap in 90 seconds. Strait remains exactly as narrow as before.',
+    ],
+  },
+};
+
+const INCIDENT_INDEX_LABELS = [
+  [50,  'structurally elevated'],
+  [70,  'meaningfully elevated'],
+  [90,  'extremely elevated'],
+  [120, 'historically elevated'],
+  [160, 'unprecedented'],
+  [220, 'off the chart we use'],
+  [9999,'we have run out of words'],
+];
+
+(function () {
+  let incidentIndex = 42;
+  const buttons = document.querySelectorAll('.incident-btn');
+  const feed = document.getElementById('incidentFeed');
+  const indexVal = document.getElementById('incidentIndexVal');
+  const indexSub = document.getElementById('incidentIndexSub');
+  if (!buttons.length || !feed || !indexVal) return;
+
+  function fmtTime() {
+    const d = new Date();
+    const hh = String(d.getHours()).padStart(2, '0');
+    const mm = String(d.getMinutes()).padStart(2, '0');
+    return hh + ':' + mm;
+  }
+
+  function indexLabel(n) {
+    for (const [thresh, label] of INCIDENT_INDEX_LABELS) {
+      if (n < thresh) return label;
+    }
+    return 'we have run out of words';
+  }
+
+  function bumpIndex(min, max) {
+    const delta = Math.floor(Math.random() * (max - min + 1)) + min;
+    incidentIndex += delta;
+    indexVal.textContent = incidentIndex;
+    indexVal.classList.add('flash');
+    setTimeout(() => indexVal.classList.remove('flash'), 400);
+    indexSub.textContent = indexLabel(incidentIndex);
+  }
+
+  function pushFeed(label, line) {
+    const empty = feed.querySelector('.incident-empty');
+    if (empty) empty.remove();
+    const item = document.createElement('div');
+    item.className = 'incident-feed-item';
+    item.innerHTML =
+      '<span class="ts">' + fmtTime() + '</span>' +
+      '<span class="body">' + line + '<span class="src">SOURCE: ' + label + '</span></span>';
+    feed.insertBefore(item, feed.firstChild);
+    // Cap to 30 items so the DOM doesn't grow forever.
+    while (feed.children.length > 30) feed.removeChild(feed.lastChild);
+  }
+
+  function fire(action) {
+    const pool = INCIDENT_POOL[action];
+    if (!pool) return;
+    const count = 1 + Math.floor(Math.random() * 2); // 1 or 2 lines
+    const used = {};
+    for (let i = 0; i < count; i++) {
+      let pick;
+      let tries = 0;
+      do {
+        pick = pool.lines[Math.floor(Math.random() * pool.lines.length)];
+        tries++;
+      } while (used[pick] && tries < 8);
+      used[pick] = true;
+      pushFeed(pool.label, pick);
+    }
+    bumpIndex(pool.delta[0], pool.delta[1]);
+  }
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => fire(btn.getAttribute('data-action')));
+  });
+})();
+

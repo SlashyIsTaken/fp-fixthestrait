@@ -72,7 +72,7 @@ A thirteenth solution is currently under consideration. We are not at liberty to
 - **Ceasefire detection** — when WTI drops meaningfully and cross-asset signals (VIX, Brent, Gold) confirm genuine risk-off behaviour, the Situation Room enters a de-escalation posture: the probability gauge applies a stability discount, the analyst note switches to a dedicated grudging-disappointment pool, and a green CEASEFIRE banner appears in the price panel. Analysts remain unhappy about it.
 - **Sources & Methods** — a dossier sub-section listing the intelligence sources from which all assessments are derived. Includes ████████, the vibes, an intercepted text message that just said "lol", and Steve. All sources rated MEDIUM-HIGH; the rating scale is one rung tall by design.
 - **Classified Mode** — toggle to reveal hidden analyst notes, internal memos, intercepted communications, and a market intelligence assessment regarding Steve (dolphin)
-- **Satirical news ticker** — rotating intelligence intercepts of varying credibility (range: low to extremely low)
+- **Satirical news ticker** — rotating intelligence intercepts of varying credibility (range: low to extremely low). Two of the entries on every page load are generated live from the real WTI feed and dressed in dossier voice ("WTI now $XX.XX. This number is real. Make of it what you will.")
 
 ### Interactive Briefings
 - **Twelve solution dossiers** — each with classified analyst notes, real-world facts, and an interactive component
@@ -81,6 +81,7 @@ A thirteenth solution is currently under consideration. We are not at liberty to
 - **Canal Drawing Tool** *(Solution 08)* — sketch a bypass canal across the Arabian Peninsula with Leaflet
 - **Iran Relocation Map** *(Solution 06)* — drag Iran somewhere more convenient
 - **Strait Simulator** — pilot a tanker through obstacles including angry tweets, rogue dolphins, and floating NFTs
+- **Incident Simulator** — a tabletop exercise. Click bureaucratic-looking buttons ("Iran issues statement", "US sends carrier", "Steve goes long", "Bahrain replies-all by mistake", *etc.*) and watch a Bloomberg-adjacent intelligence feed react in real time with deadpan headlines drawn from per-button template pools. Each click also nudges a fake **Tension Index** in the panel header. The Tension Index never decreases. This is by design.
 - **The Strait Room** — a fake group chat between the USA, Iran, the UAE, Oman, Saudi Arabia, Qatar, Bahrain, Kuwait, and Steve (dolphin)
 - **Comparison Matrix** — all twelve solutions rated across cost, feasibility, dolphin involvement, and probable geopolitical fallout
 - **What If? Timeline** — day-by-day projection of global economic collapse following hypothetical strait closure
