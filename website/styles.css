@@ -181,6 +181,45 @@ nav {
   animation: fadeUp 0.8s ease-out 0.2s both;
 }
 
+.hero-premise {
+  font-family: var(--font-mono);
+  font-size: clamp(11px, 1.5vw, 13px);
+  color: var(--text-dimmer);
+  max-width: 640px;
+  line-height: 1.8;
+  letter-spacing: 0.5px;
+  margin-top: 20px;
+  animation: fadeUp 0.8s ease-out 0.25s both;
+}
+
+.hero-scroll {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: fadeUp 0.8s ease-out 0.5s both;
+}
+
+.hero-scroll-text {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dimmer);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.hero-scroll-arrow {
+  font-size: 16px;
+  color: var(--text-dimmer);
+  animation: scroll-bounce 2s ease-in-out infinite;
+}
+
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50% { transform: translateY(6px); opacity: 0.8; }
+}
+
 .hero-stats {
   display: flex;
   gap: 48px;

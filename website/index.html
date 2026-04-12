@@ -124,9 +124,10 @@
 </nav>
 
 <section class="hero">
-  <div class="hero-overline">Global Energy Vulnerability Report — March 2026</div>
+  <div class="hero-overline">Global Energy Vulnerability Report — April 2026</div>
   <h1>Fix the <span>Strait of Hormuz</span></h1>
   <p class="hero-sub">The Strait of Hormuz is a 33km chokepoint between Iran and Oman where roughly a fifth of the world's oil squeezes through every single day. How do you fix the Strait of Hormuz? We have 12 solutions. None of them work.</p>
+  <p class="hero-premise">This dossier contains twelve proposed solutions to the chokepoint problem, a live market intelligence terminal, an intercepted group chat between nine sovereign states and one dolphin, and a tanker simulator. All interactive. None classified. Some involving trebuchets.</p>
   <div class="hero-stats">
     <div class="hero-stat">
       <div class="number" id="ship-count" data-target="21" data-suffix="M">0</div>
@@ -144,6 +145,7 @@
       <div class="label-note">passes through this one gap</div>
     </div>
   </div>
+  <div class="hero-scroll"><span class="hero-scroll-text">Scroll to begin briefing</span><span class="hero-scroll-arrow">&#8595;</span></div>
 </section>
 
 <div class="threat-bar">
@@ -181,55 +183,6 @@
     <div class="ticker-item"><span class="tag blue">REPORT</span> Elon announces "Strait Tunnel" — delivery date: 2019 (retroactively)</div>
   </div>
 </div>
-
-<section class="oil-section" id="oil">
-  <div class="section-header">
-    <div class="overline">LIVE MARKET INTELLIGENCE</div>
-    <h2>Crude Oil Situation Room</h2>
-    <p>Real-time WTI crude pricing. Because nothing says "geopolitical stability" like watching oil prices tick in real time.</p>
-  </div>
-  <div class="oil-inner">
-    <div class="oil-top-row">
-      <div class="oil-price-panel" id="oilPricePanel">
-        <div class="oil-loading-msg">&#9632;&#9632;&#9632; DECRYPTING MARKET DATA&#8230;</div>
-      </div>
-      <div class="oil-chart-panel">
-        <div class="oil-chart-label">WTI CRUDE &mdash; INTRADAY PRICE (USD/bbl)</div>
-        <div class="oil-canvas-wrap oil-canvas-wrap-price"><canvas id="oilChart" height="110"></canvas></div>
-        <div class="oil-chart-label oil-vol-label">TRADING VOLUME</div>
-        <div class="oil-canvas-wrap oil-canvas-wrap-vol"><canvas id="oilVolChart" height="36"></canvas></div>
-      </div>
-    </div>
-    <div class="oil-asset-strip" id="oilAssetStrip"></div>
-    <div class="oil-probability-panel">
-      <div class="oil-prob-header">
-        <span class="oil-prob-tag">&#9650; CLASSIFIED ASSESSMENT</span>
-        <span class="oil-prob-title">Strait Incident Probability&#8482;</span>
-        <span class="oil-prob-pct" id="oilProbPct">&mdash;</span>
-      </div>
-      <div class="oil-prob-bar-wrap">
-        <div class="oil-prob-fill" id="oilProbFill"></div>
-        <div class="oil-prob-zones">
-          <span>FINE</span><span>CONCERNING</span><span>BAD</span><span>VERY BAD</span><span>CLASSIC</span>
-        </div>
-      </div>
-      <div class="oil-prob-breakdown" id="oilProbBreakdown"></div>
-    </div>
-    <div class="oil-analyst-note" id="oilAnalystNote">
-      <span class="oil-analyst-tag">&#9632; ANALYST NOTE</span>
-      <span id="oilAnalystText">Awaiting intelligence assessment&hellip;</span>
-    </div>
-    <div class="oil-footer-note">
-      Data: WTI Crude Futures (CL=F) via Yahoo Finance &middot; Cached 15 min &middot; <span id="oilUpdated"></span> &middot; Probability updated continuously since 2019, still wrong
-    </div>
-    <div class="classified-hint">
-      <div class="classified-hint-label">EYES ONLY &mdash; MARKET INTELLIGENCE INTERCEPT</div>
-      <div class="classified-hint-body">SIGINT analysis confirms that 73% of volume spikes in CL=F in the past 18 months occurred within 4 hours of an undisclosed meeting between parties we are not permitted to name, in a location we are not permitted to specify, regarding a topic described in the filing only as "logistical alignment." The remaining 27% was Steve. We are still not sure what Steve is doing but he has been consistently right since 2021. An investigation was opened. The investigation has been closed. The investigator now works for Steve.</div>
-      <div class="classified-hint-footer">This assessment is based on pattern analysis and should not be construed as an accusation of anything by anyone. It is simply a description of observable patterns that are, frankly, very hard to explain.</div>
-    </div>
-
-  </div>
-</section>
 
 <main>
 <div class="section-header" id="solutions">
@@ -422,6 +375,55 @@
   </div>
   <div class="sources-footer">All sources rated MEDIUM-HIGH. We do not maintain a higher rating. We do not maintain a lower one either. The scale is one rung tall by design.</div>
 </div>
+
+<section class="oil-section" id="oil">
+  <div class="section-header">
+    <div class="overline">LIVE MARKET INTELLIGENCE</div>
+    <h2>Crude Oil Situation Room</h2>
+    <p>Real-time WTI crude pricing. Because nothing says "geopolitical stability" like watching oil prices tick in real time.</p>
+  </div>
+  <div class="oil-inner">
+    <div class="oil-top-row">
+      <div class="oil-price-panel" id="oilPricePanel">
+        <div class="oil-loading-msg">&#9632;&#9632;&#9632; DECRYPTING MARKET DATA&#8230;</div>
+      </div>
+      <div class="oil-chart-panel">
+        <div class="oil-chart-label">WTI CRUDE &mdash; INTRADAY PRICE (USD/bbl)</div>
+        <div class="oil-canvas-wrap oil-canvas-wrap-price"><canvas id="oilChart" height="110"></canvas></div>
+        <div class="oil-chart-label oil-vol-label">TRADING VOLUME</div>
+        <div class="oil-canvas-wrap oil-canvas-wrap-vol"><canvas id="oilVolChart" height="36"></canvas></div>
+      </div>
+    </div>
+    <div class="oil-asset-strip" id="oilAssetStrip"></div>
+    <div class="oil-probability-panel">
+      <div class="oil-prob-header">
+        <span class="oil-prob-tag">&#9650; CLASSIFIED ASSESSMENT</span>
+        <span class="oil-prob-title">Strait Incident Probability&#8482;</span>
+        <span class="oil-prob-pct" id="oilProbPct">&mdash;</span>
+      </div>
+      <div class="oil-prob-bar-wrap">
+        <div class="oil-prob-fill" id="oilProbFill"></div>
+        <div class="oil-prob-zones">
+          <span>FINE</span><span>CONCERNING</span><span>BAD</span><span>VERY BAD</span><span>CLASSIC</span>
+        </div>
+      </div>
+      <div class="oil-prob-breakdown" id="oilProbBreakdown"></div>
+    </div>
+    <div class="oil-analyst-note" id="oilAnalystNote">
+      <span class="oil-analyst-tag">&#9632; ANALYST NOTE</span>
+      <span id="oilAnalystText">Awaiting intelligence assessment&hellip;</span>
+    </div>
+    <div class="oil-footer-note">
+      Data: WTI Crude Futures (CL=F) via Yahoo Finance &middot; Cached 15 min &middot; <span id="oilUpdated"></span> &middot; Probability updated continuously since 2019, still wrong
+    </div>
+    <div class="classified-hint">
+      <div class="classified-hint-label">EYES ONLY &mdash; MARKET INTELLIGENCE INTERCEPT</div>
+      <div class="classified-hint-body">SIGINT analysis confirms that 73% of volume spikes in CL=F in the past 18 months occurred within 4 hours of an undisclosed meeting between parties we are not permitted to name, in a location we are not permitted to specify, regarding a topic described in the filing only as "logistical alignment." The remaining 27% was Steve. We are still not sure what Steve is doing but he has been consistently right since 2021. An investigation was opened. The investigation has been closed. The investigator now works for Steve.</div>
+      <div class="classified-hint-footer">This assessment is based on pattern analysis and should not be construed as an accusation of anything by anyone. It is simply a description of observable patterns that are, frankly, very hard to explain.</div>
+    </div>
+
+  </div>
+</section>
 
 <!-- ===== COMPARISON CHART ===== -->
 <div class="section-header" id="compare">
