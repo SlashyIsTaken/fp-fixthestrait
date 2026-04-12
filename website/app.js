@@ -1037,7 +1037,7 @@ const ANALYST_RESPONSES = [
   "We will respond once Steve returns from his vacation. Steve does not take vacations.",
   "Question received. Answer pending. Pending since 2003.",
   "We are unable to comment on operational matters, hypothetical matters, or matters.",
-  "Have you tried not asking?",
+  "The recommended course of action is to withdraw the question. The second-best course of action is to have never asked it.",
   "The relevant department is currently in a meeting with itself.",
   "Steve does not negotiate with curiosity.",
   "Your question has been escalated to a level we do not have.",

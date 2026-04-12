@@ -4,7 +4,7 @@
 
   var errorMessages = [
     'ERROR: Solution must violate at least 2 laws of physics. Yours only violates 1.',
-    'ERROR: Our AI reviewer says this is "too reasonable." Please make it worse.',
+    'ERROR: Internal review board assessed your solution as "too reasonable." This is disqualifying.',
     'ERROR: Similar solution already submitted by a dolphin. Dolphins have priority.',
     'ERROR: Cost estimate too low. Nothing that fixes the strait costs less than $1 trillion.',
     'ERROR: Solution does not sufficiently anger Iran. Please add more provocation.',
@@ -15,20 +15,20 @@
     'ERROR: Our server is located in the Strait of Hormuz and is currently being blockaded.',
     'ERROR: Solution requires consent from Iran. Iran has left the group chat.',
     'ERROR: Estimated completion date is before the heat death of the universe. Please be more realistic.',
-    'ERROR: Your solution was reviewed by 3 dolphins, 1 trebuchet, and a blockchain. All said no.',
-    'ERROR: The CIA flagged your submission as "too good." You are now on a list. Congrats.',
+    'ERROR: Your solution was reviewed by a panel consisting of three dolphins and one trebuchet. All four voted no. The trebuchet abstained, then also voted no.',
+    'ERROR: Your submission has been flagged by an agency we are not permitted to name. You are now on a list we are not permitted to describe. No further action is required. Or possible.',
     'ERROR: Budget exceeds global GDP. Please reduce to merely "most of global GDP."',
-    'ERROR: Submission requires Adobe Flash Player, which is no longer supported. Like your idea.',
-    'ERROR: Solution already attempted by an intern in 2019. The intern is no longer with us (they quit).',
-    'ERROR: Your idea made the AI reviewer laugh, which crashed the server. Rebooting with less humor.',
+    'ERROR: Submission was routed to a server in the Strait of Hormuz. The server has been blockaded. Your idea is now a geopolitical incident.',
+    'ERROR: Solution already attempted by an intern in 2019. The intern has been reassigned to a facility we are not at liberty to discuss. They are fine. Probably.',
+    'ERROR: Your submission caused a brief power surge in the review system. The review system is a desk lamp. The desk lamp is fine. Your idea is not.',
     'ERROR: Cannot process: your solution is somehow LESS practical than the dolphin one.',
-    'ERROR: Submission flagged by SpamAssassin. Even spam filters think this is a joke.'
+    'ERROR: Your submission has been cross-referenced against 47,283 prior submissions. It is identical to none of them and yet somehow worse than all of them.'
   ];
 
   var successMessages = [
     { stamp: 'REJECTED', text: 'Your solution was reviewed by our panel of zero experts and unanimously rejected. It has been filed under "Ideas That Made Us Uncomfortable" alongside 47,000 other submissions. The review committee (a Magic 8-Ball and a rubber duck) found your proposal "ambitious but fundamentally cursed." You will not be contacted.' },
     { stamp: 'UNDER REVIEW', text: 'Your solution has been forwarded to the Department of Bad Ideas, Sub-Division of Strait-Related Proposals, Office of Things That Will Never Happen. Current queue position: 47,284. Estimated review time: 300-400 years. A carrier pigeon has been dispatched with your confirmation. The pigeon has also been rejected.' },
-    { stamp: 'CLASSIFIED', text: 'Your solution has been intercepted by [REDACTED] and classified at the highest level. Three intelligence agencies are now arguing over who has to read it. A black helicopter has been dispatched to your location. This is unrelated (it\'s a coincidence) (it is not a coincidence). Please do not submit further ideas. We are watching. We are also laughing.' },
+    { stamp: 'CLASSIFIED', text: 'Your solution has been intercepted by [REDACTED] and classified at the highest level. Three intelligence agencies are now arguing over who has to read it. A black helicopter has been dispatched to your location. This is unrelated (it\'s a coincidence) (it is not a coincidence). Please do not submit further ideas. We are monitoring the situation. The situation is you.' },
     { stamp: 'SENT TO IRAN', text: 'Through a routing error, your solution was accidentally forwarded directly to Iran\'s Ministry of Foreign Affairs. They responded with a single emoji: \uD83D\uDE10. We are treating this as diplomatic progress. This is the most engagement we\'ve gotten from Iran since the group chat incident. Congratulations, you are now technically a diplomat.' },
     { stamp: 'ERROR 418', text: 'HTTP 418: I\'m a teapot. The server refuses to brew coffee because it is, permanently and fundamentally, a teapot. Similarly, the Strait of Hormuz refuses to be fixed because it is, permanently and fundamentally, a chokepoint. Your solution has been composted. The compost has also been rejected.' }
   ];
