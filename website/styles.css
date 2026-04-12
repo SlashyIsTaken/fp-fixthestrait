@@ -94,16 +94,95 @@ nav {
 
 .nav-links {
   display: flex;
-  gap: 32px;
+  gap: 28px;
   list-style: none;
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 1px;
   text-transform: uppercase;
+  align-items: center;
 }
 
 .nav-links a { color: var(--text-dim); text-decoration: none; transition: color 0.3s; }
 .nav-links a:hover { color: var(--accent); }
+
+/* Nav dropdowns */
+.nav-dropdown { position: relative; }
+
+.nav-dropdown-btn {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.3s;
+}
+
+.nav-dropdown-btn:hover { color: var(--accent); }
+.nav-caret { font-size: 8px; transition: transform 0.2s; }
+
+.nav-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111113;
+  border: 1px solid var(--border);
+  list-style: none;
+  padding: 8px 0;
+  min-width: 180px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  transform: translateX(-50%) translateY(4px);
+  z-index: 200;
+  margin-top: 0;
+  padding-top: 16px;
+}
+
+/* Invisible bridge so the hover zone is continuous from button to menu */
+.nav-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 0;
+  right: 0;
+  height: 16px;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown.open .nav-dropdown-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.nav-dropdown:hover .nav-caret,
+.nav-dropdown.open .nav-caret {
+  transform: rotate(180deg);
+}
+
+.nav-dropdown-menu li { width: 100%; }
+
+.nav-dropdown-menu a {
+  display: block;
+  padding: 8px 20px;
+  font-size: 11px;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav-dropdown-menu a:hover {
+  background: rgba(255, 107, 43, 0.08);
+  color: var(--accent);
+}
 
 /* Hamburger */
 .nav-hamburger {
@@ -1870,6 +1949,45 @@ body.classified::after {
   .classified-banner { position: relative; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: 1px; }
   nav { padding: 16px 20px; position: sticky; top: 0; z-index: 10000; backdrop-filter: none; background: #0a0a0a; }
   .nav-hamburger { display: flex; position: relative; z-index: 10002; }
+  .nav-dropdown-menu {
+    position: static;
+    transform: none;
+    background: none;
+    border: none;
+    padding: 0;
+    min-width: 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 1;
+    pointer-events: auto;
+    transition: max-height 0.3s ease;
+    margin-top: 0;
+  }
+  .nav-dropdown.open .nav-dropdown-menu {
+    max-height: 400px;
+    transform: none;
+  }
+  .nav-dropdown:hover .nav-dropdown-menu { max-height: 0; }
+  .nav-dropdown:hover .nav-caret { transform: none; }
+  .nav-dropdown.open .nav-dropdown-menu,
+  .nav-dropdown.open:hover .nav-dropdown-menu { max-height: 400px; }
+  .nav-dropdown.open .nav-caret,
+  .nav-dropdown.open:hover .nav-caret { transform: rotate(180deg); }
+  .nav-dropdown-menu a {
+    padding: 10px 0;
+    font-size: 14px;
+    color: var(--text-dim);
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .nav-dropdown-btn {
+    color: var(--text);
+    font-size: 16px;
+    width: 100%;
+    justify-content: center;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-caret { font-size: 10px; }
   .nav-links {
     position: fixed;
     top: 0;
@@ -1891,9 +2009,7 @@ body.classified::after {
     -webkit-overflow-scrolling: touch;
   }
   .nav-links.nav-open { opacity: 1; pointer-events: auto; }
-  .nav-links li { list-style: none; width: 100%; text-align: center; }
-  .nav-links a { color: var(--text); font-size: 18px; display: block; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
-  .nav-links li:first-child a { border-top: 1px solid rgba(255,255,255,0.06); }
+  .nav-links > li { list-style: none; width: 100%; text-align: center; }
   .nav-links .classified-toggle { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border); }
   /* Threat bar: make meter visible in column layout */
   .threat-bar { flex-direction: column; gap: 10px; align-items: stretch; padding: 16px 20px; overflow: visible; }

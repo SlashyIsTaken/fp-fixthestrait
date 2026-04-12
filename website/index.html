@@ -107,18 +107,40 @@
     <span></span><span></span><span></span>
   </button>
   <ul class="nav-links" id="navLinks">
-    <li><a href="#oil" onclick="closeMobileNav()">Oil</a></li>
-    <li><a href="#solutions" onclick="closeMobileNav()">Solutions</a></li>
-    <li><a href="#compare" onclick="closeMobileNav()">Compare</a></li>
-    <li><a href="#what-if" onclick="closeMobileNav()">What If?</a></li>
-    <li><a href="#strait-room" onclick="closeMobileNav()">Strait Room</a></li>
-    <li><a href="#simulator" onclick="closeMobileNav()">Simulator</a></li>
-    <li><a href="#incident-sim" onclick="closeMobileNav()">Incident Sim</a></li>
-    <li><a href="#ask-analyst" onclick="closeMobileNav()">Ask Steve</a></li>
-    <li><a href="#glossary" onclick="closeMobileNav()">Glossary</a></li>
-    <li><a href="#submit-solution" onclick="closeMobileNav()">Submit</a></li>
-    <li><a href="#about" onclick="closeMobileNav()">Intel</a></li>
-    <li><a href="https://en.wikipedia.org/wiki/Strait_of_Hormuz" target="_blank">Wikipedia</a></li>
+    <li class="nav-dropdown">
+      <button class="nav-dropdown-btn" onclick="toggleNavDropdown(this)">Briefing <span class="nav-caret">&#9662;</span></button>
+      <ul class="nav-dropdown-menu">
+        <li><a href="#solutions" onclick="closeMobileNav()">Solutions</a></li>
+        <li><a href="#compare" onclick="closeMobileNav()">Compare</a></li>
+        <li><a href="#what-if" onclick="closeMobileNav()">What If?</a></li>
+        <li><a href="#sources" onclick="closeMobileNav()">Sources</a></li>
+      </ul>
+    </li>
+    <li class="nav-dropdown">
+      <button class="nav-dropdown-btn" onclick="toggleNavDropdown(this)">Interactive <span class="nav-caret">&#9662;</span></button>
+      <ul class="nav-dropdown-menu">
+        <li><a href="#strait-room" onclick="closeMobileNav()">Strait Room</a></li>
+        <li><a href="#simulator" onclick="closeMobileNav()">Simulator</a></li>
+        <li><a href="#incident-sim" onclick="closeMobileNav()">Incident Sim</a></li>
+      </ul>
+    </li>
+    <li class="nav-dropdown">
+      <button class="nav-dropdown-btn" onclick="toggleNavDropdown(this)">Intel <span class="nav-caret">&#9662;</span></button>
+      <ul class="nav-dropdown-menu">
+        <li><a href="#oil" onclick="closeMobileNav()">Oil Situation Room</a></li>
+        <li><a href="#ask-analyst" onclick="closeMobileNav()">Ask Steve</a></li>
+        <li><a href="#glossary" onclick="closeMobileNav()">Glossary</a></li>
+      </ul>
+    </li>
+    <li class="nav-dropdown">
+      <button class="nav-dropdown-btn" onclick="toggleNavDropdown(this)">Contribute <span class="nav-caret">&#9662;</span></button>
+      <ul class="nav-dropdown-menu">
+        <li><a href="#submit-solution" onclick="closeMobileNav()">Submit Solution</a></li>
+        <li><a href="#about" onclick="closeMobileNav()">About / Intel</a></li>
+        <li><a href="https://github.com/SlashyIsTaken/fp-fixthestrait" target="_blank">GitHub</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Strait_of_Hormuz" target="_blank">Wikipedia</a></li>
+      </ul>
+    </li>
     <li><div class="classified-toggle" id="classifiedToggle" onclick="toggleClassified()"><div class="toggle-track"><div class="toggle-thumb"></div></div>Classified Mode</div></li>
   </ul>
 </nav>
@@ -874,7 +896,21 @@ function toggleMobileNav() {
 function closeMobileNav() {
   document.getElementById('navLinks').classList.remove('nav-open');
   document.getElementById('navHamburger').classList.remove('open');
+  document.querySelectorAll('.nav-dropdown.open').forEach(function(d) { d.classList.remove('open'); });
 }
+function toggleNavDropdown(btn) {
+  var dropdown = btn.closest('.nav-dropdown');
+  var wasOpen = dropdown.classList.contains('open');
+  // Close all other dropdowns
+  document.querySelectorAll('.nav-dropdown.open').forEach(function(d) { d.classList.remove('open'); });
+  if (!wasOpen) dropdown.classList.add('open');
+}
+// Close dropdowns when clicking outside (desktop)
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.nav-dropdown')) {
+    document.querySelectorAll('.nav-dropdown.open').forEach(function(d) { d.classList.remove('open'); });
+  }
+});
 </script>
 <script src="oil.js"></script>
 <script src="app.js"></script>
