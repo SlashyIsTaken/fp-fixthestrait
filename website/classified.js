@@ -452,13 +452,26 @@
 
   // ===== CLASSIFIED GLOSSARY ENTRIES =====
   function toggleClassifiedGlossary(active) {
-    var list = document.querySelector('.glossary-list');
-    if (!list) return;
+    var container = document.querySelector('.glossary-classified-container');
+    if (!container) return;
 
-    // Remove previously injected classified entries
-    list.querySelectorAll('.classified-glossary-entry').forEach(function(e) { e.remove(); });
+    // Clear previously injected classified category
+    container.innerHTML = '';
 
     if (!active) return;
+
+    // Build a classified category as a details/summary block
+    var details = document.createElement('details');
+    details.className = 'glossary-category classified-glossary-category';
+    details.open = true;
+
+    var summary = document.createElement('summary');
+    summary.className = 'glossary-category-title classified-category-title';
+    summary.innerHTML = 'Classified <span class="classified-tag">[EYES ONLY]</span>';
+    details.appendChild(summary);
+
+    var dl = document.createElement('dl');
+    dl.className = 'glossary-list';
 
     classifiedGlossaryEntries.forEach(function(entry) {
       var div = document.createElement('div');
@@ -467,8 +480,11 @@
         '<dt>' + entry.term + ' <span class="glossary-pos">(' + entry.pos + ')</span> ' +
         '<span class="classified-tag">[CLASSIFIED]</span></dt>' +
         '<dd>' + entry.def + '</dd>';
-      list.appendChild(div);
+      dl.appendChild(div);
     });
+
+    details.appendChild(dl);
+    container.appendChild(details);
   }
 
   // ===== CLASSIFIED COMPARISON COLUMN =====
